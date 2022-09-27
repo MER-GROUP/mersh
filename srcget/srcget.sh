@@ -13,11 +13,11 @@
 
 # settings file
 # [файл настроек]
-file_settings=settings.sh
+file_settings=./settings.sh
 
 # link file
 # [файл ссылок]
-file_links=links.sh
+file_links=./links.sh
 
 # settings matrix
 # [матрица настроек]
