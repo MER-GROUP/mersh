@@ -4,6 +4,9 @@
 
 # Script for downloading and updating sources from github
 # [Скрипт для скачивания и обновления исходников с github]
+
+# Script implementation - Max Romanenko (Red Alert) - 2022.
+# Реализация скрипта - Макс Романенко (Red Alert) - 2022г.
 # ************************************************************************
 # global variables
 # [глобальные переменные]
