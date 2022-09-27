@@ -17,7 +17,8 @@ file_settings=./settings.sh
 
 # link file
 # [файл ссылок]
-file_links=./links.sh
+# file_links=./links.sh
+file_links=$( v=$( grep -e 'file_links' $file_settings ); echo ${v#*=} )
 
 # settings matrix
 # [матрица настроек]
@@ -77,6 +78,8 @@ echo '----------settings_get----------'
 echo path_src = ${settings_arr[path_src]}
 echo file_links = ${settings_arr[file_links]}
 echo hist_src = ${settings_arr[hist_src]}
+echo '----------file_links----------'
+echo file_links = ${file_links}
 echo '----------links_arr----------'
 echo ${links_arr[0]}
 echo ${links_arr[1]}
