@@ -8,6 +8,14 @@
 # global variables
 # [глобальные переменные]
 
+# settings file
+# [файл настроек]
+file_settings=settings.sh
+
+# link file
+# [файл ссылок]
+file_links=links.sh
+
 # settings matrix
 # [матрица настроек]
 declare -A settings_arr
@@ -20,7 +28,7 @@ settings_get(){
     # --------------------------------------------------------------------
     # get settings
     # [получить настройки]
-    for line in $( grep -v '^#' settings.sh ); do
+    for line in $( grep -v '^#' $file_settings ); do
         # echo $line
         IFS='=' read -a arr <<< $line
         settings_arr[${arr[0]}]=${arr[1]}
@@ -46,6 +54,7 @@ settings_get(){
 settings_get
 # ************************************************************************
 # tests
+# [тесты]
 echo '###################tests###################'
 echo path_src = ${settings_arr[path_src]}
 echo file_links = ${settings_arr[file_links]}
