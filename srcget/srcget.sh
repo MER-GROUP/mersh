@@ -22,6 +22,10 @@ file_links=links.sh
 # settings matrix
 # [матрица настроек]
 declare -A settings_arr
+
+# link matrix
+# [матрица ссылок]
+links_arr=( $( grep -v '^#' $file_links ) )
 # ************************************************************************
 # function settings_get
 
@@ -69,8 +73,13 @@ settings_get
 # tests
 # [тесты]
 echo '###################tests###################'
+echo '----------settings_get----------'
 echo path_src = ${settings_arr[path_src]}
 echo file_links = ${settings_arr[file_links]}
 echo hist_src = ${settings_arr[hist_src]}
+echo '----------links_arr----------'
+echo ${links_arr[0]}
+echo ${links_arr[1]}
+echo ${links_arr[2]}
 echo '###########################################'
 # ************************************************************************
