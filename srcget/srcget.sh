@@ -47,8 +47,8 @@ settings_get
 # ************************************************************************
 # tests
 echo '###################tests###################'
-echo ${settings_arr[path_src]}
-echo ${settings_arr[file_links]}
-echo ${settings_arr[hist_src]}
+echo path_src = ${settings_arr[path_src]}
+echo file_links = ${settings_arr[file_links]}
+echo hist_src = ${settings_arr[hist_src]}
 echo '###########################################'
 # ************************************************************************
