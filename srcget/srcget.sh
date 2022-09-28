@@ -61,10 +61,13 @@ check_core_utils(){
 # function settings_get
 
 # get settings [получить настройки]
-settings_get(){
+settings_get(){ # args: file_path
     # --------------------------------------------------------------------
+    # the path of the settings file
+    # [путь файла с настройками]
+    file_path=${1}
     # get settings [получить настройки]
-    for line in $( grep -v '^#' $file_settings ); do
+    for line in $( grep -v '^#' $file_path ); do
         # echo $line
         IFS='=' read -a arr <<< ${line}
         settings_arr[${arr[0]}]=${arr[1]}
@@ -105,7 +108,7 @@ check_path(){ # args: path
 # program logic [логика программы]
 
 # get settings [получить настройки]
-settings_get
+settings_get ${file_settings}
 
 # checking the existence of a directory [проверка существования директории]
 check_path ${settings_arr[path_src]}
