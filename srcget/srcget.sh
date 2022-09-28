@@ -91,13 +91,23 @@ check_path(){ # args: path
     # data storage directory [директория хранения данных]
 	path=${1}
 
-    # if the path does not exist then create a directory
-    # otherwise, if it is not a directory, then exit the program
-    # [если пути не существует то создать директорию]
-    # [иначе если это не директория то выйти из программы]
+    # # if the directory is a file then exit the program
+    # # otherwise if the path does not exist then create a directory
+    # # [если директория это файл то выйти из программы]
+    # # [иначе если пути не существует то создать директорию]
+    # if [[ ! -d ${path} ]]; then
+    #     echo "${path} is not dir, exiting"
+    #     exit 1
+    # elif [[ ! -e ${path} ]]; then
+    #     echo "Dir is not exist, creating ${path}"
+    #     mkdir -p ${path}
+    # fi
+
+    # if the directory is a file then delete the file and create a directory
+    # [если директория это файл то удалить файл и создать директорию]
 	if [[ ! -e ${path} ]]; then
         echo "Dir is not exist, creating ${path}"
-        if [ ! -d ${path} ]; then
+        if [[ ! -d ${path} ]]; then
             let "ind = ${#path[0]} - 1"
             # echo "file = ${path[@]:0:${ind}}"
             file=${path[@]:0:${ind}}
@@ -105,9 +115,6 @@ check_path(){ # args: path
             rm ${file}
         fi
         mkdir -p ${path}
-	elif [[ ! -d ${path} ]]; then
-        echo "${path} is not dir, exiting"
-        exit 1
     fi
     # --------------------------------------------------------------------
 }
