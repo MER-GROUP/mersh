@@ -53,7 +53,7 @@ check_core_utils(){ # args: program_1 ... program_N
 
         # 0 - the program is installed, 1 and more - not
         # [0 - программа установленна, 1 и больше - нет]
-        which ${app} > /dev/null
+        which ${app} &> /dev/null
         bool=$( echo  ${?} )
         if [ 0 -ne ${bool} ]; then
             echo "You need to install the ${app} to continue"
@@ -116,9 +116,9 @@ check_path(){ # args: path
             # echo "file = ${path[@]:0:${ind}}"
             file=${path[@]:0:${ind}}
             # rm -rf ${path}
-            rm ${file}
+            rm ${file} &> /dev/null
         fi
-        mkdir -p ${path}
+        mkdir -p ${path} &> /dev/null
     fi
     # --------------------------------------------------------------------
 }
