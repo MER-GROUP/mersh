@@ -27,6 +27,10 @@ declare -A settings_arr
 # link matrix
 # [матрица ссылок]
 links_arr=( $( grep -v '^#' ${file_links} ) )
+
+# name of the programs to check for installation
+# [название программ для проверки на установку]
+utils=( git tar mkdir rm which )
 # ************************************************************************
 # function check_core_utils
 
@@ -50,7 +54,7 @@ check_core_utils(){ # args: program_1 ... program_N
         # 0 - the program is installed, 1 and more - not
         # [0 - программа установленна, 1 и больше - нет]
         which ${app} > /dev/null
-        bool=$( echo  ${?})
+        bool=$( echo  ${?} )
         if [ 0 -ne ${bool} ]; then
             echo "You need to install the ${app} to continue"
             exit ${bool}
@@ -145,7 +149,7 @@ tests(){
 # checking the necessary installed utilities
 # [проверка необходимых установленных утилит]
 # check_core_utils git tar which mer # for test [для тестов]
-check_core_utils git tar which
+check_core_utils ${utils[@]}
 
 # get settings [получить настройки]
 settings_get ${file_settings}
