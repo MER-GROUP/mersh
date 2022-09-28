@@ -54,13 +54,27 @@ settings_get(){
     # --------------------------------------------------------------------
 }
 # ************************************************************************
-# function links_get
+# function check_path
 
-# get links
-# [получить ссылки]
-links_get(){
+# checking the existence of a directory
+# [проверка существования директории]
+check_path(){ # args: path
     # --------------------------------------------------------------------
-    echo pass
+    # data storage directory
+    # [директория хранения данных]
+	path=$1
+
+    # if the path does not exist then create a directory
+    # otherwise, if it is not a directory, then exit the program
+    # [если пути не существует то создать директорию]
+    # [иначе если это не директория то выйти из программы]
+	if [[ ! -e $path ]]; then
+        echo "Dir is not exist, creating $path"
+        mkdir -p $path
+	elif [[ ! -d $path ]]; then
+        echo "$path is not dir, exiting"
+        exit 1
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
