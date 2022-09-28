@@ -38,7 +38,7 @@ check_core_utils(){ # args: program_1 ... program_N
     # arr=( git tar mer) # for test [для тестов]
     # arr=( git tar which) # for test [для тестов]
     arr=( "${*}" )
-    echo ${arr[@]}
+    # echo ${arr[@]}
 
     # checking the necessary installed utilities
     # [проверка необходимых установленных утилит]
@@ -52,7 +52,7 @@ check_core_utils(){ # args: program_1 ... program_N
         which ${app} > /dev/null
         bool=$( echo  ${?})
         if [ 0 -ne ${bool} ]; then
-            echo "for further work, you need to install the program"
+            echo "You need to install the ${app} to continue"
             exit ${bool}
         fi
     done
@@ -130,6 +130,7 @@ tests(){
 
 # checking the necessary installed utilities
 # [проверка необходимых установленных утилит]
+# check_core_utils git tar which mer # for test [для тестов]
 check_core_utils git tar which
 
 # get settings [получить настройки]
