@@ -127,15 +127,15 @@ tests(){
 # ************************************************************************
 # program logic [логика программы]
 
+# checking the necessary installed utilities
+# [проверка необходимых установленных утилит]
+check_core_utils
+
 # get settings [получить настройки]
 settings_get ${file_settings}
 
 # checking the existence of a directory [проверка существования директории]
 check_path ${settings_arr[path_src]}
-
-# checking the necessary installed utilities
-# [проверка необходимых установленных утилит]
-check_core_utils
 
 # script tests [тесты скрипта]
 tests
