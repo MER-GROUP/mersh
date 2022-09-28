@@ -84,6 +84,10 @@ check_path(){ # args: path
 # get settings
 # [получить настройки]
 settings_get
+
+# checking the existence of a directory
+# [проверка существования директории]
+check_path ${settings_arr[path_src]}
 # ************************************************************************
 # tests
 # [тесты]
