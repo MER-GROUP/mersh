@@ -36,7 +36,7 @@ check_core_utils(){
     # --------------------------------------------------------------------
     # required installed programs [необходимые установленные программы]
     # arr=( git tar mer) # for test [для тестов]
-    arr=( git tar mer)
+    arr=( git tar which)
     echo ${arr[@]}
 
     # checking the necessary installed utilities
@@ -104,6 +104,27 @@ check_path(){ # args: path
     # --------------------------------------------------------------------
 }
 # ************************************************************************
+# function tests
+
+# script tests [тесты скрипта]
+tests(){
+    # --------------------------------------------------------------------
+    # tests [тесты]
+    echo '###################tests###################'
+    echo '----------settings_get----------'
+    echo path_src = ${settings_arr[path_src]}
+    echo file_links = ${settings_arr[file_links]}
+    echo hist_src = ${settings_arr[hist_src]}
+    echo '----------file_links----------'
+    echo file_links = ${file_links}
+    echo '----------links_arr----------'
+    echo ${links_arr[0]}
+    echo ${links_arr[1]}
+    echo ${links_arr[2]}
+    echo '###########################################'
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
 # program logic [логика программы]
 
 # get settings [получить настройки]
@@ -111,20 +132,11 @@ settings_get ${file_settings}
 
 # checking the existence of a directory [проверка существования директории]
 check_path ${settings_arr[path_src]}
-# ************************************************************************
-# tests [тесты]
-echo '###################tests###################'
-echo '----------settings_get----------'
-echo path_src = ${settings_arr[path_src]}
-echo file_links = ${settings_arr[file_links]}
-echo hist_src = ${settings_arr[hist_src]}
-echo '----------file_links----------'
-echo file_links = ${file_links}
-echo '----------links_arr----------'
-echo ${links_arr[0]}
-echo ${links_arr[1]}
-echo ${links_arr[2]}
-echo '----------check_core_utils----------'
+
+# checking the necessary installed utilities
+# [проверка необходимых установленных утилит]
 check_core_utils
-echo '###########################################'
+
+# script tests [тесты скрипта]
+tests
 # ************************************************************************
