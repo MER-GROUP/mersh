@@ -32,11 +32,12 @@ links_arr=( $( grep -v '^#' ${file_links} ) )
 
 # checking the necessary installed utilities
 # [проверка необходимых установленных утилит]
-check_core_utils(){
+check_core_utils(){ # args: program_1 ... program_N
     # --------------------------------------------------------------------
     # required installed programs [необходимые установленные программы]
     # arr=( git tar mer) # for test [для тестов]
-    arr=( git tar which)
+    # arr=( git tar which) # for test [для тестов]
+    arr=( "${*}" )
     echo ${arr[@]}
 
     # checking the necessary installed utilities
@@ -129,7 +130,7 @@ tests(){
 
 # checking the necessary installed utilities
 # [проверка необходимых установленных утилит]
-check_core_utils
+check_core_utils git tar which
 
 # get settings [получить настройки]
 settings_get ${file_settings}
