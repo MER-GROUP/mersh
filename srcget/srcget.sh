@@ -97,6 +97,13 @@ check_path(){ # args: path
     # [иначе если это не директория то выйти из программы]
 	if [[ ! -e ${path} ]]; then
         echo "Dir is not exist, creating ${path}"
+        if [ ! -d ${path} ]; then
+            let "ind = ${#path[0]} - 1"
+            # echo "file = ${path[@]:0:${ind}}"
+            file=${path[@]:0:${ind}}
+            # rm -rf ${path}
+            rm ${file}
+        fi
         mkdir -p ${path}
 	elif [[ ! -d ${path} ]]; then
         echo "${path} is not dir, exiting"
