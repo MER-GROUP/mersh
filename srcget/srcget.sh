@@ -63,8 +63,7 @@ check_core_utils(){
 # get settings [получить настройки]
 settings_get(){ # args: file_path
     # --------------------------------------------------------------------
-    # the path of the settings file
-    # [путь файла с настройками]
+    # the path of the settings file [путь файла с настройками]
     file_path=${1}
     # get settings [получить настройки]
     for line in $( grep -v '^#' $file_path ); do
