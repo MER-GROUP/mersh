@@ -8,27 +8,22 @@
 # Script implementation - Max Romanenko (Red Alert) - 2022.
 # Реализация скрипта - Макс Романенко (Red Alert) - 2022г.
 # ************************************************************************
-# global variables
-# [глобальные переменные]
+# global variables [глобальные переменные]
 
-# settings file
-# [файл настроек]
+# settings file [файл настроек]
 file_settings=./settings.sh
 
-# link file
-# [файл ссылок]
+# link file [файл ссылок]
 # file_links=./links.sh
 file_links=$( v=$( grep -e 'file_links' ${file_settings} ); echo ${v#*=} )
 
-# settings matrix
-# [матрица настроек]
+# settings matrix [матрица настроек]
 declare -A settings_arr
 
-# link matrix
-# [матрица ссылок]
+# link matrix [матрица ссылок]
 links_arr=( $( grep -v '^#' ${file_links} ) )
 
-# name of the programs to check for installation
+# name of the programs to check for installation 
 # [название программ для проверки на установку]
 utils=( git tar mkdir rm which )
 # ************************************************************************
@@ -123,6 +118,21 @@ check_path(){ # args: path
     # --------------------------------------------------------------------
 }
 # ************************************************************************
+# function src_get
+
+# get sources from github [получить исходники с github]
+src_get(){ # args: path, links
+    # --------------------------------------------------------------------
+    # data storage directory [директория хранения данных]
+	path=${1}
+    # link matrix [матрица ссылок]
+    links=( ${2} )
+
+    echo path = ${path}
+    echo links = ${links[@]}
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
 # function tests
 
 # script tests [тесты скрипта]
@@ -156,6 +166,9 @@ settings_get ${file_settings}
 
 # checking the existence of a directory [проверка существования директории]
 check_path ${settings_arr[path_src]}
+
+# get sources from github [получить исходники с github]
+src_get ${settings_arr[path_src]} ${links_arr[@]}
 
 # script tests [тесты скрипта]
 tests
