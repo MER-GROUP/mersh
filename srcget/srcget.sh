@@ -126,10 +126,25 @@ src_get(){ # args: path, links
     # data storage directory [директория хранения данных]
 	path=${1}
     # link matrix [матрица ссылок]
-    links=( ${2} )
+    # links=(  ${*} ) 
+    links=(  $( arr=( ${*} ); echo ${arr[@]:1:${#arr[@]}} ) ) 
+    # echo path = ${path}
+    # echo links = ${links[@]}
 
-    echo path = ${path}
-    echo links = ${links[@]}
+    cd ${path}
+    # pwd
+
+    # Cloning sources
+    # [Клонирование исходников]
+    for link in ${links[@]}; do
+        echo ""
+        echo "Starting cloning ${link}"
+        git clone ${link} 2> /dev/null
+        echo "End cloning ${link}"
+    done
+
+    cd ..
+    # pwd
     # --------------------------------------------------------------------
 }
 # ************************************************************************
