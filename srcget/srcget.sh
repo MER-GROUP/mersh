@@ -139,7 +139,7 @@ src_get(){ # args: path, links
     for link in ${links[@]}; do
         echo ""
         echo "Starting cloning ${link}"
-        git clone ${link} 2> /dev/null
+        git clone ${link}
         echo "End cloning ${link}"
     done
 
