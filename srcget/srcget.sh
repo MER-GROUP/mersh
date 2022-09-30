@@ -165,14 +165,26 @@ src_to_tar_gz(){ # args: path
 
     # archiving of sources
     # [архивирование исходников]
-    for link in ${dirs[@]}; do
+    for dir in ${dirs[@]}; do
         echo ""
-        echo "Starting archiving ${link}"
-        name=""
-        # 
+        echo "Starting archiving ${dir}"
+
+        date_name=$( date +"%Y.%d.%m_%H-%M-%S" )
+        # echo ${date_name}
+
+        let "ind = ${#dir[0]} - 1"
+        arhive_name=${dir[@]:0:${ind}}
+        # echo ${arhive_name}
+
+        base_name="${arhive_name}_${date_name}.tar.gz"
+
+        # pack the listed files and/or folders into arhive.tar.gz (with gzip compression)
+        # tar -zcvf arhive.tar.gz file1 file2 ... fileN
         # [запаковать перечисленные файлы и/или папки в архив.tar.gz (со сжатием при помощи gzip)]
-        tar -zcvf архив.tar.gz файл1 файл2 ... файлN
-        echo "End archiving ${link}"
+        # [tar -zcvf архив.tar.gz файл1 файл2 ... файлN]
+        tar -zcvf ${base_name} ${dir}
+
+        echo "End archiving ${dir}"
     done
 
     cd ..
@@ -215,7 +227,7 @@ settings_get ${file_settings}
 check_path ${settings_arr[path_src]}
 
 # get sources from github [получить исходники с github]
-# src_get ${settings_arr[path_src]} ${links_arr[@]}
+src_get ${settings_arr[path_src]} ${links_arr[@]}
 
 # archive the sources [заархивировать исходники]
 src_to_tar_gz ${settings_arr[path_src]}
