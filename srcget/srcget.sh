@@ -25,7 +25,7 @@ links_arr=( $( grep -v '^#' ${file_links} ) )
 
 # name of the programs to check for installation 
 # [название программ для проверки на установку]
-utils=( date find git gzip tar mkdir rm which )
+utils=( date find git gzip ls mkdir rm tar which )
 # ************************************************************************
 # function check_core_utils
 
@@ -161,7 +161,7 @@ src_to_tar_gz(){ # args: path
 
     # getting folders in a directory [получение папок в директории]
     dirs=( $( ls -p | grep "/$" ) )
-    echo ${dirs[@]}
+    # echo ${dirs[@]}
 
     # archiving of sources
     # [архивирование исходников]
