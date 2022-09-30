@@ -25,7 +25,7 @@ links_arr=( $( grep -v '^#' ${file_links} ) )
 
 # name of the programs to check for installation 
 # [название программ для проверки на установку]
-utils=( git tar mkdir rm which )
+utils=( date find git gzip tar mkdir rm which )
 # ************************************************************************
 # function check_core_utils
 
@@ -148,6 +148,38 @@ src_get(){ # args: path, links
     # --------------------------------------------------------------------
 }
 # ************************************************************************
+# function src_to_tar_gz
+
+# archive the sources [заархивировать исходники]
+src_to_tar_gz(){ # args: path
+    # --------------------------------------------------------------------
+    # data storage directory [директория хранения данных]
+	path=${1}
+
+    cd ${path}
+    # pwd
+
+    # getting folders in a directory [получение папок в директории]
+    dirs=( $( ls -p | grep "/$" ) )
+    echo ${dirs[@]}
+
+    # archiving of sources
+    # [архивирование исходников]
+    for link in ${dirs[@]}; do
+        echo ""
+        echo "Starting archiving ${link}"
+        name=""
+        # 
+        # [запаковать перечисленные файлы и/или папки в архив.tar.gz (со сжатием при помощи gzip)]
+        tar -zcvf архив.tar.gz файл1 файл2 ... файлN
+        echo "End archiving ${link}"
+    done
+
+    cd ..
+    # pwd
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
 # function tests
 
 # script tests [тесты скрипта]
@@ -183,7 +215,10 @@ settings_get ${file_settings}
 check_path ${settings_arr[path_src]}
 
 # get sources from github [получить исходники с github]
-src_get ${settings_arr[path_src]} ${links_arr[@]}
+# src_get ${settings_arr[path_src]} ${links_arr[@]}
+
+# archive the sources [заархивировать исходники]
+src_to_tar_gz ${settings_arr[path_src]}
 
 # script tests [тесты скрипта]
 tests
