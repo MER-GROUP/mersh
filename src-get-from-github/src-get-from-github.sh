@@ -1,6 +1,6 @@
 #!/bin/bash
 # ************************************************************************
-# srcget
+# src-get-from-github
 
 # Script for downloading and updating sources from github
 # [Скрипт для скачивания и обновления исходников с github]
@@ -163,8 +163,7 @@ src_to_tar_gz(){ # args: path
     dirs=( $( ls -p | grep "/$" ) )
     # echo ${dirs[@]}
 
-    # archiving of sources
-    # [архивирование исходников]
+    # archiving of sources [архивирование исходников]
     for dir in ${dirs[@]}; do
         echo ""
         echo "Starting archiving ${dir}"
@@ -185,6 +184,39 @@ src_to_tar_gz(){ # args: path
         tar -zcvf ${base_name} ${dir}
 
         echo "End archiving ${dir}"
+    done
+
+    cd ..
+    # pwd
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
+# function delete_src_folders
+
+# delete source directories [удалить директории с исходниками]
+delete_src_folders(){ # args: path
+    # --------------------------------------------------------------------
+    # data storage directory [директория хранения данных]
+	path=${1}
+
+    cd ${path}
+    # pwd
+
+    # getting folders in a directory [получение папок в директории]
+    dirs=( $( ls -p | grep "/$" ) )
+    # echo ${dirs[@]}
+
+    # delete source directories [удалить директории с исходниками]
+    for dir in ${dirs[@]}; do
+        echo ""
+        echo "Starting delete source directories ${dir}"
+
+        let "ind = ${#dir[0]} - 1"
+        dir_src=${dir[@]:0:${ind}}
+        # echo ${dir_src}
+        rm -rf ${dir_src} &> /dev/null
+
+        echo "End delete source directories ${dir}"
     done
 
     cd ..
@@ -231,6 +263,9 @@ src_get ${settings_arr[path_src]} ${links_arr[@]}
 
 # archive the sources [заархивировать исходники]
 src_to_tar_gz ${settings_arr[path_src]}
+
+# delete source directories [удалить директории с исходниками]
+delete_src_folders ${settings_arr[path_src]}
 
 # script tests [тесты скрипта]
 tests
