@@ -226,42 +226,57 @@ delete_src_folders(){ # args: path
     # pwd
     # --------------------------------------------------------------------
 }
-# # ************************************************************************
-# # function delete more history
+# ************************************************************************
+# function delete more history
 
-# # delete source archives longer than the specified storage history
-# # [удалить архивы исходников больше заданной истории хранения]
-# delete_arhive_src_more_history(){ # args: path
-#     # --------------------------------------------------------------------
-#     # data storage directory [директория хранения данных]
-# 	local path=${1}
+# delete source archives longer than the specified storage history
+# [удалить архивы исходников больше заданной истории хранения]
+delete_arhive_src_more_history(){ # args: path, hist
+    # --------------------------------------------------------------------
+    # data storage directory [директория хранения данных]
+	local path=${1}
 
-#     cd ${path}
-#     # pwd
+    cd ${path}
+    # pwd
 
-#     # getting folders in a directory [получение папок в директории]
-#     local dirs=( $( ls -p | grep "/$" ) )
-#     # echo ${dirs[@]}
+    # getting folders in a directory [получение файлов в директории]
+    local files_arr=( $( ls -p | grep -v "/$" ) )
+    # echo ${files_arr[@]}
+    local i=0
+    # let i++
+    # echo "i = ${i}"
+    local files_base_arr
+    for file in ${files_arr[@]}; do
+        # echo ${file}
+        # echo ${i}
+        local file_temp=$( echo ${file%_*}% )
+        files_base_arr[${i}]=$( echo ${file_temp%_*} )
+        # echo ${files_base_arr[${i}]}
+        let i++
+    done
 
-#     # delete source directories [удалить директории с исходниками]
-#     for dir in ${dirs[@]}; do
-#         echo ""
-#         echo "Starting delete source directories ${dir}"
+    # apply a set on files
+    # [применить множество на файлах]
 
-#         local ind
-#         let "ind = ${#dir[0]} - 1"
-#         local dir_src=${dir[@]:0:${ind}}
-#         # echo ${dir_src}
-#         rm -rf ${dir_src} &> /dev/null
+    # # delete source directories [удалить директории с исходниками]
+    # for dir in ${dirs[@]}; do
+    #     echo ""
+    #     echo "Starting delete source directories ${dir}"
 
-#         echo "End delete source directories ${dir}"
-#     done
+    #     local ind
+    #     let "ind = ${#dir[0]} - 1"
+    #     local dir_src=${dir[@]:0:${ind}}
+    #     # echo ${dir_src}
+    #     rm -rf ${dir_src} &> /dev/null
 
-#     cd ..
-#     # pwd
-#     # --------------------------------------------------------------------
-# }
-# # ************************************************************************
+    #     echo "End delete source directories ${dir}"
+    # done
+
+    cd ..
+    # pwd
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
 # function tests
 
 # script tests [тесты скрипта]
@@ -304,6 +319,10 @@ src_to_tar_gz ${settings_arr[path_src]}
 
 # delete source directories [удалить директории с исходниками]
 delete_src_folders ${settings_arr[path_src]}
+
+# delete source archives longer than the specified storage history
+# [удалить архивы исходников больше заданной истории хранения]
+delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
 
 # script tests [тесты скрипта]
 tests
