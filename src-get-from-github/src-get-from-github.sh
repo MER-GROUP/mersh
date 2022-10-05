@@ -36,20 +36,20 @@ check_core_utils(){ # args: program_1 ... program_N
     # required installed programs [необходимые установленные программы]
     # arr=( git tar mer) # for test [для тестов]
     # arr=( git tar which) # for test [для тестов]
-    arr=( "${*}" )
+    local arr=( "${*}" )
     # echo ${arr[@]}
 
     # checking the necessary installed utilities
     # [проверка необходимых установленных утилит]
     for app in ${arr[@]}; do
         # # test [тест]
-        # app_path=$( which $app )
+        # local app_path=$( which $app )
         # echo $app_path
 
         # 0 - the program is installed, 1 and more - not
         # [0 - программа установленна, 1 и больше - нет]
         which ${app} &> /dev/null
-        bool=$( echo  ${?} )
+        local bool=$( echo  ${?} )
         if [ 0 -ne ${bool} ]; then
             echo "You need to install the ${app} to continue"
             exit ${bool}
@@ -64,11 +64,11 @@ check_core_utils(){ # args: program_1 ... program_N
 settings_get(){ # args: file_path
     # --------------------------------------------------------------------
     # the path of the settings file [путь файла с настройками]
-    file_path=${1}
+    local file_path=${1}
     # get settings [получить настройки]
     for line in $( grep -v '^#' $file_path ); do
         # echo $line
-        IFS='=' read -a arr <<< ${line}
+        IFS='=' read -a local arr <<< ${line}
         settings_arr[${arr[0]}]=${arr[1]}
     done
     # --------------------------------------------------------------------
@@ -88,7 +88,7 @@ settings_get(){ # args: file_path
 check_path(){ # args: path
     # --------------------------------------------------------------------
     # data storage directory [директория хранения данных]
-	path=${1}
+	local path=${1}
 
     # # if the directory is a file then exit the program
     # # otherwise if the path does not exist then create a directory
@@ -107,9 +107,10 @@ check_path(){ # args: path
 	if [[ ! -e ${path} ]]; then
         echo "Dir is not exist, creating ${path}"
         if [[ ! -d ${path} ]]; then
+            local ind
             let "ind = ${#path[0]} - 1"
             # echo "file = ${path[@]:0:${ind}}"
-            file=${path[@]:0:${ind}}
+            local file=${path[@]:0:${ind}}
             # rm -rf ${path}
             rm ${file} &> /dev/null
         fi
@@ -124,10 +125,10 @@ check_path(){ # args: path
 src_get(){ # args: path, links
     # --------------------------------------------------------------------
     # data storage directory [директория хранения данных]
-	path=${1}
+	local path=${1}
     # link matrix [матрица ссылок]
     # links=(  ${*} ) 
-    links=(  $( arr=( ${*} ); echo ${arr[@]:1:${#arr[@]}} ) ) 
+    local links=(  $( arr=( ${*} ); echo ${arr[@]:1:${#arr[@]}} ) ) 
     # echo path = ${path}
     # echo links = ${links[@]}
 
@@ -154,13 +155,13 @@ src_get(){ # args: path, links
 src_to_tar_gz(){ # args: path
     # --------------------------------------------------------------------
     # data storage directory [директория хранения данных]
-	path=${1}
+	local path=${1}
 
     cd ${path}
     # pwd
 
     # getting folders in a directory [получение папок в директории]
-    dirs=( $( ls -p | grep "/$" ) )
+    local dirs=( $( ls -p | grep "/$" ) )
     # echo ${dirs[@]}
 
     # archiving of sources [архивирование исходников]
@@ -168,14 +169,15 @@ src_to_tar_gz(){ # args: path
         echo ""
         echo "Starting archiving ${dir}"
 
-        date_name=$( date +"%Y.%d.%m_%H-%M-%S" )
+        local date_name=$( date +"%Y.%d.%m_%H-%M-%S" )
         # echo ${date_name}
 
+        local ind
         let "ind = ${#dir[0]} - 1"
-        arhive_name=${dir[@]:0:${ind}}
+        local arhive_name=${dir[@]:0:${ind}}
         # echo ${arhive_name}
 
-        base_name="${arhive_name}_${date_name}.tar.gz"
+        local base_name="${arhive_name}_${date_name}.tar.gz"
 
         # pack the listed files and/or folders into arhive.tar.gz (with gzip compression)
         # tar -zcvf arhive.tar.gz file1 file2 ... fileN
@@ -197,13 +199,13 @@ src_to_tar_gz(){ # args: path
 delete_src_folders(){ # args: path
     # --------------------------------------------------------------------
     # data storage directory [директория хранения данных]
-	path=${1}
+	local path=${1}
 
     cd ${path}
     # pwd
 
     # getting folders in a directory [получение папок в директории]
-    dirs=( $( ls -p | grep "/$" ) )
+    local dirs=( $( ls -p | grep "/$" ) )
     # echo ${dirs[@]}
 
     # delete source directories [удалить директории с исходниками]
@@ -211,8 +213,9 @@ delete_src_folders(){ # args: path
         echo ""
         echo "Starting delete source directories ${dir}"
 
+        local ind
         let "ind = ${#dir[0]} - 1"
-        dir_src=${dir[@]:0:${ind}}
+        local dir_src=${dir[@]:0:${ind}}
         # echo ${dir_src}
         rm -rf ${dir_src} &> /dev/null
 
@@ -223,7 +226,42 @@ delete_src_folders(){ # args: path
     # pwd
     # --------------------------------------------------------------------
 }
-# ************************************************************************
+# # ************************************************************************
+# # function delete more history
+
+# # delete source archives longer than the specified storage history
+# # [удалить архивы исходников больше заданной истории хранения]
+# delete_arhive_src_more_history(){ # args: path
+#     # --------------------------------------------------------------------
+#     # data storage directory [директория хранения данных]
+# 	local path=${1}
+
+#     cd ${path}
+#     # pwd
+
+#     # getting folders in a directory [получение папок в директории]
+#     local dirs=( $( ls -p | grep "/$" ) )
+#     # echo ${dirs[@]}
+
+#     # delete source directories [удалить директории с исходниками]
+#     for dir in ${dirs[@]}; do
+#         echo ""
+#         echo "Starting delete source directories ${dir}"
+
+#         local ind
+#         let "ind = ${#dir[0]} - 1"
+#         local dir_src=${dir[@]:0:${ind}}
+#         # echo ${dir_src}
+#         rm -rf ${dir_src} &> /dev/null
+
+#         echo "End delete source directories ${dir}"
+#     done
+
+#     cd ..
+#     # pwd
+#     # --------------------------------------------------------------------
+# }
+# # ************************************************************************
 # function tests
 
 # script tests [тесты скрипта]
