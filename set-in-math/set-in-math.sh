@@ -43,7 +43,7 @@ set-in-math(){ # args: element_1 ... element_N
             set+=( ${arr[${index}]} )
         fi
 
-        let index++
+        let index++ # (( index++ ))
     done
 
     # echo "set = ${set[@]}" # test
