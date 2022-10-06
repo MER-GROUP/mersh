@@ -33,7 +33,8 @@ set-in-math(){ # args: element_1 ... element_N
         local bool=True
 
         for i in ${set[@]}; do
-            if [[ ${arr[${index}]} -eq ${i} ]]; then
+            # if [[ ${arr[${index}]} -eq ${i} ]]; then # for int [для целых чисел]
+            if [[ ${arr[${index}]} == ${i} ]]; then # for str [для строк]
                 bool=False
                 break
             fi
