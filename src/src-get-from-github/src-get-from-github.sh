@@ -68,7 +68,8 @@ settings_get(){ # args: file_path
     # get settings [получить настройки]
     for line in $( grep -v '^#' $file_path ); do
         # echo $line
-        IFS='=' read -a local arr <<< ${line}
+        local arr
+        IFS='=' read -a arr <<< ${line}
         settings_arr[${arr[0]}]=${arr[1]}
     done
     # --------------------------------------------------------------------
