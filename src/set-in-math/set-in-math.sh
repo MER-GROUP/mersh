@@ -30,16 +30,16 @@ set-in-math(){ # args: element_1 ... element_N
 
     while [[ ${index} -ne ${#arr[@]} ]]; do
         # echo "index = ${index}" # test
-        local bool=False
+        local bool=True
 
         for i in ${set[@]}; do
             if [[ ${arr[${index}]} -eq ${i} ]]; then
-                bool=True
+                bool=False
                 break
             fi
         done
 
-        if [[ 'False' == ${bool} ]]; then
+        if [[ 'True' == ${bool} ]]; then
             set+=( ${arr[${index}]} )
         fi
 
