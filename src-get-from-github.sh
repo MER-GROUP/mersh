@@ -2,5 +2,6 @@
 # ************************************************************************
 # connecting the script
 # [подключаем скрипт]
-source ./src/src-get-from-github/src-get-from-github.sh
+cd ./src/src-get-from-github/
+source ./src-get-from-github.sh
 # ************************************************************************
