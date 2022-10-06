@@ -2,5 +2,5 @@
 # ************************************************************************
 # connecting the script
 # [подключаем скрипт]
-source ./src/set-in-math/set-in-math.sh
+source ./src/src-get-from-github/src-get-from-github.sh
 # ************************************************************************
