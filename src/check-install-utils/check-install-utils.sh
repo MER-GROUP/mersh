@@ -17,7 +17,8 @@ check-install-utils(){ # args: program_1 ... program_N
     # programs that need to be checked for installation
     # [программы которые нужно проверить на установку]
     local arr=( "${@}" ) # local arr=( "${*}" )
-    echo ${arr[@]}
+    # echo ${arr[@]} # test 
+    # echo ${#arr[@]} # test
 
     # programs to install
     # [программы которые нужно установить]
@@ -26,8 +27,8 @@ check-install-utils(){ # args: program_1 ... program_N
     # checking the necessary installed utilities
     # [Проверка установки утилит]
     for app in ${arr[@]}; do
-        # local app_path=$( which $app ) # test [тест]
-        # echo $app_path # test [тест]
+        # local app_path=$( which $app ) # test
+        # echo $app_path # test
 
         # 0 - the program is installed, 1 and more - not
         # [0 - программа установленна, 1 и больше - нет]
@@ -41,9 +42,11 @@ check-install-utils(){ # args: program_1 ... program_N
         fi
     done
 
-    # You need to install the following programs
-    # [Нужно установить следующие программы]
-    echo -e "You need to install the following programs:\n ${utils[@]}"
+    if [[ 0 -ne ${#utils[@]} ]]; then
+        # You need to install the following programs
+        # [Нужно установить следующие программы]
+        echo -e "You need to install the following programs:\n ${utils[@]}"
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
@@ -60,4 +63,8 @@ declare -x -f check-install-utils
 # utils=( max date find git gzip ls mkdir rm tar which mer) # test
 # check-install-utils "${utils[@]}" # test
 # check-install-utils "max" "date" "find" "git" "gzip" "ls" "mkdir" "rm" "tar" "which" "mer" # test
+# test
+if [[  ]]; then
+    echo
+fi
 # ************************************************************************
