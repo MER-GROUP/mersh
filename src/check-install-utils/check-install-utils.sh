@@ -45,7 +45,6 @@ declare -x -f check-install-utils
 # ************************************************************************
 # tests
 
-# check-install-utils # test
+check-install-utils # test
 # check-install-utils "1" "2" "3" "1" "2" "3" "1" "2" "3" # test
-# check-install-utils "1" "2" "3" "1" "2" "1" "2" "3" "4" "5" "6" # test
 # ************************************************************************
