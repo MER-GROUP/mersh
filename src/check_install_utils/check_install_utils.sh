@@ -1,6 +1,6 @@
 #!/bin/bash
 # ************************************************************************
-# check_install_utils
+# check-install-utils
 
 # The script checks the installation of utils
 # [Скрипт проверяет установку утилит]
@@ -8,11 +8,11 @@
 # Script implementation - Max Romanenko (Red Alert) - 2022.
 # Реализация скрипта - Макс Романенко (Red Alert) - 2022г.
 # ************************************************************************
-# function check_install_utils
+# function check-install-utils
 
 # checking the necessary installed utilities
 # [Проверка установки утилит]
-check_install_utils(){ # args: program_1 ... program_N
+check-install-utils(){ # args: program_1 ... program_N
     # --------------------------------------------------------------------
     # required installed programs [необходимые установленные программы]
     local arr=( "${*}" )
@@ -41,11 +41,11 @@ check_install_utils(){ # args: program_1 ... program_N
 
 # function access outside the script
 # [доступ функции вне скрипта]
-declare -x -f check_install_utils
+declare -x -f check-install-utils
 # ************************************************************************
 # tests
 
-# check_install_utils # test
-# check_install_utils "1" "2" "3" "1" "2" "3" "1" "2" "3" # test
-# check_install_utils "1" "2" "3" "1" "2" "1" "2" "3" "4" "5" "6" # test
+# check-install-utils # test
+# check-install-utils "1" "2" "3" "1" "2" "3" "1" "2" "3" # test
+# check-install-utils "1" "2" "3" "1" "2" "1" "2" "3" "4" "5" "6" # test
 # ************************************************************************

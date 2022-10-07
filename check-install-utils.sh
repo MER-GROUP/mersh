@@ -2,7 +2,7 @@
 # ************************************************************************
 # connecting the script
 # [подключаем скрипт]
-cd ./src/check_install_utils/
-source ./check_install_utils.sh
+cd ./src/check-install-utils/
+source ./check-install-utils.sh
 cd ../../
 # ************************************************************************
