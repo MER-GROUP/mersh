@@ -14,38 +14,51 @@
 # [Проверка установки утилит]
 check-install-utils(){ # args: program_1 ... program_N
     # --------------------------------------------------------------------
-    # programs that need to be checked for installation
-    # [программы которые нужно проверить на установку]
-    local arr=( "${@}" ) # local arr=( "${*}" )
-    # echo ${arr[@]} # test 
-    # echo ${#arr[@]} # test
+    # checking the installation of the utility - which
+    # [проверка установки утилиты which]
+    # if [[ 0 -eq $( type mer &> /dev/null; echo ${?} ) ]]; then # test
+    if [[ 0 -eq $( type which &> /dev/null; echo ${?} ) ]]; then
+        
+        # programs that need to be checked for installation
+        # [программы которые нужно проверить на установку]
+        local arr=( "${@}" ) # local arr=( "${*}" )
+        # echo ${arr[@]} # test 
+        # echo ${#arr[@]} # test
 
-    # programs to install
-    # [программы которые нужно установить]
-    local utils
+        # programs to install
+        # [программы которые нужно установить]
+        local utils
 
-    # checking the necessary installed utilities
-    # [Проверка установки утилит]
-    for app in ${arr[@]}; do
-        # local app_path=$( which $app ) # test
-        # echo $app_path # test
+        # checking the necessary installed utilities
+        # [Проверка установки утилит]
+        for app in ${arr[@]}; do
+            # local app_path=$( which $app ) # test
+            # echo $app_path # test
 
-        # 0 - the program is installed, 1 and more - not
-        # [0 - программа установленна, 1 и больше - нет]
-        which ${app} &> /dev/null
-        local bool=$( echo  ${?} )
-        if [ 0 -ne ${bool} ]; then
-            # echo "You need to install the ${app} to continue"
-            # exit ${bool}
-            app+="\n"
-            utils+=( ${app} )
-        fi
-    done
+            # 0 - the program is installed, 1 and more - not
+            # [0 - программа установленна, 1 и больше - нет]
+            which ${app} &> /dev/null
+            local bool=$( echo  ${?} )
+            if [ 0 -ne ${bool} ]; then
+                # echo "You need to install the ${app} to continue"
+                # exit ${bool}
+                app+="\n"
+                utils+=( ${app} )
+            fi
+        done
 
-    if [[ 0 -ne ${#utils[@]} ]]; then
-        # You need to install the following programs
-        # [Нужно установить следующие программы]
-        echo -e "You need to install the following programs:\n ${utils[@]}"
+        # output [Вывод]
+        if [[ 0 -ne ${#utils[@]} ]]; then
+            # You need to install the following programs
+            # [Нужно установить следующие программы]
+            echo -e "you need to install the following programs:\n ${utils[@]}"
+        else
+            echo "all utils are installed"
+        fi  
+
+    else
+        # output [Вывод]
+        echo -e "you need to install the following programs:\n which"
     fi
     # --------------------------------------------------------------------
 }
@@ -63,8 +76,14 @@ declare -x -f check-install-utils
 # utils=( max date find git gzip ls mkdir rm tar which mer) # test
 # check-install-utils "${utils[@]}" # test
 # check-install-utils "max" "date" "find" "git" "gzip" "ls" "mkdir" "rm" "tar" "which" "mer" # test
+
 # test
-if [[  ]]; then
-    echo
-fi
+# utils=( max date find git gzip ls mkdir rm tar which mer )
+# utils=( date find git gzip ls mkdir rm tar which )
+# utils_test=$( check-install-utils "${utils[@]}" )
+# if [[ "all utils are installed" != ${utils_test} ]]; then
+#     echo "False"
+# else
+#     echo "True"
+# fi
 # ************************************************************************
