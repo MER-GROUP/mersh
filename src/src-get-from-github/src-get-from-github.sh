@@ -208,7 +208,7 @@ delete_arhive_src_more_history(){ # args: path, hist
 
     cd ${path}
     # pwd
-
+    # ----------------------------------
     # getting folders in a directory [получение файлов в директории]
     local files_arr=( $( ls -p | grep -v "/$" ) )
     # echo ${files_arr[@]}
@@ -224,12 +224,25 @@ delete_arhive_src_more_history(){ # args: path, hist
         # echo ${files_base_arr[${i}]}
         let i++
     done
-
+    # ----------------------------------
     # apply a set on files
     # [применить множество на файлах]
+    set_in_math=`pwd`
+    # pwd
+    cd ../../../
+    # pwd
+    source set-in-math.sh
+    cd ${set_in_math}
+    # pwd
+    files_base_arr=( $( set-in-math ${files_base_arr[@]} ) ) 
+    echo "${files_base_arr[@]}"
+    # ----------------------------------
+    # delete archived sources [удалить архивированные исходниками]
+    for arhive_src in ${files_base_arr[@]}; do
+        all_arhive_src=( $( ls -1cr | grep "${arhive_src}" ) )
+        echo ${all_arhive_src[@]}
+        # размер массива минус история по полученному остатку удалить лишние архивы
 
-    # # delete source directories [удалить директории с исходниками]
-    # for dir in ${dirs[@]}; do
     #     echo ""
     #     echo "Starting delete source directories ${dir}"
 
@@ -240,8 +253,9 @@ delete_arhive_src_more_history(){ # args: path, hist
     #     rm -rf ${dir_src} &> /dev/null
 
     #     echo "End delete source directories ${dir}"
-    # done
 
+    done
+    # ----------------------------------
     cd ..
     # pwd
     # --------------------------------------------------------------------
@@ -296,7 +310,7 @@ if [[ 'all utils are installed' == ${check} ]]; then
     check_path ${settings_arr[path_src]}
 
     # get sources from github [получить исходники с github]
-    src_get ${settings_arr[path_src]} ${links_arr[@]}
+    # src_get ${settings_arr[path_src]} ${links_arr[@]}
 
     # archive the sources [заархивировать исходники]
     src_to_tar_gz ${settings_arr[path_src]}
