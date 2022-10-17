@@ -239,7 +239,7 @@ delete_arhive_src_more_history(){ # args: path, hist
     # ----------------------------------
     # delete archived sources [удалить архивированные исходниками]
     for arhive_src in ${files_base_arr[@]}; do
-        all_arhive_src=( $( ls -1cr | grep "${arhive_src}" ) )
+        all_arhive_src=( $( ls -1cr | grep "^${arhive_src}" ) )
         echo ${all_arhive_src[@]}
         # размер массива минус история по полученному остатку удалить лишние архивы
 
