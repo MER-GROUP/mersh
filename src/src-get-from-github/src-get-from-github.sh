@@ -27,36 +27,36 @@ links_arr=( $( grep -v '^#' ${file_links} ) )
 # [название программ для проверки на установку]
 utils=( date find git gzip ls mkdir rm tar which )
 # ************************************************************************
-# function check_core_utils
+# # function check_core_utils
 
-# checking the necessary installed utilities
-# [проверка необходимых установленных утилит]
-check_core_utils(){ # args: program_1 ... program_N
-    # --------------------------------------------------------------------
-    # required installed programs [необходимые установленные программы]
-    # arr=( git tar mer) # for test [для тестов]
-    # arr=( git tar which) # for test [для тестов]
-    local arr=( "${*}" )
-    # echo ${arr[@]}
+# # checking the necessary installed utilities
+# # [проверка необходимых установленных утилит]
+# check_core_utils(){ # args: program_1 ... program_N
+#     # --------------------------------------------------------------------
+#     # required installed programs [необходимые установленные программы]
+#     # arr=( git tar mer) # for test [для тестов]
+#     # arr=( git tar which) # for test [для тестов]
+#     local arr=( "${*}" )
+#     # echo ${arr[@]}
 
-    # checking the necessary installed utilities
-    # [проверка необходимых установленных утилит]
-    for app in ${arr[@]}; do
-        # # test [тест]
-        # local app_path=$( which $app )
-        # echo $app_path
+#     # checking the necessary installed utilities
+#     # [проверка необходимых установленных утилит]
+#     for app in ${arr[@]}; do
+#         # # test [тест]
+#         # local app_path=$( which $app )
+#         # echo $app_path
 
-        # 0 - the program is installed, 1 and more - not
-        # [0 - программа установленна, 1 и больше - нет]
-        which ${app} &> /dev/null
-        local bool=$( echo  ${?} )
-        if [ 0 -ne ${bool} ]; then
-            echo "You need to install the ${app} to continue"
-            exit ${bool}
-        fi
-    done
-    # --------------------------------------------------------------------
-}
+#         # 0 - the program is installed, 1 and more - not
+#         # [0 - программа установленна, 1 и больше - нет]
+#         which ${app} &> /dev/null
+#         local bool=$( echo  ${?} )
+#         if [ 0 -ne ${bool} ]; then
+#             echo "You need to install the ${app} to continue"
+#             exit ${bool}
+#         fi
+#     done
+#     # --------------------------------------------------------------------
+# }
 # ************************************************************************
 # function settings_get
 
@@ -303,28 +303,40 @@ tests(){
 
 # checking the necessary installed utilities
 # [проверка необходимых установленных утилит]
-# check_core_utils git tar which mer # for test [для тестов]
-check_core_utils ${utils[@]}
+path_src_get_from_github=`pwd`
+# echo ${path_src_get_from_github} # for test [для тестов]
+cd ../../
+source check-install-utils.sh
+# pwd # for test [для тестов]
+cd ${path_src_get_from_github}
+# pwd # for test [для тестов]
+# check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
+check-install-utils "${utils[@]}"
+echo -e "${check}"
 
-# get settings [получить настройки]
-settings_get ${file_settings}
+# if everything is installed, then continue the program
+# [если все установлено, то продолжить работу программы]
+if [[ 'all utils are installed' == ${check} ]]; then
+    # get settings [получить настройки]
+    settings_get ${file_settings}
 
-# checking the existence of a directory [проверка существования директории]
-check_path ${settings_arr[path_src]}
+    # checking the existence of a directory [проверка существования директории]
+    check_path ${settings_arr[path_src]}
 
-# get sources from github [получить исходники с github]
-src_get ${settings_arr[path_src]} ${links_arr[@]}
+    # get sources from github [получить исходники с github]
+    src_get ${settings_arr[path_src]} ${links_arr[@]}
 
-# archive the sources [заархивировать исходники]
-src_to_tar_gz ${settings_arr[path_src]}
+    # archive the sources [заархивировать исходники]
+    src_to_tar_gz ${settings_arr[path_src]}
 
-# delete source directories [удалить директории с исходниками]
-delete_src_folders ${settings_arr[path_src]}
+    # delete source directories [удалить директории с исходниками]
+    delete_src_folders ${settings_arr[path_src]}
 
-# delete source archives longer than the specified storage history
-# [удалить архивы исходников больше заданной истории хранения]
-delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
+    # delete source archives longer than the specified storage history
+    # [удалить архивы исходников больше заданной истории хранения]
+    delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
 
-# script tests [тесты скрипта]
-tests
+    # script tests [тесты скрипта]
+    tests
+fi
 # ************************************************************************
