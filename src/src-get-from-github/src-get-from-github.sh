@@ -309,6 +309,6 @@ if [[ 'all utils are installed' == ${check} ]]; then
     delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
 
     # script tests [тесты скрипта]
-    tests
+    # tests
 fi
 # ************************************************************************
