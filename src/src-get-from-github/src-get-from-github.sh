@@ -27,37 +27,6 @@ links_arr=( $( grep -v '^#' ${file_links} ) )
 # [название программ для проверки на установку]
 utils=( date find git gzip ls mkdir rm tar which )
 # ************************************************************************
-# function check_core_utils
-
-# checking the necessary installed utilities
-# [проверка необходимых установленных утилит]
-check_core_utils(){ # args: program_1 ... program_N
-    # --------------------------------------------------------------------
-    # required installed programs [необходимые установленные программы]
-    # arr=( git tar mer) # for test [для тестов]
-    # arr=( git tar which) # for test [для тестов]
-    local arr=( "${*}" )
-    # echo ${arr[@]}
-
-    # checking the necessary installed utilities
-    # [проверка необходимых установленных утилит]
-    for app in ${arr[@]}; do
-        # # test [тест]
-        # local app_path=$( which $app )
-        # echo $app_path
-
-        # 0 - the program is installed, 1 and more - not
-        # [0 - программа установленна, 1 и больше - нет]
-        which ${app} &> /dev/null
-        local bool=$( echo  ${?} )
-        if [ 0 -ne ${bool} ]; then
-            echo "You need to install the ${app} to continue"
-            exit ${bool}
-        fi
-    done
-    # --------------------------------------------------------------------
-}
-# ************************************************************************
 # function settings_get
 
 # get settings [получить настройки]
@@ -170,7 +139,7 @@ src_to_tar_gz(){ # args: path
         echo ""
         echo "Starting archiving ${dir}"
 
-        local date_name=$( date +"%Y.%d.%m_%H-%M-%S" )
+        local date_name=$( date +"%Y.%m.%d_%H-%M-%S" )
         # echo ${date_name}
 
         local ind
@@ -239,7 +208,7 @@ delete_arhive_src_more_history(){ # args: path, hist
 
     cd ${path}
     # pwd
-
+    # ----------------------------------
     # getting folders in a directory [получение файлов в директории]
     local files_arr=( $( ls -p | grep -v "/$" ) )
     # echo ${files_arr[@]}
@@ -255,12 +224,25 @@ delete_arhive_src_more_history(){ # args: path, hist
         # echo ${files_base_arr[${i}]}
         let i++
     done
-
+    # ----------------------------------
     # apply a set on files
     # [применить множество на файлах]
+    set_in_math=`pwd`
+    # pwd
+    cd ../../../
+    # pwd
+    source set-in-math.sh
+    cd ${set_in_math}
+    # pwd
+    files_base_arr=( $( set-in-math ${files_base_arr[@]} ) ) 
+    echo "${files_base_arr[@]}"
+    # ----------------------------------
+    # delete archived sources [удалить архивированные исходниками]
+    for arhive_src in ${files_base_arr[@]}; do
+        all_arhive_src=( $( ls -1cr | grep "^${arhive_src}" ) )
+        echo ${all_arhive_src[@]}
+        # размер массива минус история по полученному остатку удалить лишние архивы
 
-    # # delete source directories [удалить директории с исходниками]
-    # for dir in ${dirs[@]}; do
     #     echo ""
     #     echo "Starting delete source directories ${dir}"
 
@@ -271,8 +253,9 @@ delete_arhive_src_more_history(){ # args: path, hist
     #     rm -rf ${dir_src} &> /dev/null
 
     #     echo "End delete source directories ${dir}"
-    # done
 
+    done
+    # ----------------------------------
     cd ..
     # pwd
     # --------------------------------------------------------------------
@@ -301,30 +284,45 @@ tests(){
 # ************************************************************************
 # program logic [логика программы]
 
+# --------------------------------------------------------------------
 # checking the necessary installed utilities
 # [проверка необходимых установленных утилит]
-# check_core_utils git tar which mer # for test [для тестов]
-check_core_utils ${utils[@]}
+path_src_get_from_github=`pwd`
+# echo ${path_src_get_from_github} # for test [для тестов]
+cd ../../
+source check-install-utils.sh
+# pwd # for test [для тестов]
+cd ${path_src_get_from_github}
+# pwd # for test [для тестов]
+# check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
+check=$( check-install-utils "${utils[@]}" )
+# echo ${check} # for test [для тестов]
+echo -e "${check}"
+# --------------------------------------------------------------------
 
-# get settings [получить настройки]
-settings_get ${file_settings}
+# if everything is installed, then continue the program
+# [если все установлено, то продолжить работу программы]
+if [[ 'all utils are installed' == ${check} ]]; then
+    # get settings [получить настройки]
+    settings_get ${file_settings}
 
-# checking the existence of a directory [проверка существования директории]
-check_path ${settings_arr[path_src]}
+    # checking the existence of a directory [проверка существования директории]
+    check_path ${settings_arr[path_src]}
 
-# get sources from github [получить исходники с github]
-src_get ${settings_arr[path_src]} ${links_arr[@]}
+    # get sources from github [получить исходники с github]
+    # src_get ${settings_arr[path_src]} ${links_arr[@]}
 
-# archive the sources [заархивировать исходники]
-src_to_tar_gz ${settings_arr[path_src]}
+    # archive the sources [заархивировать исходники]
+    src_to_tar_gz ${settings_arr[path_src]}
 
-# delete source directories [удалить директории с исходниками]
-delete_src_folders ${settings_arr[path_src]}
+    # delete source directories [удалить директории с исходниками]
+    delete_src_folders ${settings_arr[path_src]}
 
-# delete source archives longer than the specified storage history
-# [удалить архивы исходников больше заданной истории хранения]
-delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
+    # delete source archives longer than the specified storage history
+    # [удалить архивы исходников больше заданной истории хранения]
+    delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
 
-# script tests [тесты скрипта]
-tests
+    # script tests [тесты скрипта]
+    # tests
+fi
 # ************************************************************************
