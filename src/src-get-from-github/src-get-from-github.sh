@@ -170,7 +170,7 @@ src_to_tar_gz(){ # args: path
         echo ""
         echo "Starting archiving ${dir}"
 
-        local date_name=$( date +"%Y.%d.%m_%H-%M-%S" )
+        local date_name=$( date +"%Y.%m.%d_%H-%M-%S" )
         # echo ${date_name}
 
         local ind
