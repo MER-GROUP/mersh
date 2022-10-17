@@ -27,37 +27,6 @@ links_arr=( $( grep -v '^#' ${file_links} ) )
 # [название программ для проверки на установку]
 utils=( date find git gzip ls mkdir rm tar which )
 # ************************************************************************
-# # function check_core_utils
-
-# # checking the necessary installed utilities
-# # [проверка необходимых установленных утилит]
-# check_core_utils(){ # args: program_1 ... program_N
-#     # --------------------------------------------------------------------
-#     # required installed programs [необходимые установленные программы]
-#     # arr=( git tar mer) # for test [для тестов]
-#     # arr=( git tar which) # for test [для тестов]
-#     local arr=( "${*}" )
-#     # echo ${arr[@]}
-
-#     # checking the necessary installed utilities
-#     # [проверка необходимых установленных утилит]
-#     for app in ${arr[@]}; do
-#         # # test [тест]
-#         # local app_path=$( which $app )
-#         # echo $app_path
-
-#         # 0 - the program is installed, 1 and more - not
-#         # [0 - программа установленна, 1 и больше - нет]
-#         which ${app} &> /dev/null
-#         local bool=$( echo  ${?} )
-#         if [ 0 -ne ${bool} ]; then
-#             echo "You need to install the ${app} to continue"
-#             exit ${bool}
-#         fi
-#     done
-#     # --------------------------------------------------------------------
-# }
-# ************************************************************************
 # function settings_get
 
 # get settings [получить настройки]
@@ -301,6 +270,7 @@ tests(){
 # ************************************************************************
 # program logic [логика программы]
 
+# --------------------------------------------------------------------
 # checking the necessary installed utilities
 # [проверка необходимых установленных утилит]
 path_src_get_from_github=`pwd`
@@ -314,6 +284,7 @@ cd ${path_src_get_from_github}
 check=$( check-install-utils "${utils[@]}" )
 # echo ${check} # for test [для тестов]
 echo -e "${check}"
+# --------------------------------------------------------------------
 
 # if everything is installed, then continue the program
 # [если все установлено, то продолжить работу программы]
