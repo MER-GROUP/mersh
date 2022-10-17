@@ -311,7 +311,8 @@ source check-install-utils.sh
 cd ${path_src_get_from_github}
 # pwd # for test [для тестов]
 # check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
-check-install-utils "${utils[@]}"
+check=$( check-install-utils "${utils[@]}" )
+# echo ${check} # for test [для тестов]
 echo -e "${check}"
 
 # if everything is installed, then continue the program
