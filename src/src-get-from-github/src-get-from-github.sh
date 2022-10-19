@@ -235,35 +235,30 @@ delete_arhive_src_more_history(){ # args: path, hist
     cd ${set_in_math}
     # pwd
     files_base_arr=( $( set-in-math ${files_base_arr[@]} ) ) 
-    echo "${files_base_arr[@]}"
+    # echo "${files_base_arr[@]}"
     # ----------------------------------
     # delete archived sources [удалить архивированные исходниками]
     for arhive_src in ${files_base_arr[@]}; do
         all_arhive_src=( $( ls -1cr | grep "^${arhive_src}" ) )
-        echo ${all_arhive_src[@]}
+        # echo ${all_arhive_src[@]}
 
         # the size of the array minus the history is the number of unnecessary sources
         # [размер массива минус история - это количество лишних исходников]
         local ost
         let "ost = ${#all_arhive_src[@]} - ${settings_arr[hist_src]}"
-        echo ${ost}
+        # echo ${ost}
 
         # if the remainder to delete is greater than 0, then we delete unnecessary sources
         # [если остаток для удаления больше 0, то удаляем лишние исходники]
         if [[ 0 -lt ${ost} ]]; then
-            # написать цикл для удаления исходников
-
-
-            # echo ""
-            # echo "Starting delete source directories ${dir}"
-
-            # local ind
-            # let "ind = ${#dir[0]} - 1"
-            # local dir_src=${dir[@]:0:${ind}}
-            # # echo ${dir_src}
-            # rm -rf ${dir_src} &> /dev/null
-
-            # echo "End delete source directories ${dir}"
+            # a cycle for deleting sources
+            # [цикл для удаления исходников]
+            for (( i=0; i < ${ost}; i++ )); do
+                echo ""
+                echo "Starting delete arhive source ${all_arhive_src[i]}"
+                rm -rf ${all_arhive_src[i]} &> /dev/null
+                echo "End delete source directories ${all_arhive_src[i]}"
+            done
         fi
     done
     # ----------------------------------
