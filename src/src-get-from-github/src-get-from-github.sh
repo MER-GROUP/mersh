@@ -227,43 +227,40 @@ delete_arhive_src_more_history(){ # args: path, hist
     # ----------------------------------
     # apply a set on files
     # [применить множество на файлах]
-    set_in_math=`pwd`
-    # pwd
-    cd ../../../
-    # pwd
-    source set-in-math.sh
-    cd ${set_in_math}
-    # pwd
+    # ----------------
+    # set_in_math=`pwd`
+    # # pwd
+    # cd ../../../
+    # # pwd
+    # source set-in-math.sh
+    # cd ${set_in_math}
+    # # pwd
+    # ----------------
     files_base_arr=( $( set-in-math ${files_base_arr[@]} ) ) 
-    echo "${files_base_arr[@]}"
+    # echo "${files_base_arr[@]}"
     # ----------------------------------
     # delete archived sources [удалить архивированные исходниками]
     for arhive_src in ${files_base_arr[@]}; do
         all_arhive_src=( $( ls -1cr | grep "^${arhive_src}" ) )
-        echo ${all_arhive_src[@]}
+        # echo ${all_arhive_src[@]}
 
         # the size of the array minus the history is the number of unnecessary sources
         # [размер массива минус история - это количество лишних исходников]
         local ost
         let "ost = ${#all_arhive_src[@]} - ${settings_arr[hist_src]}"
-        echo ${ost}
+        # echo ${ost}
 
         # if the remainder to delete is greater than 0, then we delete unnecessary sources
         # [если остаток для удаления больше 0, то удаляем лишние исходники]
         if [[ 0 -lt ${ost} ]]; then
-            # написать цикл для удаления исходников
-
-
-            # echo ""
-            # echo "Starting delete source directories ${dir}"
-
-            # local ind
-            # let "ind = ${#dir[0]} - 1"
-            # local dir_src=${dir[@]:0:${ind}}
-            # # echo ${dir_src}
-            # rm -rf ${dir_src} &> /dev/null
-
-            # echo "End delete source directories ${dir}"
+            # a cycle for deleting sources
+            # [цикл для удаления исходников]
+            for (( i=0; i < ${ost}; i++ )); do
+                echo ""
+                echo "Starting delete arhive source ${all_arhive_src[i]}"
+                rm -rf ${all_arhive_src[i]} &> /dev/null
+                echo "End delete source directories ${all_arhive_src[i]}"
+            done
         fi
     done
     # ----------------------------------
@@ -275,7 +272,7 @@ delete_arhive_src_more_history(){ # args: path, hist
 # function tests
 
 # script tests [тесты скрипта]
-tests(){
+tests(){ # NO args
     # --------------------------------------------------------------------
     # tests [тесты]
     echo '###################tests###################'
@@ -293,47 +290,84 @@ tests(){
     # --------------------------------------------------------------------
 }
 # ************************************************************************
-# program logic [логика программы]
+# function src-get-from-github
 
-# --------------------------------------------------------------------
-# checking the necessary installed utilities
-# [проверка необходимых установленных утилит]
-path_src_get_from_github=`pwd`
-# echo ${path_src_get_from_github} # for test [для тестов]
-cd ../../
-source check-install-utils.sh
-# pwd # for test [для тестов]
-cd ${path_src_get_from_github}
-# pwd # for test [для тестов]
-# check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
-check=$( check-install-utils "${utils[@]}" )
-# echo ${check} # for test [для тестов]
-echo -e "${check}"
-# --------------------------------------------------------------------
+# function for downloading and updating sources from github
+# [Функция для скачивания и обновления исходников с github]
+src-get-from-github(){ # NO args
+    # --------------------------------------------------------------------
+    # program logic [логика программы]
+    # --------------------------------------------------------------------
+    # checking the necessary installed utilities
+    # [проверка необходимых установленных утилит]
 
-# if everything is installed, then continue the program
-# [если все установлено, то продолжить работу программы]
-if [[ 'all utils are installed' == ${check} ]]; then
-    # get settings [получить настройки]
-    settings_get ${file_settings}
+    # path_src_get_from_github=`pwd`
+    # echo ${path_src_get_from_github} # for test [для тестов]
 
-    # checking the existence of a directory [проверка существования директории]
-    check_path ${settings_arr[path_src]}
 
-    # get sources from github [получить исходники с github]
-    # src_get ${settings_arr[path_src]} ${links_arr[@]}
+    # if [[ 0 -ne $( type check-install-utils &> /dev/null; echo ${?} ) ]]; then
 
-    # archive the sources [заархивировать исходники]
-    src_to_tar_gz ${settings_arr[path_src]}
+    #     cd ../../
+    #     pwd # for test [для тестов]
+    #     source check-install-utils.sh
+    #     pwd # for test [для тестов]
+    #     cd ${path_src_get_from_github}
+    #     pwd # for test [для тестов]
 
-    # delete source directories [удалить директории с исходниками]
-    delete_src_folders ${settings_arr[path_src]}
+    # fi
 
-    # delete source archives longer than the specified storage history
-    # [удалить архивы исходников больше заданной истории хранения]
-    delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
 
-    # script tests [тесты скрипта]
-    # tests
-fi
+
+
+
+    # [для запуска через bash имя_скрипта.sh]
+    # cd ../../
+    # pwd # for test [для тестов]
+    # source check-install-utils.sh
+    # pwd # for test [для тестов]
+    # cd ${path_src_get_from_github}
+    # pwd # for test [для тестов]
+
+    # check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
+    check=$( check-install-utils "${utils[@]}" )
+    # echo ${check} # for test [для тестов]
+    echo -e "${check}"
+    # --------------------------------------------------------------------
+    # if everything is installed, then continue the program
+    # [если все установлено, то продолжить работу программы]
+    if [[ 'all utils are installed' == ${check} ]]; then
+        # get settings [получить настройки]
+        settings_get ${file_settings}
+
+        # checking the existence of a directory [проверка существования директории]
+        check_path ${settings_arr[path_src]}
+
+        # get sources from github [получить исходники с github]
+        src_get ${settings_arr[path_src]} ${links_arr[@]}
+
+        # archive the sources [заархивировать исходники]
+        src_to_tar_gz ${settings_arr[path_src]}
+
+        # delete source directories [удалить директории с исходниками]
+        delete_src_folders ${settings_arr[path_src]}
+
+        # delete source archives longer than the specified storage history
+        # [удалить архивы исходников больше заданной истории хранения]
+        delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
+
+        # script tests [тесты скрипта]
+        # tests
+    fi
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
+# init funcs
+
+# function access outside the script
+# [доступ функции вне скрипта]
+declare -x -f src-get-from-github
+# ************************************************************************
+# tests
+
+# src-get-from-github # test
 # ************************************************************************
