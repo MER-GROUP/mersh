@@ -227,13 +227,15 @@ delete_arhive_src_more_history(){ # args: path, hist
     # ----------------------------------
     # apply a set on files
     # [применить множество на файлах]
-    set_in_math=`pwd`
-    # pwd
-    cd ../../../
-    # pwd
-    source set-in-math.sh
-    cd ${set_in_math}
-    # pwd
+    # ----------------
+    # set_in_math=`pwd`
+    # # pwd
+    # cd ../../../
+    # # pwd
+    # source set-in-math.sh
+    # cd ${set_in_math}
+    # # pwd
+    # ----------------
     files_base_arr=( $( set-in-math ${files_base_arr[@]} ) ) 
     # echo "${files_base_arr[@]}"
     # ----------------------------------
@@ -298,13 +300,34 @@ src-get-from-github(){ # NO args
     # --------------------------------------------------------------------
     # checking the necessary installed utilities
     # [проверка необходимых установленных утилит]
-    path_src_get_from_github=`pwd`
+
+    # path_src_get_from_github=`pwd`
     # echo ${path_src_get_from_github} # for test [для тестов]
-    cd ../../
-    source check-install-utils.sh
+
+
+    # if [[ 0 -ne $( type check-install-utils &> /dev/null; echo ${?} ) ]]; then
+
+    #     cd ../../
+    #     pwd # for test [для тестов]
+    #     source check-install-utils.sh
+    #     pwd # for test [для тестов]
+    #     cd ${path_src_get_from_github}
+    #     pwd # for test [для тестов]
+
+    # fi
+
+
+
+
+
+    # [для запуска через bash имя_скрипта.sh]
+    # cd ../../
     # pwd # for test [для тестов]
-    cd ${path_src_get_from_github}
+    # source check-install-utils.sh
     # pwd # for test [для тестов]
+    # cd ${path_src_get_from_github}
+    # pwd # for test [для тестов]
+
     # check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
     check=$( check-install-utils "${utils[@]}" )
     # echo ${check} # for test [для тестов]
