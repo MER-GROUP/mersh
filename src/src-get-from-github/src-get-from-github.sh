@@ -316,7 +316,7 @@ if [[ 'all utils are installed' == ${check} ]]; then
     check_path ${settings_arr[path_src]}
 
     # get sources from github [получить исходники с github]
-    # src_get ${settings_arr[path_src]} ${links_arr[@]}
+    src_get ${settings_arr[path_src]} ${links_arr[@]}
 
     # archive the sources [заархивировать исходники]
     src_to_tar_gz ${settings_arr[path_src]}
