@@ -270,7 +270,7 @@ delete_arhive_src_more_history(){ # args: path, hist
 # function tests
 
 # script tests [тесты скрипта]
-tests(){
+tests(){ # NO args
     # --------------------------------------------------------------------
     # tests [тесты]
     echo '###################tests###################'
@@ -288,47 +288,53 @@ tests(){
     # --------------------------------------------------------------------
 }
 # ************************************************************************
-# program logic [логика программы]
+# function src-get-from-github
 
-# --------------------------------------------------------------------
-# checking the necessary installed utilities
-# [проверка необходимых установленных утилит]
-path_src_get_from_github=`pwd`
-# echo ${path_src_get_from_github} # for test [для тестов]
-cd ../../
-source check-install-utils.sh
-# pwd # for test [для тестов]
-cd ${path_src_get_from_github}
-# pwd # for test [для тестов]
-# check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
-check=$( check-install-utils "${utils[@]}" )
-# echo ${check} # for test [для тестов]
-echo -e "${check}"
-# --------------------------------------------------------------------
+# function for downloading and updating sources from github
+# [Функция для скачивания и обновления исходников с github]
+src-get-from-github(){ # NO args
+    # --------------------------------------------------------------------
+    # program logic [логика программы]
+    # --------------------------------------------------------------------
+    # checking the necessary installed utilities
+    # [проверка необходимых установленных утилит]
+    path_src_get_from_github=`pwd`
+    # echo ${path_src_get_from_github} # for test [для тестов]
+    cd ../../
+    source check-install-utils.sh
+    # pwd # for test [для тестов]
+    cd ${path_src_get_from_github}
+    # pwd # for test [для тестов]
+    # check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
+    check=$( check-install-utils "${utils[@]}" )
+    # echo ${check} # for test [для тестов]
+    echo -e "${check}"
+    # --------------------------------------------------------------------
+    # if everything is installed, then continue the program
+    # [если все установлено, то продолжить работу программы]
+    if [[ 'all utils are installed' == ${check} ]]; then
+        # get settings [получить настройки]
+        settings_get ${file_settings}
 
-# if everything is installed, then continue the program
-# [если все установлено, то продолжить работу программы]
-if [[ 'all utils are installed' == ${check} ]]; then
-    # get settings [получить настройки]
-    settings_get ${file_settings}
+        # checking the existence of a directory [проверка существования директории]
+        check_path ${settings_arr[path_src]}
 
-    # checking the existence of a directory [проверка существования директории]
-    check_path ${settings_arr[path_src]}
+        # get sources from github [получить исходники с github]
+        src_get ${settings_arr[path_src]} ${links_arr[@]}
 
-    # get sources from github [получить исходники с github]
-    src_get ${settings_arr[path_src]} ${links_arr[@]}
+        # archive the sources [заархивировать исходники]
+        src_to_tar_gz ${settings_arr[path_src]}
 
-    # archive the sources [заархивировать исходники]
-    src_to_tar_gz ${settings_arr[path_src]}
+        # delete source directories [удалить директории с исходниками]
+        delete_src_folders ${settings_arr[path_src]}
 
-    # delete source directories [удалить директории с исходниками]
-    delete_src_folders ${settings_arr[path_src]}
+        # delete source archives longer than the specified storage history
+        # [удалить архивы исходников больше заданной истории хранения]
+        delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
 
-    # delete source archives longer than the specified storage history
-    # [удалить архивы исходников больше заданной истории хранения]
-    delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
-
-    # script tests [тесты скрипта]
-    # tests
-fi
+        # script tests [тесты скрипта]
+        # tests
+    fi
+    # --------------------------------------------------------------------
+}
 # ************************************************************************
