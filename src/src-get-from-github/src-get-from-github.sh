@@ -32,6 +32,20 @@ utils=( date find git gzip ls mkdir rm tar which )
 # get settings [получить настройки]
 settings_get(){ # args: file_path
     # --------------------------------------------------------------------
+    # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
+    # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
+    # pwd # test
+    local current_dir=`pwd`
+    # echo "${current_dir##*/}" # test
+    local bool="False"
+    if [[ `pwd` =~ "mersh"$ ]]; then
+        cd ./src/src-get-from-github/
+        bool="True"
+        # pwd # test
+        # cd ../../ # test
+        # pwd # test
+    fi
+    # ----------------------------------
     # the path of the settings file [путь файла с настройками]
     local file_path=${1}
     # get settings [получить настройки]
@@ -41,7 +55,7 @@ settings_get(){ # args: file_path
         IFS='=' read -a arr <<< ${line}
         settings_arr[${arr[0]}]=${arr[1]}
     done
-    # --------------------------------------------------------------------
+    # ----------------------------------
     # # show settings v1 [показать настройки]
     # echo ${settings_arr[@]}
 
@@ -49,6 +63,14 @@ settings_get(){ # args: file_path
     # for line in ${settings_arr[@]}; do
     #     echo ${line}
     # done
+    # ----------------------------------
+    # return to the original directory if there was a transition to another directory
+    # [возврат в первоначальную директорию, если был переход в другую директорию]
+    if [[ 'True' == ${bool} ]]; then
+        cd ${current_dir}
+        bool="False"
+        # echo "BOOL"
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
