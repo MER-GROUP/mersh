@@ -256,16 +256,30 @@ src_to_tar_gz(){ # args: path
 # delete source directories [удалить директории с исходниками]
 delete_src_folders(){ # args: path
     # --------------------------------------------------------------------
+    # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
+    # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
+    # pwd # test
+    local current_dir=`pwd`
+    # echo "${current_dir##*/}" # test
+    local bool="False"
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
+        cd ./src/src-get-from-github/
+        bool="True"
+        # pwd # test
+        # cd ../../ # test
+        # pwd # test
+    fi
+    # ----------------------------------
     # data storage directory [директория хранения данных]
 	local path=${1}
-
+    # ----------------------------------
     cd ${path}
     # pwd
-
+    # ----------------------------------
     # getting folders in a directory [получение папок в директории]
     local dirs=( $( ls -p | grep "/$" ) )
     # echo ${dirs[@]}
-
+    # ----------------------------------
     # delete source directories [удалить директории с исходниками]
     for dir in ${dirs[@]}; do
         echo ""
@@ -279,9 +293,17 @@ delete_src_folders(){ # args: path
 
         echo "End delete source directories ${dir}"
     done
-
+    # ----------------------------------
     cd ..
     # pwd
+    # ----------------------------------
+    # return to the original directory if there was a transition to another directory
+    # [возврат в первоначальную директорию, если был переход в другую директорию]
+    if [[ 'True' == ${bool} ]]; then
+        cd ${current_dir}
+        bool="False"
+        # echo "BOOL"
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
