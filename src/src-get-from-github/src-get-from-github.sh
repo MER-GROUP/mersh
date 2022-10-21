@@ -79,9 +79,6 @@ settings_get(){ # args: file_path
 # checking the existence of a directory [проверка существования директории]
 check_path(){ # args: path
     # --------------------------------------------------------------------
-    # data storage directory [директория хранения данных]
-	local path=${1}
-    # ----------------------------------
     # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
     # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
     # pwd # test
@@ -95,6 +92,9 @@ check_path(){ # args: path
         # cd ../../ # test
         # pwd # test
     fi
+    # ----------------------------------
+    # data storage directory [директория хранения данных]
+	local path=${1}
     # ----------------------------------
     # # if the directory is a file then exit the program
     # # otherwise if the path does not exist then create a directory
@@ -138,14 +138,6 @@ check_path(){ # args: path
 # get sources from github [получить исходники с github]
 src_get(){ # args: path, links
     # --------------------------------------------------------------------
-    # data storage directory [директория хранения данных]
-	local path=${1}
-    # link matrix [матрица ссылок]
-    # links=(  ${*} ) 
-    local links=(  $( arr=( ${*} ); echo ${arr[@]:1:${#arr[@]}} ) ) 
-    # echo path = ${path}
-    # echo links = ${links[@]}
-    # ----------------------------------
     # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
     # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
     # pwd # test
@@ -159,6 +151,14 @@ src_get(){ # args: path, links
         # cd ../../ # test
         # pwd # test
     fi
+    # ----------------------------------
+    # data storage directory [директория хранения данных]
+	local path=${1}
+    # link matrix [матрица ссылок]
+    # links=(  ${*} ) 
+    local links=(  $( arr=( ${*} ); echo ${arr[@]:1:${#arr[@]}} ) ) 
+    # echo path = ${path}
+    # echo links = ${links[@]}
     # ----------------------------------
     cd ${path}
     # pwd
