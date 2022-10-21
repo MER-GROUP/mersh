@@ -38,7 +38,7 @@ settings_get(){ # args: file_path
     local current_dir=`pwd`
     # echo "${current_dir##*/}" # test
     local bool="False"
-    if [[ `pwd` =~ "mersh"$ ]]; then
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
         cd ./src/src-get-from-github/
         bool="True"
         # pwd # test
@@ -88,7 +88,7 @@ check_path(){ # args: path
     local current_dir=`pwd`
     # echo "${current_dir##*/}" # test
     local bool="False"
-    if [[ `pwd` =~ "mersh"$ ]]; then
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
         cd ./src/src-get-from-github/
         bool="True"
         # pwd # test
