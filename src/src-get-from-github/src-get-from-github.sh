@@ -313,9 +313,23 @@ delete_src_folders(){ # args: path
 # [удалить архивы исходников больше заданной истории хранения]
 delete_arhive_src_more_history(){ # args: path, hist
     # --------------------------------------------------------------------
+    # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
+    # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
+    # pwd # test
+    local current_dir=`pwd`
+    # echo "${current_dir##*/}" # test
+    local bool="False"
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
+        cd ./src/src-get-from-github/
+        bool="True"
+        # pwd # test
+        # cd ../../ # test
+        # pwd # test
+    fi
+    # ----------------------------------
     # data storage directory [директория хранения данных]
 	local path=${1}
-
+    # ----------------------------------
     cd ${path}
     # pwd
     # ----------------------------------
@@ -376,6 +390,14 @@ delete_arhive_src_more_history(){ # args: path, hist
     # ----------------------------------
     cd ..
     # pwd
+    # ----------------------------------
+    # return to the original directory if there was a transition to another directory
+    # [возврат в первоначальную директорию, если был переход в другую директорию]
+    if [[ 'True' == ${bool} ]]; then
+        cd ${current_dir}
+        bool="False"
+        # echo "BOOL"
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
