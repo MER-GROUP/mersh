@@ -38,7 +38,7 @@ settings_get(){ # args: file_path
     local current_dir=`pwd`
     # echo "${current_dir##*/}" # test
     local bool="False"
-    if [[ `pwd` =~ "mersh"$ ]]; then
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
         cd ./src/src-get-from-github/
         bool="True"
         # pwd # test
@@ -79,22 +79,22 @@ settings_get(){ # args: file_path
 # checking the existence of a directory [проверка существования директории]
 check_path(){ # args: path
     # --------------------------------------------------------------------
-    # data storage directory [директория хранения данных]
-	local path=${1}
-    # ----------------------------------
     # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
     # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
     # pwd # test
     local current_dir=`pwd`
     # echo "${current_dir##*/}" # test
     local bool="False"
-    if [[ `pwd` =~ "mersh"$ ]]; then
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
         cd ./src/src-get-from-github/
         bool="True"
         # pwd # test
         # cd ../../ # test
         # pwd # test
     fi
+    # ----------------------------------
+    # data storage directory [директория хранения данных]
+	local path=${1}
     # ----------------------------------
     # # if the directory is a file then exit the program
     # # otherwise if the path does not exist then create a directory
@@ -138,6 +138,20 @@ check_path(){ # args: path
 # get sources from github [получить исходники с github]
 src_get(){ # args: path, links
     # --------------------------------------------------------------------
+    # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
+    # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
+    # pwd # test
+    local current_dir=`pwd`
+    # echo "${current_dir##*/}" # test
+    local bool="False"
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
+        cd ./src/src-get-from-github/
+        bool="True"
+        # pwd # test
+        # cd ../../ # test
+        # pwd # test
+    fi
+    # ----------------------------------
     # data storage directory [директория хранения данных]
 	local path=${1}
     # link matrix [матрица ссылок]
@@ -145,10 +159,10 @@ src_get(){ # args: path, links
     local links=(  $( arr=( ${*} ); echo ${arr[@]:1:${#arr[@]}} ) ) 
     # echo path = ${path}
     # echo links = ${links[@]}
-
+    # ----------------------------------
     cd ${path}
     # pwd
-
+    # ----------------------------------
     # Cloning sources
     # [Клонирование исходников]
     for link in ${links[@]}; do
@@ -157,9 +171,17 @@ src_get(){ # args: path, links
         git clone ${link}
         echo "End cloning ${link}"
     done
-
+    # ----------------------------------
     cd ..
     # pwd
+    # ----------------------------------
+    # return to the original directory if there was a transition to another directory
+    # [возврат в первоначальную директорию, если был переход в другую директорию]
+    if [[ 'True' == ${bool} ]]; then
+        cd ${current_dir}
+        bool="False"
+        # echo "BOOL"
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
@@ -168,16 +190,30 @@ src_get(){ # args: path, links
 # archive the sources [заархивировать исходники]
 src_to_tar_gz(){ # args: path
     # --------------------------------------------------------------------
+    # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
+    # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
+    # pwd # test
+    local current_dir=`pwd`
+    # echo "${current_dir##*/}" # test
+    local bool="False"
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
+        cd ./src/src-get-from-github/
+        bool="True"
+        # pwd # test
+        # cd ../../ # test
+        # pwd # test
+    fi
+    # --------------------------------------------------------------------
     # data storage directory [директория хранения данных]
 	local path=${1}
-
+    # ----------------------------------
     cd ${path}
     # pwd
-
+    # ----------------------------------
     # getting folders in a directory [получение папок в директории]
     local dirs=( $( ls -p | grep "/$" ) )
     # echo ${dirs[@]}
-
+    # ----------------------------------
     # archiving of sources [архивирование исходников]
     for dir in ${dirs[@]}; do
         echo ""
@@ -201,9 +237,17 @@ src_to_tar_gz(){ # args: path
 
         echo "End archiving ${dir}"
     done
-
+    # ----------------------------------
     cd ..
     # pwd
+    # ----------------------------------
+    # return to the original directory if there was a transition to another directory
+    # [возврат в первоначальную директорию, если был переход в другую директорию]
+    if [[ 'True' == ${bool} ]]; then
+        cd ${current_dir}
+        bool="False"
+        # echo "BOOL"
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
@@ -212,16 +256,30 @@ src_to_tar_gz(){ # args: path
 # delete source directories [удалить директории с исходниками]
 delete_src_folders(){ # args: path
     # --------------------------------------------------------------------
+    # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
+    # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
+    # pwd # test
+    local current_dir=`pwd`
+    # echo "${current_dir##*/}" # test
+    local bool="False"
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
+        cd ./src/src-get-from-github/
+        bool="True"
+        # pwd # test
+        # cd ../../ # test
+        # pwd # test
+    fi
+    # ----------------------------------
     # data storage directory [директория хранения данных]
 	local path=${1}
-
+    # ----------------------------------
     cd ${path}
     # pwd
-
+    # ----------------------------------
     # getting folders in a directory [получение папок в директории]
     local dirs=( $( ls -p | grep "/$" ) )
     # echo ${dirs[@]}
-
+    # ----------------------------------
     # delete source directories [удалить директории с исходниками]
     for dir in ${dirs[@]}; do
         echo ""
@@ -235,9 +293,17 @@ delete_src_folders(){ # args: path
 
         echo "End delete source directories ${dir}"
     done
-
+    # ----------------------------------
     cd ..
     # pwd
+    # ----------------------------------
+    # return to the original directory if there was a transition to another directory
+    # [возврат в первоначальную директорию, если был переход в другую директорию]
+    if [[ 'True' == ${bool} ]]; then
+        cd ${current_dir}
+        bool="False"
+        # echo "BOOL"
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
@@ -247,9 +313,23 @@ delete_src_folders(){ # args: path
 # [удалить архивы исходников больше заданной истории хранения]
 delete_arhive_src_more_history(){ # args: path, hist
     # --------------------------------------------------------------------
+    # if we are in the mesh folder, then go to mersh/src/src-get-from-github/
+    # [если находимся в папке mersh, то переходим в mersh/src/src-get-from-github/]
+    # pwd # test
+    local current_dir=`pwd`
+    # echo "${current_dir##*/}" # test
+    local bool="False"
+    if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
+        cd ./src/src-get-from-github/
+        bool="True"
+        # pwd # test
+        # cd ../../ # test
+        # pwd # test
+    fi
+    # ----------------------------------
     # data storage directory [директория хранения данных]
 	local path=${1}
-
+    # ----------------------------------
     cd ${path}
     # pwd
     # ----------------------------------
@@ -310,6 +390,14 @@ delete_arhive_src_more_history(){ # args: path, hist
     # ----------------------------------
     cd ..
     # pwd
+    # ----------------------------------
+    # return to the original directory if there was a transition to another directory
+    # [возврат в первоначальную директорию, если был переход в другую директорию]
+    if [[ 'True' == ${bool} ]]; then
+        cd ${current_dir}
+        bool="False"
+        # echo "BOOL"
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
@@ -342,41 +430,43 @@ src-get-from-github(){ # NO args
     # --------------------------------------------------------------------
     # program logic [логика программы]
     # --------------------------------------------------------------------
+    # if we are in the ../mersh/src/src-get-from-github/ folder, then go to ../mersh/
+    # [если находимся в папке ../mersh/src/src-get-from-github/, то переходим в ../mersh/]
+    # pwd # test
+    local current_dir=`pwd`
+    # echo "${current_dir##*/}" # test
+    local bool="False"
+    if [[ `pwd` != *"mersh" ]] || [[ `pwd` != *".mersh" ]]; then
+        bool="True"
+        # pwd # test
+        cd ../../ # test
+        # pwd # test
+    fi
+    # ----------------------------------
+    # connecting library functions
+    # [подключаем функции-библиотеки]
+    if [[ 0 -ne $( type check-install-utils &> /dev/null; echo ${?} ) ]]; then
+        source check-install-utils.sh
+    fi
+    if [[ 0 -ne $( type set-in-math &> /dev/null; echo ${?} ) ]]; then
+        source set-in-math.sh
+    fi
+    # ----------------------------------
+    # return to the original directory if there was a transition to another directory
+    # [возврат в первоначальную директорию, если был переход в другую директорию]
+    if [[ 'True' == ${bool} ]]; then
+        cd ${current_dir}
+        bool="False"
+        # echo "BOOL"
+    fi
+    # --------------------------------------------------------------------
     # checking the necessary installed utilities
     # [проверка необходимых установленных утилит]
-
-    # path_src_get_from_github=`pwd`
-    # echo ${path_src_get_from_github} # for test [для тестов]
-
-
-    # if [[ 0 -ne $( type check-install-utils &> /dev/null; echo ${?} ) ]]; then
-
-    #     cd ../../
-    #     pwd # for test [для тестов]
-    #     source check-install-utils.sh
-    #     pwd # for test [для тестов]
-    #     cd ${path_src_get_from_github}
-    #     pwd # for test [для тестов]
-
-    # fi
-
-
-
-
-
-    # [для запуска через bash имя_скрипта.sh]
-    # cd ../../
-    # pwd # for test [для тестов]
-    # source check-install-utils.sh
-    # pwd # for test [для тестов]
-    # cd ${path_src_get_from_github}
-    # pwd # for test [для тестов]
-
     # check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
     check=$( check-install-utils "${utils[@]}" )
     # echo ${check} # for test [для тестов]
     echo -e "${check}"
-    # --------------------------------------------------------------------
+    # ----------------------------------
     # if everything is installed, then continue the program
     # [если все установлено, то продолжить работу программы]
     if [[ 'all utils are installed' == ${check} ]]; then
