@@ -426,71 +426,101 @@ tests(){ # NO args
 
 # function for downloading and updating sources from github
 # [Функция для скачивания и обновления исходников с github]
-src-get-from-github(){ # NO args
+# src-get-from-github(){ # NO args
+src-get-from-github(){ # args: param_1 ... param_N
     # --------------------------------------------------------------------
-    # program logic [логика программы]
+    # if there are no parameters or more than 1 then show the help
+    # [если нет параметров или больше 1 то показать справку]
+    if [[ 0 -eq "${#}" ]] || [[ 1 -gt "${#}" ]] ; then
+        echo "|-ENG-HELP-------------------------------------------------------------------------------|"
+        echo "|  help               : src-get-from-github - downloads and updates sources from github  |"
+        echo "|  usage              : src-get-from-github [ param ]                                    |"
+        echo "|  example [start]    : src-get-from-github start                                        |"
+        echo "|  output             : ... downloads and updates sources from github ...                |"
+        echo "|  example [links]    : src-get-from-github links                                        |"
+        echo "|  output             : ... opens the settings where the links to github are located ... |"
+        echo "|  example [settings] : src-get-from-github settings                                     |"
+        echo "|  output             : ... opens the program settings ...                               |"
+        echo "|-RUS-HELP-------------------------------------------------------------------------------|"
+        echo "|  помощь             : src-get-from-github - загружает и обновляет исходники с github   |"
+        echo "|  использование      : src-get-from-github [ параметр ]                                 |"
+        echo "|  пример [start]     : src-get-from-github start                                        |"
+        echo "|  вывод              : ... загружает и обновляет исходники с github ...                 |"
+        echo "|  пример [links]     : src-get-from-github links                                        |"
+        echo "|  вывод              : ... октрывает настройки где располодены ссылки на github ...     |"
+        echo "|  пример [settings]  : src-get-from-github settings                                     |"
+        echo "|  вывод              : ... открывает настройки программы ...                            |"
+        echo "|-END------------------------------------------------------------------------------------|"
     # --------------------------------------------------------------------
-    # if we are in the ../mersh/src/src-get-from-github/ folder, then go to ../mersh/
-    # [если находимся в папке ../mersh/src/src-get-from-github/, то переходим в ../mersh/]
-    # pwd # test
-    local current_dir=`pwd`
-    # echo "${current_dir##*/}" # test
-    local bool="False"
-    if [[ `pwd` != *"mersh" ]] || [[ `pwd` != *".mersh" ]]; then
-        bool="True"
+    # if the parameter == 'start' then run the program
+    # [если параметр == 'start' то запустить программу]
+    elif [[ 'start' == "${1}" ]]; then
+        # ----------------------------------------------------------------
+        # program logic [логика программы]
+        # ----------------------------------------------------------------
+        # if we are in the ../mersh/src/src-get-from-github/ folder, then go to ../mersh/
+        # [если находимся в папке ../mersh/src/src-get-from-github/, то переходим в ../mersh/]
         # pwd # test
-        cd ../../ # test
-        # pwd # test
-    fi
-    # ----------------------------------
-    # connecting library functions
-    # [подключаем функции-библиотеки]
-    if [[ 0 -ne $( type check-install-utils &> /dev/null; echo ${?} ) ]]; then
-        source check-install-utils.sh
-    fi
-    if [[ 0 -ne $( type set-in-math &> /dev/null; echo ${?} ) ]]; then
-        source set-in-math.sh
-    fi
-    # ----------------------------------
-    # return to the original directory if there was a transition to another directory
-    # [возврат в первоначальную директорию, если был переход в другую директорию]
-    if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
-        bool="False"
-        # echo "BOOL"
-    fi
-    # --------------------------------------------------------------------
-    # checking the necessary installed utilities
-    # [проверка необходимых установленных утилит]
-    # check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
-    check=$( check-install-utils "${utils[@]}" )
-    # echo ${check} # for test [для тестов]
-    echo -e "${check}"
-    # ----------------------------------
-    # if everything is installed, then continue the program
-    # [если все установлено, то продолжить работу программы]
-    if [[ 'all utils are installed' == ${check} ]]; then
-        # get settings [получить настройки]
-        settings_get ${file_settings}
+        local current_dir=`pwd`
+        # echo "${current_dir##*/}" # test
+        local bool="False"
+        if [[ `pwd` != *"mersh" ]] || [[ `pwd` != *".mersh" ]]; then
+            bool="True"
+            # pwd # test
+            cd ../../ # test
+            # pwd # test
+        fi
+        # ----------------------------------
+        # connecting library functions
+        # [подключаем функции-библиотеки]
+        if [[ 0 -ne $( type check-install-utils &> /dev/null; echo ${?} ) ]]; then
+            source check-install-utils.sh
+        fi
+        if [[ 0 -ne $( type set-in-math &> /dev/null; echo ${?} ) ]]; then
+            source set-in-math.sh
+        fi
+        # ----------------------------------
+        # return to the original directory if there was a transition to another directory
+        # [возврат в первоначальную директорию, если был переход в другую директорию]
+        if [[ 'True' == ${bool} ]]; then
+            cd ${current_dir}
+            bool="False"
+            # echo "BOOL"
+        fi
+        # ----------------------------------------------------------------
+        # checking the necessary installed utilities
+        # [проверка необходимых установленных утилит]
+        # check=$( check-install-utils "max" "git" "tar" "which" "mer" ) # for test [для тестов]
+        check=$( check-install-utils "${utils[@]}" )
+        # echo ${check} # for test [для тестов]
+        echo -e "${check}"
+        # ----------------------------------
+        # if everything is installed, then continue the program
+        # [если все установлено, то продолжить работу программы]
+        if [[ 'all utils are installed' == ${check} ]]; then
+            # get settings [получить настройки]
+            settings_get ${file_settings}
 
-        # checking the existence of a directory [проверка существования директории]
-        check_path ${settings_arr[path_src]}
+            # checking the existence of a directory [проверка существования директории]
+            check_path ${settings_arr[path_src]}
 
-        # get sources from github [получить исходники с github]
-        src_get ${settings_arr[path_src]} ${links_arr[@]}
+            # get sources from github [получить исходники с github]
+            src_get ${settings_arr[path_src]} ${links_arr[@]}
 
-        # archive the sources [заархивировать исходники]
-        src_to_tar_gz ${settings_arr[path_src]}
+            # archive the sources [заархивировать исходники]
+            src_to_tar_gz ${settings_arr[path_src]}
 
-        # delete source directories [удалить директории с исходниками]
-        delete_src_folders ${settings_arr[path_src]}
+            # delete source directories [удалить директории с исходниками]
+            delete_src_folders ${settings_arr[path_src]}
 
-        # delete source archives longer than the specified storage history
-        # [удалить архивы исходников больше заданной истории хранения]
-        delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
+            # delete source archives longer than the specified storage history
+            # [удалить архивы исходников больше заданной истории хранения]
+            delete_arhive_src_more_history ${settings_arr[path_src]} ${settings_arr[hist_src]}
 
-        # script tests [тесты скрипта]
-        # tests
+            # script tests [тесты скрипта]
+            # tests
+        fi
+        # ----------------------------------------------------------------
     fi
     # --------------------------------------------------------------------
 }
