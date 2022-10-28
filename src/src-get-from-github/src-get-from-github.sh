@@ -25,7 +25,7 @@ links_arr=( $( grep -v '^#' ${file_links} ) )
 
 # name of the programs to check for installation 
 # [название программ для проверки на установку]
-utils=( date find git gzip ls mkdir rm tar which )
+utils=( date find git gzip ls mkdir nano rm tar which )
 # ************************************************************************
 # function settings_get
 
@@ -401,6 +401,34 @@ delete_arhive_src_more_history(){ # args: path, hist
     # --------------------------------------------------------------------
 }
 # ************************************************************************
+# function help_src_get_from_github
+
+# program help [справка программы]
+help_src_get_from_github(){ # NO args
+    # --------------------------------------------------------------------
+    # program help [справка программы]
+    echo "|-ENG-HELP-------------------------------------------------------------------------------|"
+    echo "|  help               : src-get-from-github - downloads and updates sources from github  |"
+    echo "|  usage              : src-get-from-github [ param ]                                    |"
+    echo "|  example [start]    : src-get-from-github start                                        |"
+    echo "|  output             : ... downloads and updates sources from github ...                |"
+    echo "|  example [links]    : src-get-from-github links                                        |"
+    echo "|  output             : ... opens the settings where the links to github are located ... |"
+    echo "|  example [settings] : src-get-from-github settings                                     |"
+    echo "|  output             : ... opens the program settings ...                               |"
+    echo "|-RUS-HELP-------------------------------------------------------------------------------|"
+    echo "|  помощь             : src-get-from-github - загружает и обновляет исходники с github   |"
+    echo "|  использование      : src-get-from-github [ параметр ]                                 |"
+    echo "|  пример [start]     : src-get-from-github start                                        |"
+    echo "|  вывод              : ... загружает и обновляет исходники с github ...                 |"
+    echo "|  пример [links]     : src-get-from-github links                                        |"
+    echo "|  вывод              : ... октрывает настройки где располодены ссылки на github ...     |"
+    echo "|  пример [settings]  : src-get-from-github settings                                     |"
+    echo "|  вывод              : ... открывает настройки программы ...                            |"
+    echo "|-END------------------------------------------------------------------------------------|"
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
 # function tests
 
 # script tests [тесты скрипта]
@@ -465,25 +493,8 @@ src-get-from-github(){ # args: param_1 ... param_N
     # if there are no parameters or more than 1 then show the help
     # [если нет параметров или больше 1 то показать справку]
     if [[ 0 -eq "${#}" ]] || [[ 1 -gt "${#}" ]] ; then
-        echo "|-ENG-HELP-------------------------------------------------------------------------------|"
-        echo "|  help               : src-get-from-github - downloads and updates sources from github  |"
-        echo "|  usage              : src-get-from-github [ param ]                                    |"
-        echo "|  example [start]    : src-get-from-github start                                        |"
-        echo "|  output             : ... downloads and updates sources from github ...                |"
-        echo "|  example [links]    : src-get-from-github links                                        |"
-        echo "|  output             : ... opens the settings where the links to github are located ... |"
-        echo "|  example [settings] : src-get-from-github settings                                     |"
-        echo "|  output             : ... opens the program settings ...                               |"
-        echo "|-RUS-HELP-------------------------------------------------------------------------------|"
-        echo "|  помощь             : src-get-from-github - загружает и обновляет исходники с github   |"
-        echo "|  использование      : src-get-from-github [ параметр ]                                 |"
-        echo "|  пример [start]     : src-get-from-github start                                        |"
-        echo "|  вывод              : ... загружает и обновляет исходники с github ...                 |"
-        echo "|  пример [links]     : src-get-from-github links                                        |"
-        echo "|  вывод              : ... октрывает настройки где располодены ссылки на github ...     |"
-        echo "|  пример [settings]  : src-get-from-github settings                                     |"
-        echo "|  вывод              : ... открывает настройки программы ...                            |"
-        echo "|-END------------------------------------------------------------------------------------|"
+        # program help [справка программы]
+        help_src_get_from_github
     # --------------------------------------------------------------------
     # if the parameter == 'start' then run the program
     # [если параметр == 'start' то запустить программу]
@@ -528,17 +539,18 @@ src-get-from-github(){ # args: param_1 ... param_N
     # open the settings where the links to github are located
     # [октрыть настройки где располодены ссылки на github]
     elif [[ 'links' == "${1}" ]]; then
-        echo "111111111111111111"
+        echo "LINKS"
     # --------------------------------------------------------------------
     # open the settings where the links to github are located
     # [октрыть настройки где располодены ссылки на github]
     elif [[ 'settings' == "${1}" ]]; then
-        echo "222222222222222222"
+        echo "SETTINGS"
     # --------------------------------------------------------------------
     # if the parameter is incorrect then show help
     # [если неверный параметр то показать справку]
     else
-        echo "333333333333333333"
+        # program help [справка программы]
+        help_src_get_from_github
     fi
     # --------------------------------------------------------------------
 }
