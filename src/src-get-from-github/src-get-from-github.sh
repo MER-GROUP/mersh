@@ -429,6 +429,39 @@ tests(){ # NO args
 # src-get-from-github(){ # NO args
 src-get-from-github(){ # args: param_1 ... param_N
     # --------------------------------------------------------------------
+    # connecting library functions
+    # [подключаем функции-библиотеки]
+    # ----------------------------------
+    # if we are in the ../mersh/src/src-get-from-github/ folder, then go to ../mersh/
+    # [если находимся в папке ../mersh/src/src-get-from-github/, то переходим в ../mersh/]
+    # pwd # test
+    local current_dir=`pwd`
+    # echo "${current_dir##*/}" # test
+    local bool="False"
+    if [[ `pwd` != *"mersh" ]] || [[ `pwd` != *".mersh" ]]; then
+        bool="True"
+        # pwd # test
+        cd ../../ # test
+        # pwd # test
+    fi
+    # ----------------------------------
+    # connecting library functions
+    # [подключаем функции-библиотеки]
+    if [[ 0 -ne $( type check-install-utils &> /dev/null; echo ${?} ) ]]; then
+        source check-install-utils.sh
+    fi
+    if [[ 0 -ne $( type set-in-math &> /dev/null; echo ${?} ) ]]; then
+        source set-in-math.sh
+    fi
+    # ----------------------------------
+    # return to the original directory if there was a transition to another directory
+    # [возврат в первоначальную директорию, если был переход в другую директорию]
+    if [[ 'True' == ${bool} ]]; then
+        cd ${current_dir}
+        bool="False"
+        # echo "BOOL"
+    fi
+    # --------------------------------------------------------------------
     # if there are no parameters or more than 1 then show the help
     # [если нет параметров или больше 1 то показать справку]
     if [[ 0 -eq "${#}" ]] || [[ 1 -gt "${#}" ]] ; then
@@ -457,36 +490,6 @@ src-get-from-github(){ # args: param_1 ... param_N
     elif [[ 'start' == "${1}" ]]; then
         # ----------------------------------------------------------------
         # program logic [логика программы]
-        # ----------------------------------------------------------------
-        # if we are in the ../mersh/src/src-get-from-github/ folder, then go to ../mersh/
-        # [если находимся в папке ../mersh/src/src-get-from-github/, то переходим в ../mersh/]
-        # pwd # test
-        local current_dir=`pwd`
-        # echo "${current_dir##*/}" # test
-        local bool="False"
-        if [[ `pwd` != *"mersh" ]] || [[ `pwd` != *".mersh" ]]; then
-            bool="True"
-            # pwd # test
-            cd ../../ # test
-            # pwd # test
-        fi
-        # ----------------------------------
-        # connecting library functions
-        # [подключаем функции-библиотеки]
-        if [[ 0 -ne $( type check-install-utils &> /dev/null; echo ${?} ) ]]; then
-            source check-install-utils.sh
-        fi
-        if [[ 0 -ne $( type set-in-math &> /dev/null; echo ${?} ) ]]; then
-            source set-in-math.sh
-        fi
-        # ----------------------------------
-        # return to the original directory if there was a transition to another directory
-        # [возврат в первоначальную директорию, если был переход в другую директорию]
-        if [[ 'True' == ${bool} ]]; then
-            cd ${current_dir}
-            bool="False"
-            # echo "BOOL"
-        fi
         # ----------------------------------------------------------------
         # checking the necessary installed utilities
         # [проверка необходимых установленных утилит]
