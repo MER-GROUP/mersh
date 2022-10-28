@@ -539,12 +539,18 @@ src-get-from-github(){ # args: param_1 ... param_N
     # open the settings where the links to github are located
     # [октрыть настройки где располодены ссылки на github]
     elif [[ 'links' == "${1}" ]]; then
-        echo "LINKS"
+        # echo "LINKS"
+        # echo `pwd`
+        nano ./src/src-get-from-github/links.sh
+        # echo `pwd`
     # --------------------------------------------------------------------
     # open the settings where the links to github are located
     # [октрыть настройки где располодены ссылки на github]
     elif [[ 'settings' == "${1}" ]]; then
-        echo "SETTINGS"
+        # echo "SETTINGS"
+        # echo `pwd`
+        nano ./src/src-get-from-github/settings.sh
+        # echo `pwd`
     # --------------------------------------------------------------------
     # if the parameter is incorrect then show help
     # [если неверный параметр то показать справку]
