@@ -469,7 +469,7 @@ src-get-from-github(){ # args: param_1 ... param_N
     if [[ `pwd` != *"mersh" ]] || [[ `pwd` != *".mersh" ]]; then
         bool="True"
         # pwd # test
-        cd ../../ # test
+        cd ../../
         # pwd # test
     fi
     # ----------------------------------
