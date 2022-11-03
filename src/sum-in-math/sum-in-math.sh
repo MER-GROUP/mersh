@@ -35,9 +35,6 @@ sum-in-math(){ # args: number_1 ... number_N
     if [[ 0 -ne $( type check-install-utils &> /dev/null; echo ${?} ) ]]; then
         source check-install-utils.sh
     fi
-    if [[ 0 -ne $( type set-in-math &> /dev/null; echo ${?} ) ]]; then
-        source set-in-math.sh
-    fi
     # ----------------------------------
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
@@ -50,8 +47,12 @@ sum-in-math(){ # args: number_1 ... number_N
     # variable to interrupt the program
     # [переменная для прерывания программы]
     local next=True
-    # --------------------------------------------------------------------
-    # СДЕЛАТЬ ПРОВЕРКУ НА УСТАНОВЛЕННОСТЬ УТИЛИТЫ BC !!!!!!!!!!!!!!!!!!!! 1111
+    # ----------------------------------
+    # checking the installation of the utility - bc
+    # [проверка установки утилиты bc]
+    if [[ 'all utils are installed' != $( check-install-utils "bc" ) ]]; then
+        next=False
+    fi
     # --------------------------------------------------------------------
     local arr=( ${@} ) # local arr=( ${*} )
     # echo "arr = ${arr[@]}" # test
