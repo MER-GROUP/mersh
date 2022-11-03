@@ -8,6 +8,30 @@
 # Script implementation - Max Romanenko (Red Alert) - 2022.
 # Реализация скрипта - Макс Романенко (Red Alert) - 2022г.
 # ************************************************************************
+# function help_sum_in_math
+
+# program help [справка программы]
+help_sum_in_math(){ # NO args
+    # --------------------------------------------------------------------
+    # program help [справка программы]
+    echo "|-ENG-HELP----------------------------------------------------|"
+    echo "|  help          : sum-in-math - creates a mathematical sum   |"
+    echo "|  usage         : sum-in-math [ sequence of numbers ]        |"
+    echo "|  example       : sum-in-math 1 2 3                          |"
+    echo "|  output        : 6                                          |"
+    echo "|  example       : sum-in-math -5 1.5                         |"
+    echo "|  output        : -3.5                                       |"
+    echo "|-RUS-HELP----------------------------------------------------|"
+    echo "|  помощь        : sum-in-math - создаёт математическую сумму |"
+    echo "|  использование : sum-in-math [ последовательность чисел ]   |"
+    echo "|  пример        : sum-in-math 1 2 3                          |"
+    echo "|  вывод         : 6                                          |"
+    echo "|  пример        : sum-in-math -5 1.5                         |"
+    echo "|  вывод         : -3.5                                       |"
+    echo "|-END---------------------------------------------------------|"
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
 # function sum-in-math
 
 # creating a mathematical sum
@@ -50,52 +74,54 @@ sum-in-math(){ # args: number_1 ... number_N
     # ----------------------------------
     # checking the installation of the utility - bc
     # [проверка установки утилиты bc]
-    if [[ 'all utils are installed' != $( check-install-utils "bc" ) ]]; then
+    # local utility=$( check-install-utils "redalert" ) # test
+    local utility=$( check-install-utils "bc" )
+    if [[ 'all utils are installed' != "${utility}" ]]; then
+        echo "${utility}"
         next=False
     fi
     # --------------------------------------------------------------------
-    local arr=( ${@} ) # local arr=( ${*} )
-    # echo "arr = ${arr[@]}" # test
-    # echo "len arr = ${#arr[@]}" # test
-    # ----------------------------------
-    # a set of correct values to check the number
-    # [набор правильных значений для проверки числа]
-    local sequence_arr=( '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '.' )
-    # ----------------------------------
-    # СДЕЛАТЬ ПРОЕРКУ ЧТО ВСЕ ВВЕДЕННЫЕ ЭЛЕМЕНТЫ - ЭТО ЧИСЛА !!!!!!!!!!!!!!!! 2222
-    # ----------------------------------
-    # the result of summing the numbers
-    # [результат суммирования чисел]
-    local sum=0
-    # ----------------------------------
-    # summation of elements
-    # [суммирование элементов]
-    for i in ${arr[@]}; do
-        sum=`echo "${sum} + ${i}" | bc` # for float and int
-        # let "sum += i" # for only int
-        # (( sum += i )) # for only int
-    done
-    # ----------------------------------
-    # if [[ 0 -eq "${#}" ]]; then
-    if [[ 0 -ne ${#arr[@]} ]]; then
-        echo ${sum}
-    else
-        # ПОДРЕДАКТИРОВАТЬ СПРАВКУ !!! 333
-        echo "|-ENG-HELP----------------------------------------------------|"
-        echo "|  help          : sum-in-math - creates a mathematical sum   |"
-        echo "|  usage         : sum-in-math [ sequence of numbers ]        |"
-        echo "|  example       : sum-in-math 1 2 3                          |"
-        echo "|  output        : 6                                          |"
-        echo "|  example       : sum-in-math -5 -5                          |"
-        echo "|  output        : -10                                        |"
-        echo "|-RUS-HELP----------------------------------------------------|"
-        echo "|  помощь        : sum-in-math - создаёт математическую сумму |"
-        echo "|  использование : sum-in-math [ последовательность чисел ]   |"
-        echo "|  пример        : sum-in-math 1 2 3                          |"
-        echo "|  вывод         : 6                                          |"
-        echo "|  пример        : sum-in-math -5 -5                          |"
-        echo "|  вывод         : -10                                        |"
-        echo "|-END---------------------------------------------------------|"
+    # if the bc utility is installed, then continue executing the program
+    # [если утилита bc установлена, то продолжить вырлнение программы]
+    if [[ 'True' == "${next}" ]]; then
+        # ----------------------------------
+        # array of integers or float numbers
+        # [массив целых или дробных чисел]
+        local arr=( ${@} ) # local arr=( ${*} )
+        # echo "arr = ${arr[@]}" # test
+        # echo "len arr = ${#arr[@]}" # test
+        # ----------------------------------
+        # a set of correct values to check the number
+        # [набор правильных значений для проверки числа]
+        local sequence_arr=( '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '.' )
+        # ----------------------------------
+        # СДЕЛАТЬ ПРОЕРКУ ЧТО ВСЕ ВВЕДЕННЫЕ ЭЛЕМЕНТЫ - ЭТО ЧИСЛА !!!!!!!!!!!!!!!! 2222
+        # ----------------------------------
+        # the result of summing the numbers
+        # [результат суммирования чисел]
+        local sum=0
+        # ----------------------------------
+        # summation of elements
+        # [суммирование элементов]
+        for i in ${arr[@]}; do
+            sum=`echo "${sum} + ${i}" | bc` # for float and int
+            # let "sum += i" # for only int
+            # (( sum += i )) # for only int
+        done
+        # ----------------------------------
+        # show the sum of the numbers
+        # [показать сумму чисел]
+        # if [[ 0 -eq "${#}" ]]; then
+        if [[ 0 -ne ${#arr[@]} ]]; then
+            echo ${sum}
+        # ----------------------------------
+        # if the parameter is incorrect then show help
+        # [если неверный параметр то показать справку]
+        else
+            # program help [справка программы]
+            help_sum_in_math
+        fi
+        # ----------------------------------
     fi
     # --------------------------------------------------------------------
 }
@@ -115,5 +141,7 @@ declare -x -f sum-in-math
 # sum-in-math "1" "2" "3" "-1" "-5" "-5" # test
 # sum-in-math "-5" "-5" # test
 # sum-in-math "-5" "1.5" # test
-sum-in-math "-1.5" "-1.5" # test
+# sum-in-math "-1.5" "-1.5" # test
+# sum-in-math "1" "-2.5" # test
+sum-in-math "1" "-1.5" # test
 # ************************************************************************
