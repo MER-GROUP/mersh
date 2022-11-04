@@ -82,7 +82,7 @@ sum-in-math(){ # args: number_1 ... number_N
     fi
     # --------------------------------------------------------------------
     # if the bc utility is installed, then continue executing the program
-    # [если утилита bc установлена, то продолжить вырлнение программы]
+    # [если утилита bc установлена, то продолжить выполнение программы]
     if [[ 'True' == "${next}" ]]; then
         # ----------------------------------
         # array of integers or float numbers
@@ -96,6 +96,51 @@ sum-in-math(){ # args: number_1 ... number_N
         local sequence_arr=( '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '.' )
         # ----------------------------------
         # СДЕЛАТЬ ПРОЕРКУ ЧТО ВСЕ ВВЕДЕННЫЕ ЭЛЕМЕНТЫ - ЭТО ЧИСЛА (5; 1.5 и т.д.) !!!!!!!!!!!!!!!! 11111
+        # ПРОТЕСТИРОВАТЬ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #
+        # []
+        for digit in ${arr[@]}; do
+            local start=0
+            local next=1
+            local len=${#digit}
+            # echo "len = ${len}"
+            local dots=0
+
+            while [[ ${start} -ne ${len} ]]; do
+                local char=${digit[0]:${start}:${next}}
+
+                for i in ${sequence_arr[@]}; do
+                    if [[ "${char}" == "${i}" ]]; then
+                        continue
+                    else
+                        next=False
+                        break
+                    fi
+
+                    if [[ '.' == "${char}" ]]; then
+                        let "dots += 1"
+                        # (( dots += 1 ))
+                        if [[ 2 -eq ${dots}]]; then
+                            next=False
+                            break
+                        fi
+                    fi
+                done
+
+                if [[ 'False' == "${next}" ]]; then
+                    break
+                fi
+
+                let "start += 1"
+                let "next += 1"
+                # (( start += 1 ))
+                # (( next += 1 ))
+            done
+
+            if [[ 'False' == "${next}" ]]; then
+                break
+            fi
+        done
         # ----------------------------------
         # the result of summing the numbers
         # [результат суммирования чисел]
