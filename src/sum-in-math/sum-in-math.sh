@@ -109,12 +109,12 @@ sum-in-math(){ # args: number_1 ... number_N
                 # info
                 # string indexing: ${string:0:1} is the null character, ${string:1:1} is the first character
                 # string indexing: ${string:2:1} is the second character and so on
-                # ${${string:2:1} - first argument 2 - show characters from the second inclusive
+                # ${string:2:1} - first argument 2 - show characters from the second inclusive
                 # ${string:2:1} - second argument 1 - showing the quantity from the second character
                 # [информация]
                 # [индексация строк: ${string:0:1}-нулевой символ, ${string:1:1}-первый символ]
                 # [индексация строк: ${string:2:1}-второй символ и так далее]
-                # [${string:2:1} - первый аргумент 2 - показать сивволы от второго ключительно]
+                # [${string:2:1} - первый аргумент 2 - показать сивволы от второго включительно]
                 # [${string:2:1} - второй аргумент 1 - показ количества от второго символа]
                 # ------------------------------
                 # getting a symbol
