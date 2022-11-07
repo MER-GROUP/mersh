@@ -94,11 +94,11 @@ sum-in-math(){ # args: number_1 ... number_N
         # a set of correct values to check the number
         # [набор правильных значений для проверки числа]
         local sequence_arr=( '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '.' )
-        # ----------------------------------
-        # СДЕЛАТЬ ПРОЕРКУ ЧТО ВСЕ ВВЕДЕННЫЕ ЭЛЕМЕНТЫ - ЭТО ЧИСЛА (5; 1.5 и т.д.) !!!!!!!!!!!!!!!! 11111
-        # ПРОТЕСТИРОВАТЬ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # ----------------------------------------------------------------
+        # ИСПРАВИТЬ АЛГОРИТМ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 111
         #
-        # []
+        # checking that all the entered elements are numbers (5, 1.5, -2, -3.67, etc.)
+        # [проверка что все введенные элементы это числа (5, 1.5, -2, -3.67 и т.д.)]
         for digit in ${arr[@]}; do
             local start=0
             local next=1
@@ -109,21 +109,21 @@ sum-in-math(){ # args: number_1 ... number_N
             while [[ ${start} -ne ${len} ]]; do
                 local char=${digit[0]:${start}:${next}}
 
-                for i in ${sequence_arr[@]}; do
+                for i in ${sequence_arr[@]}; do  
+                    if [[ '.' == "${char}" ]]; then
+                        let "dots += 1"
+                        # (( dots += 1 ))
+                        if [[ 2 -eq ${dots} ]]; then
+                            next=False
+                            break
+                        fi
+                    fi
+
                     if [[ "${char}" == "${i}" ]]; then
                         continue
                     else
                         next=False
                         break
-                    fi
-
-                    if [[ '.' == "${char}" ]]; then
-                        let "dots += 1"
-                        # (( dots += 1 ))
-                        if [[ 2 -eq ${dots}]]; then
-                            next=False
-                            break
-                        fi
                     fi
                 done
 
@@ -141,33 +141,44 @@ sum-in-math(){ # args: number_1 ... number_N
                 break
             fi
         done
-        # ----------------------------------
-        # the result of summing the numbers
-        # [результат суммирования чисел]
-        local sum=0
-        # ----------------------------------
-        # summation of elements
-        # [суммирование элементов]
-        for i in ${arr[@]}; do
-            sum=`echo "${sum} + ${i}" | bc` # for float and int
-            # let "sum += i" # for only int
-            # (( sum += i )) # for only int
-        done
-        # ----------------------------------
-        # show the sum of the numbers
-        # [показать сумму чисел]
-        # if [[ 0 -eq "${#}" ]]; then
-        if [[ 0 -ne ${#arr[@]} ]]; then
-            # СДЕАЛТЬ ПРАВИЛЬНЫЕ ВЫВОД (НЕ: -.5 А: -0.5) !!!!!!!!! 22222
-            echo ${sum}
-        # ----------------------------------
-        # if the parameter is incorrect then show help
-        # [если неверный параметр то показать справку]
+        # ----------------------------------------------------------------
+        # if numbers are entered, then continue executing the program
+        # [если введены числа, то продолжить выполнение программы]
+        if [[ 'True' == "${next}" ]]; then
+            # ----------------------------------
+            # the result of summing the numbers
+            # [результат суммирования чисел]
+            local sum=0
+            # ----------------------------------
+            # summation of elements
+            # [суммирование элементов]
+            for i in ${arr[@]}; do
+                sum=`echo "${sum} + ${i}" | bc` # for float and int
+                # let "sum += i" # for only int
+                # (( sum += i )) # for only int
+            done
+            # ----------------------------------
+            # show the sum of the numbers
+            # [показать сумму чисел]
+            # if [[ 0 -eq "${#}" ]]; then
+            if [[ 0 -ne ${#arr[@]} ]]; then
+                # СДЕАЛТЬ ПРАВИЛЬНЫЕ ВЫВОД (НЕ: -.5 А: -0.5) !!!!!!!!!!!!!!!!!!!!!!!!!!! 222
+                echo ${sum}
+            # ----------------------------------
+            # if the parameter is incorrect then show help
+            # [если неверный параметр то показать справку]
+            else
+                # program help [справка программы]
+                help_sum_in_math
+            fi
+        # ----------------------------------------------------------------
+        # otherwise show the help
+        # [иначе показать справку]
         else
             # program help [справка программы]
             help_sum_in_math
         fi
-        # ----------------------------------
+        # ----------------------------------------------------------------
     fi
     # --------------------------------------------------------------------
 }
@@ -189,5 +200,7 @@ declare -x -f sum-in-math
 # sum-in-math "-5" "1.5" # test
 # sum-in-math "-1.5" "-1.5" # test
 # sum-in-math "1" "-2.5" # test
-sum-in-math "1" "-1.5" # test
+sum-in-math "1" "5" # test
+# sum-in-math "1" "1.5" # test
+# sum-in-math "1" "-1.5" # test
 # ************************************************************************
