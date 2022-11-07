@@ -70,7 +70,7 @@ sum-in-math(){ # args: number_1 ... number_N
     # --------------------------------------------------------------------
     # variable to interrupt the program
     # [переменная для прерывания программы]
-    local next=True
+    local next_prog=True
     # ----------------------------------
     # checking the installation of the utility - bc
     # [проверка установки утилиты bc]
@@ -78,12 +78,12 @@ sum-in-math(){ # args: number_1 ... number_N
     local utility=$( check-install-utils "bc" )
     if [[ 'all utils are installed' != "${utility}" ]]; then
         echo "${utility}"
-        next=False
+        next_prog=False
     fi
     # --------------------------------------------------------------------
     # if the bc utility is installed, then continue executing the program
     # [если утилита bc установлена, то продолжить выполнение программы]
-    if [[ 'True' == "${next}" ]]; then
+    if [[ 'True' == "${next_prog}" ]]; then
         # ----------------------------------
         # array of integers or float numbers
         # [массив целых или дробных чисел]
@@ -108,26 +108,37 @@ sum-in-math(){ # args: number_1 ... number_N
 
             while [[ ${start} -ne ${len} ]]; do
                 local char=${digit[0]:${start}:${next}}
+                echo "${char}" # test
 
                 for i in ${sequence_arr[@]}; do  
                     if [[ '.' == "${char}" ]]; then
                         let "dots += 1"
                         # (( dots += 1 ))
                         if [[ 2 -eq ${dots} ]]; then
-                            next=False
+                            next_prog=False
                             break
                         fi
                     fi
+                    echo "next-1: ${next}" # test
+                    echo "next_prog-1: ${next_prog}" # test
+                    echo "char 1 = ${char}" # test
+                    echo "i 1 = ${i}"
 
                     if [[ "${char}" == "${i}" ]]; then
+                        echo "char 2 = ${char}" # test
+                        echo "i 2 = ${i}"
                         continue
                     else
-                        next=False
+                        next_prog=False
                         break
                     fi
+                    echo "next-2: ${next}" # test
+                    echo "next_prog-2: ${next_prog}" # test
                 done
+                echo "next-3: ${next}" # test
+                echo "next_prog-3: ${next_prog}" # test
 
-                if [[ 'False' == "${next}" ]]; then
+                if [[ 'False' == "${next_prog}" ]]; then
                     break
                 fi
 
@@ -137,14 +148,14 @@ sum-in-math(){ # args: number_1 ... number_N
                 # (( next += 1 ))
             done
 
-            if [[ 'False' == "${next}" ]]; then
+            if [[ 'False' == "${next_prog}" ]]; then
                 break
             fi
         done
         # ----------------------------------------------------------------
         # if numbers are entered, then continue executing the program
         # [если введены числа, то продолжить выполнение программы]
-        if [[ 'True' == "${next}" ]]; then
+        if [[ 'True' == "${next_prog}" ]]; then
             # ----------------------------------
             # the result of summing the numbers
             # [результат суммирования чисел]
