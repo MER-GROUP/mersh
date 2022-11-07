@@ -95,45 +95,39 @@ sum-in-math(){ # args: number_1 ... number_N
         # [набор правильных значений для проверки числа]
         local sequence_str='-0123456789'
         # ----------------------------------------------------------------
-        # ЧЕТО НЕ ТО !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 111
         # checking that all the entered elements are numbers (5, 1.5, -2, -3.67, etc.)
         # [проверка что все введенные элементы это числа (5, 1.5, -2, -3.67 и т.д.)]
         for digit in ${arr[@]}; do
             local start=0
             local next=1
-            local next_bool=False
             local len=${#digit}
             # echo "len = ${len}"
             local dots=0
             local minus=0
-            # ---------------------------------
-                echo "char 0 = ${char}" # test
-                echo "start 0 = ${start}" # test
-                echo "next 0 = ${next}" # test
-                echo "len 0 = ${len}" # test
-                echo "------------" # test
             # ----------------------------------
             while [[ ${start} -ne ${len} ]]; do
-                # string indexing: 0:0-empty, 0:1-null character
-                # indexing rows: 1:1 is the first character, 2:2 is the second character, and so on
-                # [индексация строк: 0:0-пустота, 0:1-нулевой символ]
-                # [индексация строк: 1:1-первый символ, 2:2-второй символ и так далее]
-                if [[ 'True' == "${next_bool}" ]]; then
-                        let "next -= 1"
-                        # (( next -= 1 ))
-                        next_bool=None
-                    fi
+                # info
+                # string indexing: ${string:0:1} is the null character, ${string:1:1} is the first character
+                # string indexing: ${string:2:1} is the second character and so on
+                # ${${string:2:1} - first argument 2 - show characters from the second inclusive
+                # ${string:2:1} - second argument 1 - showing the quantity from the second character
+                # [информация]
+                # [индексация строк: ${string:0:1}-нулевой символ, ${string:1:1}-первый символ]
+                # [индексация строк: ${string:2:1}-второй символ и так далее]
+                # [${string:2:1} - первый аргумент 2 - показать сивволы от второго ключительно]
+                # [${string:2:1} - второй аргумент 1 - показ количества от второго символа]
                 # ------------------------------
                 # getting a symbol
                 # [получение символа]
+                # local char=${digit[@]:${start}:${next}} # or
                 # local char=${digit[0]:${start}:${next}} # or
                 local char=${digit:${start}:${next}} # or
                 # ------------------------------
-                echo "char = ${char}" # test
-                echo "start = ${start}" # test
-                echo "next = ${next}" # test
-                echo "len = ${len}" # test
-                echo "------------" # test
+                # echo "char = ${char}" # test
+                # echo "start = ${start}" # test
+                # echo "next = ${next}" # test
+                # echo "len = ${len}" # test
+                # echo "------------" # test
                 # ------------------------------
                 # we fix two points in the number
                 # [фиксируем в числе две точки]
@@ -161,12 +155,7 @@ sum-in-math(){ # args: number_1 ... number_N
                 # [если символ число то продолжаем программу]
                 if [[ "${char}" == *"${i}"* ]]; then
                     let "start += 1"
-                    let "next += 1"
                     # (( start += 1 ))
-                    # (( next += 1 ))
-                    if [[ 'None' != "${next_bool}" ]]; then
-                        next_bool=True
-                    fi
                     continue
                 # otherwise, we exit the program
                 # [иначе выходим из программы]
@@ -205,7 +194,7 @@ sum-in-math(){ # args: number_1 ... number_N
             # [показать сумму чисел]
             # if [[ 0 -eq "${#}" ]]; then
             if [[ 0 -ne ${#arr[@]} ]]; then
-                # СДЕАЛТЬ ПРАВИЛЬНЫЕ ВЫВОД (НЕ: -.5 А: -0.5) !!!!!!!!!!!!!!!!!!!!!!!!!!! 222
+                # СДЕАЛТЬ ПРАВИЛЬНЫЕ ВЫВОД (НЕ: -.5 А: -0.5) !!!!!!!!!!!!!!!!!!!!!!!!!!! 111
                 echo ${sum}
             # ----------------------------------
             # if the parameter is incorrect then show help
@@ -246,10 +235,15 @@ declare -x -f sum-in-math
 # sum-in-math "1" "5" # test
 # sum-in-math "1" "1.5" # test
 # sum-in-math "1" "567" # test
-sum-in-math "1" "5.67" # test
+# sum-in-math "1" "5.67" # test
 # sum-in-math "1" "-5.67" # test
 # sum-in-math "1" "--5.67" # test for error
 # sum-in-math "1" "-5.67-" # test for error
-
-# sum-in-math "1" "-1.5" # test !!!!!!!
+# sum-in-math "1" "-5.67." # test for error
+# sum-in-math "1" "-5.6.7" # test for error
+# sum-in-math "1" "-5..67" # test for error
+# sum-in-math "1" "..67" # test for error
+# sum-in-math "1" ".67" # test
+# sum-in-math "-1" "-.67" # test
+sum-in-math "1" "-1.5" # test
 # ************************************************************************
