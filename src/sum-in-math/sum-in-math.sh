@@ -93,64 +93,96 @@ sum-in-math(){ # args: number_1 ... number_N
         # ----------------------------------
         # a set of correct values to check the number
         # [набор правильных значений для проверки числа]
-        local sequence_arr=( '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '.' )
+        local sequence_str='-0123456789'
         # ----------------------------------------------------------------
-        # ИСПРАВИТЬ АЛГОРИТМ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 111
-        #
+        # ЧЕТО НЕ ТО !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 111
         # checking that all the entered elements are numbers (5, 1.5, -2, -3.67, etc.)
         # [проверка что все введенные элементы это числа (5, 1.5, -2, -3.67 и т.д.)]
         for digit in ${arr[@]}; do
             local start=0
             local next=1
+            local next_bool=False
             local len=${#digit}
             # echo "len = ${len}"
             local dots=0
-
+            local minus=0
+            # ---------------------------------
+                echo "char 0 = ${char}" # test
+                echo "start 0 = ${start}" # test
+                echo "next 0 = ${next}" # test
+                echo "len 0 = ${len}" # test
+                echo "------------" # test
+            # ----------------------------------
             while [[ ${start} -ne ${len} ]]; do
-                local char=${digit[0]:${start}:${next}}
-                echo "${char}" # test
-
-                for i in ${sequence_arr[@]}; do  
-                    if [[ '.' == "${char}" ]]; then
-                        let "dots += 1"
-                        # (( dots += 1 ))
-                        if [[ 2 -eq ${dots} ]]; then
-                            next_prog=False
-                            break
-                        fi
+                # string indexing: 0:0-empty, 0:1-null character
+                # indexing rows: 1:1 is the first character, 2:2 is the second character, and so on
+                # [индексация строк: 0:0-пустота, 0:1-нулевой символ]
+                # [индексация строк: 1:1-первый символ, 2:2-второй символ и так далее]
+                if [[ 'True' == "${next_bool}" ]]; then
+                        let "next -= 1"
+                        # (( next -= 1 ))
+                        next_bool=None
                     fi
-                    echo "next-1: ${next}" # test
-                    echo "next_prog-1: ${next_prog}" # test
-                    echo "char 1 = ${char}" # test
-                    echo "i 1 = ${i}"
-
-                    if [[ "${char}" == "${i}" ]]; then
-                        echo "char 2 = ${char}" # test
-                        echo "i 2 = ${i}"
-                        continue
-                    else
+                # ------------------------------
+                # getting a symbol
+                # [получение символа]
+                # local char=${digit[0]:${start}:${next}} # or
+                local char=${digit:${start}:${next}} # or
+                # ------------------------------
+                echo "char = ${char}" # test
+                echo "start = ${start}" # test
+                echo "next = ${next}" # test
+                echo "len = ${len}" # test
+                echo "------------" # test
+                # ------------------------------
+                # we fix two points in the number
+                # [фиксируем в числе две точки]
+                if [[ '.' == "${char}" ]]; then
+                    let "dots += 1"
+                    # (( dots += 1 ))
+                    if [[ 2 -eq ${dots} ]]; then
                         next_prog=False
                         break
                     fi
-                    echo "next-2: ${next}" # test
-                    echo "next_prog-2: ${next_prog}" # test
-                done
-                echo "next-3: ${next}" # test
-                echo "next_prog-3: ${next_prog}" # test
-
-                if [[ 'False' == "${next_prog}" ]]; then
-                    break
                 fi
-
-                let "start += 1"
-                let "next += 1"
-                # (( start += 1 ))
-                # (( next += 1 ))
+                # ------------------------------
+                # we fix two minuses in the number
+                # [фиксируем в числе два минуса]
+                if [[ '-' == "${char}" ]]; then
+                    let "minus += 1"
+                    # (( minus += 1 ))
+                    if [[ 2 -eq ${minus} ]]; then
+                        next_prog=False
+                        break
+                    fi
+                fi
+                # ------------------------------
+                # if the symbol is a number then we continue the program
+                # [если символ число то продолжаем программу]
+                if [[ "${char}" == *"${i}"* ]]; then
+                    let "start += 1"
+                    let "next += 1"
+                    # (( start += 1 ))
+                    # (( next += 1 ))
+                    if [[ 'None' != "${next_bool}" ]]; then
+                        next_bool=True
+                    fi
+                    continue
+                # otherwise, we exit the program
+                # [иначе выходим из программы]
+                else
+                    next_prog=False
+                    break
+                fi  
+                # ------------------------------        
             done
-
+            # ----------------------------------
+            # exit the program if the character is not a number
+            # [выход из программы если символ не число]
             if [[ 'False' == "${next_prog}" ]]; then
                 break
             fi
+            # ----------------------------------
         done
         # ----------------------------------------------------------------
         # if numbers are entered, then continue executing the program
@@ -211,7 +243,13 @@ declare -x -f sum-in-math
 # sum-in-math "-5" "1.5" # test
 # sum-in-math "-1.5" "-1.5" # test
 # sum-in-math "1" "-2.5" # test
-sum-in-math "1" "5" # test
+# sum-in-math "1" "5" # test
 # sum-in-math "1" "1.5" # test
-# sum-in-math "1" "-1.5" # test
+# sum-in-math "1" "567" # test
+sum-in-math "1" "5.67" # test
+# sum-in-math "1" "-5.67" # test
+# sum-in-math "1" "--5.67" # test for error
+# sum-in-math "1" "-5.67-" # test for error
+
+# sum-in-math "1" "-1.5" # test !!!!!!!
 # ************************************************************************
