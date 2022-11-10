@@ -14,58 +14,42 @@
 # [mersh это краткая справка по всем скриптам]
 mersh(){ # args: script_1 ... script_N
     # --------------------------------------------------------------------
+    # writing all arguments to an array
+    # [записываем все аргументы в массив]
     local arr=( ${@} ) # local arr=( ${*} )
     # echo "arr = ${arr[@]}" # test
     # echo "len arr = ${#arr[@]}" # test
     # ----------------------------------
-    local set
-    # set+=( 1 ); set+=( 2 ) # test
-    # echo "set = ${set[@]}" # test
-    # echo "len set = ${#set[@]}" # test
+    # list of scripts [список скриптов]
+    local scripts
+    scripts+=( "\b|                    check-install-utils                            |\n"  )
+    scripts+=( "\b|                    mersh                                          |\n"  )
+    scripts+=( "\b|                    set-in-math                                    |\n"  )
+    scripts+=( "\b|                    src-get-from-github                            |\n"  )
+    scripts+=( "\b|                    sum-in-math                                    |"  )
     # ----------------------------------
-    local index=0
-    # echo "index = ${index}" # test
-    # let index++ # (( index++ )) # test
-    # echo "index = ${index}" # test
-    # ----------------------------------
-    while [[ ${index} -ne ${#arr[@]} ]]; do
-        # echo "index = ${index}" # test
-        local bool=True
-
-        for i in ${set[@]}; do
-            # if [[ ${arr[${index}]} -eq ${i} ]]; then # for int [для целых чисел]
-            if [[ ${arr[${index}]} == ${i} ]]; then # for str [для строк]
-                bool=False
-                break
-            fi
-        done
-
-        if [[ 'True' == ${bool} ]]; then
-            set+=( ${arr[${index}]} )
-        fi
-
-        let index++ # (( index++ ))
-    done
-    # ----------------------------------
-    # echo "set = ${set[@]}" # test
-    if [[ 0 -ne ${#set[@]} ]]; then
-        echo ${set[@]}
+    if [[ 0 -ne ${#arr[@]} ]]; then
+        echo "1111111111111111111111111111111111"
     else
-        echo "|-ENG-HELP---------------------------------------------------------|"
-        echo "|  help          : mersh - print a mathematical set          |"
-        echo "|  usage         : mersh [ sequence of elements ]            |"
-        echo "|  example       : mersh 1 2 3 2 3 4 3 4 5                   |"
-        echo "|  output        : 1 2 3 4 5                                       |"
-        echo "|  example       : mersh one two one three                   |"
-        echo "|  output        : one two three                                   |"
-        echo "|-RUS-HELP---------------------------------------------------------|"
-        echo "|  помощь        : mersh - печатает математическое множество |"
-        echo "|  использование : mersh [ последовательность элеменов ]     |"
-        echo "|  пример        : mersh 1 2 3 2 3 4 3 4 5                   |"
-        echo "|  вывод         : 1 2 3 4 5                                       |"
-        echo "|  пример        : mersh один два один три                   |"
-        echo "|  вывод         : один два три                                    |"
-        echo "|-END--------------------------------------------------------------|"
+        echo "|-ENG-HELP----------------------------------------------------------|"
+        echo "|  help          : mersh - a short guide to all scripts             |"
+        echo "|  usage         : mersh [ sequence of scripts or none ]            |"
+        echo "|  example       : mersh                                            |"
+        echo "|  output        : ... output of this help ...                      |"
+        echo "|  example       : mersh src-get-from-github sum-in-math            |"
+        echo "|  output        : ... output of help for scripts ...               |"
+        echo "|-RUS-HELP----------------------------------------------------------|"
+        echo "|  помощь        : mersh - краткое руководство по всем скриптам     |"
+        echo "|  использование : mersh [ последовательность элеменов или ничего ] |"
+        echo "|  пример        : mersh                                            |"
+        echo "|  вывод         : ... вывод данной справки ...                     |"
+        echo "|  пример        : mersh src-get-from-github sum-in-math            |"
+        echo "|  вывод         : ... вывод справок по скриптам ...                |"
+        echo "|-END---------------------------------------------------------------|"
+        echo "|                       Scripts [скрипты]:                          |"
+        echo "|                      --------------------                         |"
+        echo -e "${scripts[@]}"
+        echo "|-------------------------------------------------------------------|"
     fi
     # --------------------------------------------------------------------
 }
@@ -78,7 +62,7 @@ declare -x -f mersh
 # ************************************************************************
 # tests
 
-# mersh # test
+mersh # test
 # mersh "1" "2" "3" "1" "2" "3" "1" "2" "3" # test
 # mersh "1" "2" "3" "1" "2" "1" "2" "3" "4" "5" "6" # test
 # ************************************************************************
