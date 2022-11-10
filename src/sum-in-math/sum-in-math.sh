@@ -196,11 +196,11 @@ sum-in-math(){ # args: number_1 ... number_N
             if [[ 0 -ne ${#arr[@]} ]]; then
                 # the full output of the number is correct: -0.5, 0.5; incorrect: -.5, .5
                 # [полный вывод числа правильно: -0.5, 0.5; неправильно: -.5, .5]
-                # СДЕАЛТЬ ПРАВИЛЬНЫЕ ВЫВОД (НЕ: -.5 А: -0.5) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 111
-                if [[ "${sum}" == "-."* ]]; then
-                    echo "1111111111111"
-                elif [[ "${sum}" == "."* ]]; then
-                    echo "2222222222222"
+                local delimeter="."
+                local left=${sum%${delimeter}*}
+                local right=${sum#*${delimeter}}
+                if [[ "${sum}" == "-."* ]] || [[ "${sum}" == "."* ]]; then
+                    echo "${left}0.${right}"
                 else
                     echo ${sum}
                 fi
@@ -253,5 +253,8 @@ declare -x -f sum-in-math
 # sum-in-math "1" "..67" # test for error
 # sum-in-math "1" ".67" # test
 # sum-in-math "-1" "-.67" # test
-sum-in-math "1" "-1.5" # test
+# sum-in-math "1" "-1.5" # test
+# sum-in-math "0.2" "0.5" # test
+# sum-in-math ".2" "0.5" # test
+# sum-in-math ".2" "-.5" # test
 # ************************************************************************
