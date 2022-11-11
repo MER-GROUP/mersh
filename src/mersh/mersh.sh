@@ -54,8 +54,8 @@ mersh(){ # args: script_1 ... script_N
             # connecting library functions
             # [подключаем функции-библиотеки]
             # ----------------------------------
-            # if we are in the ../mersh/src/sum-in-math/ folder, then go to ../mersh/
-            # [если находимся в папке ../mersh/src/sum-in-math/, то переходим в ../mersh/]
+            # if we are in the ../mersh/src/mersh/ folder, then go to ../mersh/
+            # [если находимся в папке ../mersh/src/mersh/, то переходим в ../mersh/]
             # pwd # test
             local current_dir=`pwd`
             # echo "${current_dir##*/}" # test
