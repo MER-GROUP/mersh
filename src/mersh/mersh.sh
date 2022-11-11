@@ -22,15 +22,37 @@ mersh(){ # args: script_1 ... script_N
     # ----------------------------------
     # list of scripts [список скриптов]
     local scripts
-    scripts+=( "\b|                    check-install-utils                            |\n"  )
-    scripts+=( "\b|                    mersh                                          |\n"  )
-    scripts+=( "\b|                    set-in-math                                    |\n"  )
-    scripts+=( "\b|                    src-get-from-github                            |\n"  )
-    scripts+=( "\b|                    sum-in-math                                    |"  )
+    scripts+=( "\b|                      check-install-utils                          |\n"  )
+    scripts+=( "\b|                      mersh                                        |\n"  )
+    scripts+=( "\b|                      set-in-math                                  |\n"  )
+    scripts+=( "\b|                      src-get-from-github                          |\n"  )
+    scripts+=( "\b|                      sum-in-math                                  |"  )
     # ----------------------------------
+    # variable for help output
+    # [переменная для вывода справки]
+    local check=True
+    # ----------------------------------
+    # show help for scripts that are part of mersh
+    # [показать справки скриптов которые входят в состав mersh]
     if [[ 0 -ne ${#arr[@]} ]]; then
-        echo "1111111111111111111111111111111111"
-    else
+        # checking that the arguments are mersh scripts
+        # [проверка что аргументы это скрипты mersh]
+        for script in "${arr[@]}"; do
+            if [[ "${script}" != *"${scripts}"* ]]; then
+                check=False
+                break
+            fi
+        done
+        # ----------------
+        if [[ 'True' == "${check}"  ]]; then
+            echo "1111111111111111111111111111111111"
+        fi
+        # ----------------
+    fi
+    # ----------------------------------
+    # show help if if there are no arguments or if invalid arguments
+    # [показать справку если если нет аргументов или если неверные аргументы]
+    if [[ 'False' == "${check}" ]]; then
         echo "|-ENG-HELP----------------------------------------------------------|"
         echo "|  help          : mersh - a short guide to all scripts             |"
         echo "|  usage         : mersh [ sequence of scripts or none ]            |"
@@ -62,7 +84,7 @@ declare -x -f mersh
 # ************************************************************************
 # tests
 
-mersh # test
-# mersh "1" "2" "3" "1" "2" "3" "1" "2" "3" # test
+# mersh # test
+mersh "red" "alert" "nonescript" # test
 # mersh "1" "2" "3" "1" "2" "1" "2" "3" "4" "5" "6" # test
 # ************************************************************************
