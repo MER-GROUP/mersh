@@ -47,8 +47,48 @@ mersh(){ # args: script_1 ... script_N
             fi
         done
         # ----------------
+        # if all arguments are correct, then show script help
+        # [если все агументы коректны, то показать справки скриптов]
         if [[ 'True' == "${check}"  ]]; then
-            echo "1111111111111111111111111111111111"
+            # --------------------------------------------------------------------
+            # connecting library functions
+            # [подключаем функции-библиотеки]
+            # ----------------------------------
+            # if we are in the ../mersh/src/sum-in-math/ folder, then go to ../mersh/
+            # [если находимся в папке ../mersh/src/sum-in-math/, то переходим в ../mersh/]
+            # pwd # test
+            local current_dir=`pwd`
+            # echo "${current_dir##*/}" # test
+            local bool="False"
+            if [[ `pwd` != *"mersh" ]] || [[ `pwd` != *".mersh" ]]; then
+                bool="True"
+                # pwd # test
+                cd ../../
+                # pwd # test
+            fi
+            # ----------------------------------
+            # connecting library functions
+            # [подключаем функции-библиотеки]
+            for lib in "${arr[@]}"; do
+                if [[ 0 -ne $( type "${lib}" &> /dev/null; echo ${?} ) ]]; then
+                    source "${lib}.sh"
+                fi
+            done
+            # ----------------------------------
+            # return to the original directory if there was a transition to another directory
+            # [возврат в первоначальную директорию, если был переход в другую директорию]
+            if [[ 'True' == ${bool} ]]; then
+                cd ${current_dir}
+                bool="False"
+                # echo "BOOL"
+            fi
+            # --------------------------------------------------------------------
+            # showing help on scripts
+            # [показываем справки по скриптам]
+            for doc in "${arr[@]}"; do
+                ${doc}
+            done
+            # --------------------------------------------------------------------
         fi
         # ----------------
     fi
@@ -90,5 +130,5 @@ declare -x -f mersh
 # mersh # test
 # mersh "red" "alert" "nonescript" # test
 # mersh "mersh" "alert" "set-in-math" # test
-mersh "mersh" "sum-in-math" "set-in-math" # test
+# mersh "mersh" "sum-in-math" "set-in-math" # test
 # ************************************************************************
