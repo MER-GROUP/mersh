@@ -85,6 +85,7 @@ declare -x -f mersh
 # tests
 
 # mersh # test
-mersh "red" "alert" "nonescript" # test
-# mersh "1" "2" "3" "1" "2" "1" "2" "3" "4" "5" "6" # test
+# mersh "red" "alert" "nonescript" # test
+# mersh "mersh" "alert" "set-in-math" # test
+mersh "mersh" "sum-in-math" "set-in-math" # test
 # ************************************************************************
