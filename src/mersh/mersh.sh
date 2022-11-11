@@ -38,7 +38,10 @@ mersh(){ # args: script_1 ... script_N
         # checking that the arguments are mersh scripts
         # [проверка что аргументы это скрипты mersh]
         for script in "${arr[@]}"; do
-            if [[ "${script}" != *"${scripts}"* ]]; then
+            # echo "${script}" # test
+            # echo "${scripts[@]}" # test
+            # if [[ "${scripts[@]}" != *"${script}"* ]]; then # or
+            if [[ "${scripts[@]}" != *${script}* ]]; then # or
                 check=False
                 break
             fi
@@ -52,7 +55,7 @@ mersh(){ # args: script_1 ... script_N
     # ----------------------------------
     # show help if if there are no arguments or if invalid arguments
     # [показать справку если если нет аргументов или если неверные аргументы]
-    if [[ 'False' == "${check}" ]]; then
+    if [[ 'False' == "${check}" ]] || [[ 0 -eq ${#arr[@]} ]]; then
         echo "|-ENG-HELP----------------------------------------------------------|"
         echo "|  help          : mersh - a short guide to all scripts             |"
         echo "|  usage         : mersh [ sequence of scripts or none ]            |"
