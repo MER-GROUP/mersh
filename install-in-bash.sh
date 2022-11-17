@@ -11,11 +11,11 @@ install-in-bash(){ # NO args
     # --------------------------------------------------------------------
     # getting folders in a directory [получение папок в директории]
     local dirs_arr=( $( ls -p | grep "/$" ) )
-    echo "${dirs_arr}" # test
+    echo "${dirs_arr[@]}" # test
     # ----------------------------------
     # getting folders in a directory [получение файлов в директории]
     local files_arr=( $( ls -p | grep -v "/$" ) )
-    echo "${files_arr}" # test
+    echo "${files_arr[@]}" # test
     # ----------------------------------
     
     # ----------------------------------
