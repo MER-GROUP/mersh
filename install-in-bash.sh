@@ -17,24 +17,35 @@ install-in-bash(){ # NO args
     local files_arr=( $( ls -p | grep -v "/$" ) )
     echo "${files_arr[@]}" # test
     # ----------------------------------
-    #
-    # [если директория это обычный файл]
-    if [[ -f "~/.mer-group/mersh" ]]; then
-        #
+    # if the file or directory does not exist
+    # [если файл или директория не существут]
+    # if [[ !( -e ~/.mer-group/mersh ) ]]; then
+    if [[ !( -e "${HOME}/.mer-group/mersh" ) ]]; then
+        # create a directory
+        # [создать директорию]
+        # mkdir -p ~/.mer-group/mersh/
+        mkdir -p "${HOME}/.mer-group/mersh/"
+        echo "crete -> ~/.mer-group/mersh"
+
+    # if the file is a regular file
+    # [если файл это обычный файл]
+    elif [[ -f "${HOME}/.mer-group/mersh" ]]; then
+        # delete the file and create a directory
         # [удалить файл и создать директорию]
-        echo "удалить файл и создать директори"
-    fi
-    #
-    # усли директория существует
-    if [[ -d "~/.mer-group/mersh" ]]
-        #
+        # rm -rf ~/.mer-group/mersh
+        rm -rf "${HOME}/.mer-group/mersh"
+        echo "delete -> ~/.mer-group/mersh"
+        # mkdir -p ~/.mer-group/mersh/
+        mkdir -p "${HOME}/.mer-group/mersh/"
+        echo "crete -> ~/.mer-group/mersh"
+
+    # if the file is a directory
+    # [если файл это директория]
+    elif [[ -d "${HOME}/.mer-group/mersh" ]]; then
+        # then continue executing the program
         # [то продолжить выполнение программы]
-        echo "то продолжить выполнение программы"
-    # 
-    # [если файла или директория не существут]
-    if [[ !( -e "~/.mer-group/mersh" ) ]]; then
-        echo "test -e"
-    fi
+        echo "ok -> ~/.mer-group/mersh"
+    fi    
     # ----------------------------------
     
     # ----------------------------------
