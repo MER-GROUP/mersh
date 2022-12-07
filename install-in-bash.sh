@@ -25,7 +25,7 @@ install-in-bash(){ # NO args
         # [создать директорию]
         # mkdir -p ~/.mer-group/mersh/
         mkdir -p "${HOME}/.mer-group/mersh/"
-        echo "crete -> ~/.mer-group/mersh"
+        echo "crete -> ~/.mer-group/mersh/"
 
     # if the file is a regular file
     # [если файл это обычный файл]
@@ -37,14 +37,14 @@ install-in-bash(){ # NO args
         echo "delete -> ~/.mer-group/mersh"
         # mkdir -p ~/.mer-group/mersh/
         mkdir -p "${HOME}/.mer-group/mersh/"
-        echo "crete -> ~/.mer-group/mersh"
+        echo "crete -> ~/.mer-group/mersh/"
 
     # if the file is a directory
     # [если файл это директория]
     elif [[ -d "${HOME}/.mer-group/mersh" ]]; then
         # then continue executing the program
         # [то продолжить выполнение программы]
-        echo "ok -> ~/.mer-group/mersh"
+        echo "ok -> ~/.mer-group/mersh/"
     fi    
     # ----------------------------------
     
