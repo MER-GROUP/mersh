@@ -45,9 +45,21 @@ install-in-bash(){ # NO args
         # then continue executing the program
         # [то продолжить выполнение программы]
         echo "ok -> ~/.mer-group/mersh/"
-    fi    
+    fi 
     # ----------------------------------
-    
+    # copy the mersh scripts to the ~/.mer-group/mersh/ directory
+    # [копируем скрипты mersh в директорию ~/.mer-group/mersh/]  
+    echo "copy start -> ~/.mer-group/mersh/" 
+
+    for dir in ${dirs_arr[@]}; do
+        cp -ru ${dir} ${HOME}/.mer-group/mersh/
+    done
+
+    for file in ${files_arr[@]}; do
+        cp -u ${file} ${HOME}/.mer-group/mersh/
+    done
+
+    echo "copy end -> ~/.mer-group/mersh/" 
     # ----------------------------------
 
     # --------------------------------------------------------------------
