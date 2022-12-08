@@ -1,16 +1,16 @@
 #!/bin/bash
 # ************************************************************************
-# importing scripts into bash
-# [импортирование скриптов в bash]
+# importing scripts into bash/zsh
+# [импортирование скриптов в bash/zsh]
 # ************************************************************************
 # function import
 
-# importing scripts into bash
-# [импортирование скриптов в bash]
+# importing scripts into bash/zsh
+# [импортирование скриптов в bash/zsh]
 import(){ # NO args
     # --------------------------------------------------------------------
-    # importing scripts into bash
-    # [импортирование скриптов в bash]
+    # importing scripts into bash/zsh
+    # [импортирование скриптов в bash/zsh]
     source ./check-install-utils.sh
     source ./mersh.sh
     source ./set-in-math.sh
@@ -19,8 +19,8 @@ import(){ # NO args
     # --------------------------------------------------------------------
 }
 # ************************************************************************
-# importing scripts into bash
-# [импортирование скриптов в bash]
+# importing scripts into bash/zsh
+# [импортирование скриптов в bash/zsh]
 import
 # ************************************************************************
 # tests
