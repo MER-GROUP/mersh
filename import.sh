@@ -11,7 +11,7 @@ import(){ # NO args
     # --------------------------------------------------------------------
     # getting folders in a directory [получение файлов в директории]
     local files_arr=( $( ls -p | grep -v "/$" ) )
-    echo "${files_arr[@]}" # test
+    # echo "${files_arr[@]}" # test
     # ----------------------------------
     # importing scripts into bash/zsh
     # [импортирование скриптов в bash/zsh]
