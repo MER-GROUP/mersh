@@ -28,8 +28,9 @@ import(){ # NO args
             continue
         elif [[ 'install-in-zsh.sh' == ${lib} ]]; then
             continue
+        else
+            source ${lib}
         fi
-        source ${lib}
     done
     # --------------------------------------------------------------------
 }
