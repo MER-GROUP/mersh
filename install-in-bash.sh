@@ -61,17 +61,31 @@ install-in-bash(){ # NO args
 
     echo "copy end -> ~/.mer-group/mersh/" 
     # ----------------------------------
-    # importing mersh scripts to ~/.bashrc
-    # [импорт скриптов mersh в ~/.bashrc]
-    echo "" >> ${HOME}/.bashrc
-    echo "# mersh scripts [сценарии mersh]" >> ${HOME}/.bashrc
-    echo "source ${HOME}/.mer-group/mersh/import.sh" >> ${HOME}/.bashrc
-    echo "" >> ${HOME}/.bashrc
-    echo "bash -> setting up ок"
-    # ----------------------------------
-    # restarting bash
-    # [перезапуск bash]
-    source ${HOME}/.bashrc
+    # if importing mersh scripts to bash was
+    # [если импорта скриптов mersh в bash был]
+    # if [[ '# mersh scripts' == $( grep "^# mersh scripts" ~/.bashrc | cut -d ' ' -f 1-3 ) ]]; then # or
+    if [[ '# mersh scripts' == $( echo $( current_search=`grep "^# mersh scripts" ~/.bashrc`; echo "${current_search%[*}" ) ) ]]; then # or
+        echo "bash -> setting up ок"
+    else
+        # if there was no import of mersh scripts into bash
+        # [если импорта скриптов mersh в bash не было]
+        # ----------------
+        # importing mersh scripts to ~/.bashrc
+        # [импорт скриптов mersh в ~/.bashrc]
+        echo "" >> ${HOME}/.bashrc
+        echo "# mersh scripts [сценарии mersh]" >> ${HOME}/.bashrc
+        echo "current_dir=\`pwd\`" >> ${HOME}/.bashrc
+        echo "cd /home/red/.mer-group/mersh/" >> ${HOME}/.bashrc
+        echo "source import.sh" >> ${HOME}/.bashrc
+        echo 'cd "${current_dir}"' >> ${HOME}/.bashrc
+        echo "" >> ${HOME}/.bashrc
+        echo "bash -> setting up ок"
+        # ----------------
+        # restarting bash
+        # [перезапуск bash]
+        source ${HOME}/.bashrc
+        # ----------------
+    fi
     # --------------------------------------------------------------------
 }
 # ************************************************************************
