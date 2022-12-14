@@ -11,9 +11,9 @@
 echo "zsh does not support declare and local"
 echo "zsh and bash compatibility will be implemented later"
 echo "if there is a desire and time"
-echo [zsh не поддерживает declare и local]
-echo [совместимость zsh и bash будет реализована позже]
-echo [если будет желание и время]
+echo "[zsh не поддерживает declare и local]"
+echo "[совместимость zsh и bash будет реализована позже]"
+echo "[если будет желание и время]"
 # ************************************************************************
 # # function install-in-zsh
 
