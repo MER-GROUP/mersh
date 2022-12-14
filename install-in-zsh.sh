@@ -9,9 +9,11 @@
 # [совместимость zsh и bash будет реализована позже]
 
 echo "zsh does not support declare and local"
+echo "the numbering of arrays in zsh starts with 1"
 echo "zsh and bash compatibility will be implemented later"
 echo "if there is a desire and time"
 echo "[zsh не поддерживает declare и local]"
+echo "[нумерация массивов в zsh начинается с 1]"
 echo "[совместимость zsh и bash будет реализована позже]"
 echo "[если будет желание и время]"
 # ************************************************************************
