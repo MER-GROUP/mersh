@@ -60,7 +60,7 @@ uninstall-mersh(){ # NO args
     # [копируем файл ~/.bashrc в массив]
     # [настройки mersh из файла ~/.bashrc не копируем]
     local bashrc_arr 
-    local file_path='./.bashrc'
+    local file_path='./bashrc'
     local i=0
     while IFS= read -r line; do
         # echo "${i}" # test
