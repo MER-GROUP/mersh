@@ -121,4 +121,3 @@ current_dir=`pwd`
 cd /home/red/.mer-group/mersh/
 source import.sh
 cd "${current_dir}"
-
