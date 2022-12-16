@@ -78,9 +78,24 @@ uninstall-mersh(){ # NO args
     # ----------------
     # overwrite the ~/.bashrc file
     # [перезаписать файл ~/.bashrc]
-    echo "" > "${file_path}"
-    for line in "${bashrc_arr[@]}";do
-        echo "${line}" >> "${file_path}"
+    # --------
+    # bad version
+    # [плохая версия]
+    # echo "" > "${file_path}"
+    # for line in "${bashrc_arr[@]}"; do
+    #     echo "${line}" >> "${file_path}"
+    # done
+    # --------
+    # good version
+    # [хорошая версия]
+    i=0
+    for line in "${bashrc_arr[@]}"; do
+        if [[ 0 -eq ${i} ]]; then
+            echo "${line}" > "${file_path}"
+            let i++ # (( i++ ))
+        else
+            echo "${line}" >> "${file_path}"
+        fi
     done
     # ----------------------------------
     # restarting bash
