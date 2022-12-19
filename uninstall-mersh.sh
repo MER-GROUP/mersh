@@ -29,15 +29,30 @@ uninstall-mersh(){ # NO args
         # [если в папке mer-group много папок]
         # [то удалить папку mersh со всем содержимым]
         if [[ 1 -lt ${#dirs_arr[@]} ]]; then
+            # echo "${dirs_arr}" # test
             if [[ -e "${HOME}/.mer-group/mersh" ]] && [[ -d "${HOME}/.mer-group/mersh" ]]; then
-                rm -rf "${HOME}/.mer-group"
+                rm -rf "${HOME}/.mer-group/mersh"
             fi
         # ----------------
         # if there is only one mersh folder in the mer-group folder
         # then delete the mer-group folder with all the contents
         # [если в папке mer-group только одна папка mersh]
         # [то удалить папку mer-group со всем содержимым]
+        elif  [[ 1 -eq ${#dirs_arr[@]} ]] && [[ 'mersh/' == ${dirs_arr}  ]]; then
+            # echo "${dirs_arr}" # test
+            cd ..
+            rm -rf "${HOME}/.mer-group"
+        # ----------------
+        # if mersh is deleted in the mer-group folder, but there are other folders, then we do not delete mer-group
+        # [если в папке mer-group удален mersh, но есть другие папки, то mer-group не удаляем]
+        elif  [[ 1 -eq ${#dirs_arr[@]} ]] && [[ 'mersh/' != ${dirs_arr}  ]]; then
+            # echo "${dirs_arr}" # test
+            cd ..
+        # ----------------
+        # if the mer-group folder is empty, then delete it
+        # [если папка mer-group пустая то удалить её]
         else
+            # echo "${dirs_arr}" # test
             cd ..
             rm -rf "${HOME}/.mer-group"
         fi
@@ -71,7 +86,21 @@ uninstall-mersh(){ # NO args
         elif [[ 0 -lt ${i} ]] && [[ 5 -gt ${i} ]]; then # or
             let i++ # (( i++ ))
             continue
-        fi
+
+
+
+        # elif [[ 5 -le ${i} ]] && [[ "\n" == ${i} ]]; then
+        #     echo "1111111111111111111111111111111111111111111111111"
+        #     let i++ # (( i++ ))
+        #     continue
+        # fi
+
+        # if [[ 5 -le ${i} ]]; then
+        #     echo "${line}"
+        # fi
+
+
+
         bashrc_arr+=( "$line" )
     done < "${file_path}"
     # echo "${bashrc_arr[@]}"
