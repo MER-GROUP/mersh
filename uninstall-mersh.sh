@@ -86,7 +86,21 @@ uninstall-mersh(){ # NO args
         elif [[ 0 -lt ${i} ]] && [[ 5 -gt ${i} ]]; then # or
             let i++ # (( i++ ))
             continue
-        fi
+
+
+
+        # elif [[ 5 -le ${i} ]] && [[ "\n" == ${i} ]]; then
+        #     echo "1111111111111111111111111111111111111111111111111"
+        #     let i++ # (( i++ ))
+        #     continue
+        # fi
+
+        # if [[ 5 -le ${i} ]]; then
+        #     echo "${line}"
+        # fi
+
+
+
         bashrc_arr+=( "$line" )
     done < "${file_path}"
     # echo "${bashrc_arr[@]}"
