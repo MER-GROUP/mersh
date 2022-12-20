@@ -47,7 +47,8 @@ settings_get(){ # args: file_path
     fi
     # ----------------------------------
     # the path of the settings file [путь файла с настройками]
-    local file_path=${1}
+    # local file_path=${1}
+    eval local file_path="${1}"
     # get settings [получить настройки]
     for line in $( grep -v '^#' $file_path ); do
         # echo $line
@@ -94,7 +95,8 @@ check_path(){ # args: path
     fi
     # ----------------------------------
     # data storage directory [директория хранения данных]
-	local path=${1}
+	# local path=${1}
+	eval local path="${1}"
     # ----------------------------------
     # # if the directory is a file then exit the program
     # # otherwise if the path does not exist then create a directory
@@ -153,7 +155,10 @@ src_get(){ # args: path, links
     fi
     # ----------------------------------
     # data storage directory [директория хранения данных]
-	local path=${1}
+	# local path=${1}
+	# local path="${HOME}/src/"
+	eval local path="${1}"
+    # echo "-----> path = ${path}" # test
     # link matrix [матрица ссылок]
     # links=(  ${*} ) 
     local links=(  $( arr=( ${*} ); echo ${arr[@]:1:${#arr[@]}} ) ) 
@@ -205,7 +210,8 @@ src_to_tar_gz(){ # args: path
     fi
     # --------------------------------------------------------------------
     # data storage directory [директория хранения данных]
-	local path=${1}
+	# local path=${1}
+	eval local path="${1}"
     # ----------------------------------
     cd ${path}
     # pwd
@@ -271,7 +277,8 @@ delete_src_folders(){ # args: path
     fi
     # ----------------------------------
     # data storage directory [директория хранения данных]
-	local path=${1}
+	# local path=${1}
+	eval local path="${1}"
     # ----------------------------------
     cd ${path}
     # pwd
@@ -328,7 +335,8 @@ delete_arhive_src_more_history(){ # args: path, hist
     fi
     # ----------------------------------
     # data storage directory [директория хранения данных]
-	local path=${1}
+	# local path=${1}
+	eval local path="${1}"
     # ----------------------------------
     cd ${path}
     # pwd

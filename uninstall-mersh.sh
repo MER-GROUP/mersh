@@ -75,8 +75,10 @@ uninstall-mersh(){ # NO args
     # [копируем файл ~/.bashrc в массив]
     # [настройки mersh из файла ~/.bashrc не копируем]
     local bashrc_arr 
-    local file_path='./bashrc'
+    local file_path="${HOME}/.bashrc"
     local i=0
+    local n=`echo -e "\n"`
+    local bool='True'
     while IFS= read -r line; do
         # echo "${i}" # test
         if [[ '# mersh scripts [сценарии mersh]' ==  "${line}" ]]; then
@@ -86,20 +88,14 @@ uninstall-mersh(){ # NO args
         elif [[ 0 -lt ${i} ]] && [[ 5 -gt ${i} ]]; then # or
             let i++ # (( i++ ))
             continue
-
-
-
-        # elif [[ 5 -le ${i} ]] && [[ "\n" == ${i} ]]; then
-        #     echo "1111111111111111111111111111111111111111111111111"
-        #     let i++ # (( i++ ))
-        #     continue
-        # fi
-
-        # if [[ 5 -le ${i} ]]; then
-        #     echo "${line}"
-        # fi
-
-
+        # deleting empty lines after deleted mersh settings
+        # [удаляем пустые строки после удаленных настроек mersh]
+        elif [[ 5 -le ${i} ]] && [[ ${n} == ${line} ]] && [[ 'True' == ${bool} ]]; then
+            let i++ # (( i++ ))
+            continue
+        elif [[ 5 -le ${i} ]] && [[ ${n} != ${line} ]]; then
+            bool='False'
+        fi
 
         bashrc_arr+=( "$line" )
     done < "${file_path}"
@@ -129,7 +125,7 @@ uninstall-mersh(){ # NO args
     # ----------------------------------
     # restarting bash
     # [перезапуск bash]
-    # source ${HOME}/.bashrc
+    source ${HOME}/.bashrc
     # --------------------------------------------------------------------
 }
 # ************************************************************************

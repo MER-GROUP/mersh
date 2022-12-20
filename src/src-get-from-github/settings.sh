@@ -2,7 +2,8 @@
 
 # the path for storing sources
 # [путь для хранения исходников]
-path_src=./src/
+# path_src=./src/
+path_src="${HOME}/src/"
 
 # source links file on github
 # [файл ссылок исходников на github]
