@@ -28,6 +28,10 @@ import(){ # NO args
             continue
         elif [[ 'install-in-zsh.sh' == ${lib} ]]; then
             continue
+        elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
+            continue
+        elif [[ 'import.sh' == ${lib} ]]; then
+            continue
         else
             source ${lib}
         fi
