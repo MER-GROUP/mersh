@@ -18,7 +18,8 @@ echo "file_settings = ${file_settings}" # test #################################
 
 # link file [файл ссылок]
 # file_links=./links.sh
-file_links=$( v=$( grep -e 'file_links' ${file_settings} ); echo ${v#*=} )
+# file_links=$( v=$( grep -e 'file_links' ${file_settings} ); echo ${v#*=} )
+file_links="`pwd`/$( v=$( grep -e 'file_links' ${file_settings} ); echo ${v#*=} )"
 echo "file_links = ${file_links[@]}" # test ####################################################################
 
 # settings matrix [матрица настроек]
@@ -59,25 +60,28 @@ settings_get(){ # args: file_path
         # echo $line
         local arr
         IFS='=' read -a arr <<< ${line}
-        # making a relative path to the file for links ####################################################################
-        # [делаем относительный путь на файл для ссылок] ####################################################################
-        echo "arr[0] = ${arr[0]}" # test
-        echo "arr[1] = ${arr[1]}" # test
-        if [[ 'file_links' == "${arr[0]}" ]]; then
-            echo "This is file_links" # test ####################################################################
-            # settings_arr[${arr[0]}]="`pwd`/${arr[1]}"
-            echo "arr[1] = ${arr[1]}" # test 
-            # echo "settings_arr[arr[0]] = ${settings_arr[${arr[0]}]}" # test ####################################################################
-            echo "This is file_links 22222222222222222222222" # test ####################################################################
-        else
-            settings_arr[${arr[0]}]=${arr[1]}
-        fi
+        # # making a relative path to the file for links ####################################################################
+        # # [делаем относительный путь на файл для ссылок] ####################################################################
+        # echo "arr[0] = ${arr[0]}" # test
+        # echo "arr[1] = ${arr[1]}" # test
+        # if [[ 'file_links' == "${arr[0]}" ]]; then
+        #     echo "This is file_links 11111111111111111111111" # test ####################################################################
+        #     echo "arr[1] = ${arr[1]}" # test 
+        #     # settings_arr[${arr[0]}]="`pwd`/${arr[1]}"
+        #     settings_arr[${arr[0]}]="${HOME}"
+        #     # echo "settings_arr[arr[0]] = ${settings_arr[${arr[0]}]}" # test ####################################################################
+        #     echo "This is file_links 22222222222222222222222" # test ####################################################################
+        # else
+        #     settings_arr[${arr[0]}]=${arr[1]}
+        # fi
+        settings_arr[${arr[0]}]=${arr[1]}
     done
     echo "This is file_links 33333333333333333333333" # test####################################################################
-    echo "${!settings_arr[@]}" # test
-    # echo ${settings_arr[path_src]} # test
-    # echo ${settings_arr[file_links]} # test
-    # echo ${settings_arr[hist_src]} # test
+    pwd # test ####################################################################
+    echo "${settings_arr}" # test ####################################################################
+    echo ${settings_arr[path_src]} # test ####################################################################
+    # echo ${settings_arr[file_links]} # test ####################################################################
+    echo ${settings_arr[hist_src]} # test ####################################################################
     echo "This is file_links 444444444444444444444444" # test ####################################################################
     # ----------------------------------
     # # show settings v1 [показать настройки]
