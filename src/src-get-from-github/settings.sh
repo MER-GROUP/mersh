@@ -7,7 +7,8 @@ path_src="${HOME}/src/"
 
 # source links file on github
 # [файл ссылок исходников на github]
-file_links=./links.sh
+# file_links=./links.sh
+file_links=links.sh
 
 # source code storage history
 # [история хранения исходника]
