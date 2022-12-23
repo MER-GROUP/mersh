@@ -33,7 +33,11 @@ import(){ # NO args
         elif [[ 'import.sh' == ${lib} ]]; then
             continue
         else
-            source ${lib}
+            local func=$( echo ${lib%.*} )
+            # echo "${func}" # test
+            if [[ 0 -ne $( type ${func} &> /dev/null; echo ${?} ) ]]; then
+                source ${lib}
+            fi
         fi
     done
     # --------------------------------------------------------------------
