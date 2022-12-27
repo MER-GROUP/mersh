@@ -13,13 +13,13 @@
 # settings file [файл настроек]
 # file_settings=./settings.sh
 file_settings="`pwd`/settings.sh"
-echo "file_settings = ${file_settings}" # test
+# echo "file_settings = ${file_settings}" # test
 
 # link file [файл ссылок]
 # file_links=./links.sh
 # file_links=$( v=$( grep -e '^file_links' ${file_settings} ); echo ${v#*=} )
 file_links="`pwd`/$( v=$( grep -e '^file_links' ${file_settings} ); echo ${v#*=} )"
-echo "file_links = ${file_links[@]}" # test
+# echo "file_links = ${file_links[@]}" # test
 
 # settings matrix [матрица настроек]
 declare -A settings_arr
