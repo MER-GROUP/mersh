@@ -13,14 +13,13 @@
 # settings file [файл настроек]
 # file_settings=./settings.sh
 file_settings="`pwd`/settings.sh"
-echo "current dir 1 `pwd`" # test ####################################################################
-echo "file_settings = ${file_settings}" # test ####################################################################
+echo "file_settings = ${file_settings}" # test
 
 # link file [файл ссылок]
 # file_links=./links.sh
 # file_links=$( v=$( grep -e '^file_links' ${file_settings} ); echo ${v#*=} )
 file_links="`pwd`/$( v=$( grep -e '^file_links' ${file_settings} ); echo ${v#*=} )"
-echo "file_links = ${file_links[@]}" # test ####################################################################
+echo "file_links = ${file_links[@]}" # test
 
 # settings matrix [матрица настроек]
 declare -A settings_arr
@@ -54,35 +53,14 @@ settings_get(){ # args: file_path
     # the path of the settings file [путь файла с настройками]
     # local file_path=${1}
     eval local file_path="${1}"
-    echo "file_path = ${file_path}" # test ####################################################################
+    # echo "file_path = ${file_path}" # test
     # get settings [получить настройки]
     for line in $( grep -v '^#' $file_path ); do
         # echo $line
         local arr
         IFS='=' read -a arr <<< ${line}
-        # # making a relative path to the file for links ####################################################################
-        # # [делаем относительный путь на файл для ссылок] ####################################################################
-        # echo "arr[0] = ${arr[0]}" # test
-        # echo "arr[1] = ${arr[1]}" # test
-        # if [[ 'file_links' == "${arr[0]}" ]]; then
-        #     echo "This is file_links 11111111111111111111111" # test ####################################################################
-        #     echo "arr[1] = ${arr[1]}" # test 
-        #     # settings_arr[${arr[0]}]="`pwd`/${arr[1]}"
-        #     settings_arr[${arr[0]}]="${HOME}"
-        #     # echo "settings_arr[arr[0]] = ${settings_arr[${arr[0]}]}" # test ####################################################################
-        #     echo "This is file_links 22222222222222222222222" # test ####################################################################
-        # else
-        #     settings_arr[${arr[0]}]=${arr[1]}
-        # fi
         settings_arr[${arr[0]}]=${arr[1]}
     done
-    echo "This is file_links 33333333333333333333333" # test####################################################################
-    pwd # test ####################################################################
-    echo "${settings_arr}" # test ####################################################################
-    echo ${settings_arr[path_src]} # test ####################################################################
-    # echo ${settings_arr[file_links]} # test ####################################################################
-    echo ${settings_arr[hist_src]} # test ####################################################################
-    echo "This is file_links 444444444444444444444444" # test ####################################################################
     # ----------------------------------
     # # show settings v1 [показать настройки]
     # echo ${settings_arr[@]}
@@ -543,13 +521,10 @@ src-get-from-github(){ # args: param_1 ... param_N
         check=$( check-install-utils "${utils[@]}" )
         # echo ${check} # for test [для тестов]
         echo -e "${check}"
-        echo "current dir 2 `pwd`" # test ####################################################################
         # ----------------------------------
         # if everything is installed, then continue the program
         # [если все установлено, то продолжить работу программы]
         if [[ 'all utils are installed' == ${check} ]]; then
-            echo "current dir 3 `pwd`" # test ####################################################################
-
             # get settings [получить настройки]
             settings_get ${file_settings}
 
