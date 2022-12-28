@@ -24,8 +24,6 @@ for lib in ${files_arr[@]}; do
         continue
     elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
         continue
-    elif [[ 'import.sh' == ${lib} ]]; then
-        continue
     else
         func=$( echo ${lib%.*} )
         # echo "${func}" # test
