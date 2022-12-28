@@ -31,6 +31,10 @@ uninstall_vars(){ # NO args
             echo "# mersh vars [переменные mersh]" >> ${HOME}/.bashrc
 
             cd "${HOME}/.mer-group/mersh/"
+            # pwd # test
+
+            # getting folders in a directory [получение файлов в директории]
+            files_arr=( $( ls -p | grep -v "/$" ) )
             for lib in ${files_arr[@]}; do
                 if [[ 'import.sh' == ${lib} ]]; then
                     continue
@@ -40,15 +44,10 @@ uninstall_vars(){ # NO args
                     continue
                 elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
                     continue
-                elif [[ 'import.sh' == ${lib} ]]; then
-                    continue
                 else
                     func=$( echo ${lib%.*} )
                     # echo "${func}" # test
-                    if [[ 0 -ne $( type ${func} &> /dev/null; echo ${?} ) ]]; then
-                        # unset ${lib}
-                        echo "unset ${lib}" >> ${HOME}/.bashrc
-                    fi
+                    echo "unset ${lib}" >> ${HOME}/.bashrc
                 fi
             done
             cd "${current_dir}"
@@ -196,5 +195,5 @@ uninstall_vars
 # --------------------------------------------------------------------
 # deleting all mersh scripts
 # [удаление всех скриптов mersh]
-uninstall-mersh
+# uninstall-mersh
 # ************************************************************************
