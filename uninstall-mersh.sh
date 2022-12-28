@@ -22,28 +22,45 @@ uninstall_vars(){ # NO args
     # [удаление всех скриптов mersh из сессии bash]
     # [если директория существут]
     if [[ -e "${HOME}/.mer-group/mersh" ]] && [[ -d "${HOME}/.mer-group/mersh" ]]; then
-        cd "${HOME}/.mer-group/mersh/"
-        for lib in ${files_arr[@]}; do
-            if [[ 'import.sh' == ${lib} ]]; then
-                continue
-            elif [[ 'install-in-bash.sh' == ${lib} ]]; then
-                continue
-            elif [[ 'install-in-zsh.sh' == ${lib} ]]; then
-                continue
-            elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
-                continue
-            elif [[ 'import.sh' == ${lib} ]]; then
-                continue
-            else
-                func=$( echo ${lib%.*} )
-                echo "${func}" # test
-                if [[ 0 -ne $( type ${func} &> /dev/null; echo ${?} ) ]]; then
-                    unset ${lib}
+        local current_search=`grep "^# mersh vars" ~/.bashrc`
+        current_search=`echo "${current_search%[*}"`
+        if [[ '# mersh vars' == `echo ${current_search}` ]]; then
+            echo "ок -> mersh variables removed"
+        else
+            echo "" >> ${HOME}/.bashrc
+            echo "# mersh vars [переменные mersh]" >> ${HOME}/.bashrc
+
+            cd "${HOME}/.mer-group/mersh/"
+            for lib in ${files_arr[@]}; do
+                if [[ 'import.sh' == ${lib} ]]; then
+                    continue
+                elif [[ 'install-in-bash.sh' == ${lib} ]]; then
+                    continue
+                elif [[ 'install-in-zsh.sh' == ${lib} ]]; then
+                    continue
+                elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
+                    continue
+                elif [[ 'import.sh' == ${lib} ]]; then
+                    continue
+                else
+                    func=$( echo ${lib%.*} )
+                    # echo "${func}" # test
+                    if [[ 0 -ne $( type ${func} &> /dev/null; echo ${?} ) ]]; then
+                        # unset ${lib}
+                        echo "unset ${lib}" >> ${HOME}/.bashrc
+                    fi
                 fi
-            fi
-        done
-        cd "${current_dir}"
+            done
+            cd "${current_dir}"
+
+            echo "" >> ${HOME}/.bashrc
+            echo "ок -> mersh variables removed"
+        fi
     fi
+    # ----------------------------------
+    # restarting bash
+    # [перезапуск bash]
+    source ${HOME}/.bashrc
     # --------------------------------------------------------------------
 }
 # ************************************************************************
@@ -173,6 +190,10 @@ uninstall-mersh(){ # NO args
     # --------------------------------------------------------------------
 }
 # ************************************************************************
+# removing all mersh scripts from a bash session
+# [удаление всех скриптов mersh из сессии bash]
+uninstall_vars
+# --------------------------------------------------------------------
 # deleting all mersh scripts
 # [удаление всех скриптов mersh]
 uninstall-mersh
