@@ -6,6 +6,47 @@
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # ДОБАВИТЬ UNSET НА ВСЕ СКРИПТЫ
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# ************************************************************************
+# function uninstall_vars
+
+# removing all mersh scripts from a bash session
+# [удаление всех скриптов mersh из сессии bash]
+uninstall_vars(){ # NO args
+    # --------------------------------------------------------------------
+    # getting the current directory
+    # [получение текущей директории]
+    local current_dir=`pwd`
+    # ----------------------------------
+    # removing all mersh scripts from a bash session
+    # if the file or directory exists
+    # [удаление всех скриптов mersh из сессии bash]
+    # [если директория существут]
+    if [[ -e "${HOME}/.mer-group/mersh" ]] && [[ -d "${HOME}/.mer-group/mersh" ]]; then
+        cd "${HOME}/.mer-group/mersh/"
+        for lib in ${files_arr[@]}; do
+            if [[ 'import.sh' == ${lib} ]]; then
+                continue
+            elif [[ 'install-in-bash.sh' == ${lib} ]]; then
+                continue
+            elif [[ 'install-in-zsh.sh' == ${lib} ]]; then
+                continue
+            elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
+                continue
+            elif [[ 'import.sh' == ${lib} ]]; then
+                continue
+            else
+                func=$( echo ${lib%.*} )
+                echo "${func}" # test
+                if [[ 0 -ne $( type ${func} &> /dev/null; echo ${?} ) ]]; then
+                    unset ${lib}
+                fi
+            fi
+        done
+        cd "${current_dir}"
+    fi
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
 # function uninstall-mersh
 
 # deleting all mersh scripts
@@ -14,7 +55,7 @@ uninstall-mersh(){ # NO args
     # --------------------------------------------------------------------
     # getting the current directory
     # [получение текущей директории]
-    current_dir=`pwd`
+    local current_dir=`pwd`
     # ----------------------------------
     # deleting all mersh scripts
     # if the file or directory exists
