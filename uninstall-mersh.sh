@@ -17,6 +17,19 @@ uninstall_vars(){ # NO args
     # [получение текущей директории]
     local current_dir=`pwd`
     # ----------------------------------
+    # we determine the number of mersh scripts
+    # [определяем количество скриптов mersh]
+    # local script_count
+    if [[ -e "${HOME}/.mer-group/mersh" ]] && [[ -d "${HOME}/.mer-group/mersh" ]]; then
+        cd "${HOME}/.mer-group/mersh/"
+        local script_count=( $( ls -p | grep -v "/$" ) )
+        script_count="${#script_count[@]}"
+        let "script_count -= 4" # or
+        # (( script_count -= 4 )) # or
+        # echo "${script_count}" # test
+        cd "${current_dir}"
+    fi
+    # ----------------------------------
     # removing all mersh scripts from a bash session
     # if the file or directory exists
     # [удаление всех скриптов mersh из сессии bash]
@@ -60,7 +73,68 @@ uninstall_vars(){ # NO args
     # restarting bash
     # [перезапуск bash]
     source ${HOME}/.bashrc
-    # --------------------------------------------------------------------
+    # # ----------------------------------
+    # #  deleting settings from the ~/.bashrc file
+    # # [удаление настроек из файла ~/.bashrc]
+    # # ----------------
+    # # copy the ~/.bashrc file to the array
+    # # we do not copy the mersh settings from the ~/.bashrc file
+    # # [копируем файл ~/.bashrc в массив]
+    # # [настройки mersh из файла ~/.bashrc не копируем]
+    # local bashrc_arr 
+    # local file_path="${HOME}/.bashrc"
+    # local i=0
+    # local n=`echo -e "\n"`
+    # local bool='True'
+    # # echo "${script_count}" # test
+    # while IFS= read -r line; do
+    #     # echo "${i}" # test
+    #     if [[ '# mersh vars [переменные mersh]' ==  "${line}" ]]; then
+    #         let i++ # (( i++ ))
+    #         continue
+    #     elif [[ ${i} -ge 1 ]] && [[ ${i} -le ${script_count} ]]; then
+    #     # elif [[ 0 -lt ${i} ]] && [[ ${script_count} -gt ${i} ]]; then # need minus one
+    #         let i++ # (( i++ ))
+    #         continue
+    #     # deleting empty lines after deleted mersh settings
+    #     # [удаляем пустые строки после удаленных настроек mersh]
+    #     elif [[ ${script_count} -le ${i} ]] && [[ ${n} == ${line} ]] && [[ 'True' == ${bool} ]]; then
+    #         let i++ # (( i++ ))
+    #         continue
+    #     elif [[ ${script_count} -le ${i} ]] && [[ ${n} != ${line} ]]; then
+    #         bool='False'
+    #     fi
+
+    #     bashrc_arr+=( "$line" )
+    # done < "${file_path}"
+    # # echo "${bashrc_arr[@]}"
+    # # ----------------
+    # # overwrite the ~/.bashrc file
+    # # [перезаписать файл ~/.bashrc]
+    # # --------
+    # # bad version
+    # # [плохая версия]
+    # # echo "" > "${file_path}"
+    # # for line in "${bashrc_arr[@]}"; do
+    # #     echo "${line}" >> "${file_path}"
+    # # done
+    # # --------
+    # # good version
+    # # [хорошая версия]
+    # i=0
+    # for line in "${bashrc_arr[@]}"; do
+    #     if [[ 0 -eq ${i} ]]; then
+    #         echo "${line}" > "${file_path}"
+    #         let i++ # (( i++ ))
+    #     else
+    #         echo "${line}" >> "${file_path}"
+    #     fi
+    # done
+    # # ----------------------------------
+    # # restarting bash
+    # # [перезапуск bash]
+    # source ${HOME}/.bashrc
+    # # --------------------------------------------------------------------
 }
 # ************************************************************************
 # function uninstall-mersh
