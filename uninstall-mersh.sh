@@ -60,7 +60,7 @@ uninstall_vars(){ # NO args
                 else
                     func=$( echo ${lib%.*} )
                     # echo "${func}" # test
-                    echo "unset ${lib}" >> ${HOME}/.bashrc
+                    echo "unset ${func}" >> ${HOME}/.bashrc
                 fi
             done
             cd "${current_dir}"
