@@ -26,7 +26,45 @@ uninstall-mersh(){ # NO args
         # execute if the function argument is == start
         # [выполнить если аргумент функции == start]
         if [[ 'start' == ${arr} ]] && [[ 1 -eq ${#arr[@]} ]]; then
-            echo "2222222222222"
+            # -------------------------------------------------------
+            # getting the current directory
+            # [получение текущей директории]
+            local current_dir=`pwd`
+            # ----------------------------------
+            # removing all mersh scripts from a bash session
+            # if the file or directory exists
+            # [удаление всех скриптов mersh из сессии bash]
+            # [если директория существут]
+            if [[ -e "${HOME}/.mer-group/mersh" ]] && [[ -d "${HOME}/.mer-group/mersh" ]]; then
+                cd "${HOME}/.mer-group/mersh/"
+                # pwd # test
+                # getting folders in a directory [получение файлов в директории]
+                files_arr=( $( ls -p | grep -v "/$" ) )
+                for lib in ${files_arr[@]}; do
+                    if [[ 'import.sh' == ${lib} ]]; then
+                        continue
+                    elif [[ 'install-in-bash.sh' == ${lib} ]]; then
+                        continue
+                    elif [[ 'install-in-zsh.sh' == ${lib} ]]; then
+                        continue
+                    # elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
+                    #     continue
+                    elif [[ 'uninstall-mersh_TEMP.sh' == ${lib} ]]; then
+                        continue
+                    else
+                        func=$( echo ${lib%.*} )
+                        # echo "${func}" # test
+                        unset ${func}
+                    fi
+                done
+                cd "${current_dir}"
+                echo "ок -> mersh variables removed"
+            fi
+            # ----------------------------------
+            # restarting bash
+            # [перезапуск bash]
+            source ${HOME}/.bashrc
+            # -------------------------------------------------------
         else
             echo "!!!!!!!!!! SPRAVKA !!!!!!!!!!"
         fi
