@@ -85,7 +85,7 @@ declare -x -f uninstall-mersh
 # tests
 
 # uninstall-mersh # test
-uninstall-mersh "start" # test
+# uninstall-mersh "start" # test
 # uninstall-mersh "1" "2" # test
 # uninstall-mersh "start" "2" # test
 # uninstall-mersh "start" "start" # test
