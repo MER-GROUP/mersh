@@ -26,23 +26,28 @@ uninstall-mersh(){ # NO args
         # execute if the function argument is == start
         # [выполнить если аргумент функции == start]
         if [[ 'start' == ${arr} ]] && [[ 1 -eq ${#arr[@]} ]]; then
+
+
+
+
+
             # -------------------------------------------------------
             # getting the current directory
             # [получение текущей директории]
             local current_dir=`pwd`
             # -------------------------------------------------------
-            # we determine the number of mersh scripts
-            # [определяем количество скриптов mersh]
-            # local script_count
-            if [[ -e "${HOME}/.mer-group/mersh" ]] && [[ -d "${HOME}/.mer-group/mersh" ]]; then
-                cd "${HOME}/.mer-group/mersh/"
-                local script_count=( $( ls -p | grep -v "/$" ) )
-                script_count="${#script_count[@]}"
-                let "script_count -= 4" # or
-                # (( script_count -= 4 )) # or
-                # echo "${script_count}" # test
-                cd "${current_dir}"
-            fi
+            # # we determine the number of mersh scripts
+            # # [определяем количество скриптов mersh]
+            # # local script_count
+            # if [[ -e "${HOME}/.mer-group/mersh" ]] && [[ -d "${HOME}/.mer-group/mersh" ]]; then
+            #     cd "${HOME}/.mer-group/mersh/"
+            #     local script_count=( $( ls -p | grep -v "/$" ) )
+            #     script_count="${#script_count[@]}"
+            #     let "script_count -= 3" # or
+            #     # (( script_count -= 3 )) # or
+            #     # echo "${script_count}" # test
+            #     cd "${current_dir}"
+            # fi
             # -------------------------------------------------------
             # removing all mersh scripts from a bash session
             # if the file or directory exists
@@ -69,9 +74,7 @@ uninstall-mersh(){ # NO args
                             continue
                         elif [[ 'install-in-zsh.sh' == ${lib} ]]; then
                             continue
-                        # elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
-                        #     continue
-                        elif [[ 'uninstall-mersh_TEMP.sh' == ${lib} ]]; then
+                        elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
                             continue
                         else
                             func=$( echo ${lib%.*} )
@@ -90,6 +93,8 @@ uninstall-mersh(){ # NO args
             # [перезапуск bash]
             source ${HOME}/.bashrc
             # -------------------------------------------------------
+
+
 
 
 
