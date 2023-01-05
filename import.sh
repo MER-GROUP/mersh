@@ -23,9 +23,7 @@ for lib in ${files_arr[@]}; do
     elif [[ 'install-in-zsh.sh' == ${lib} ]]; then
         continue
     # elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
-        continue
-    elif [[ 'uninstall-mersh_TEMP.sh' == ${lib} ]]; then
-        continue
+    #     continue
     else
         func=$( echo ${lib%.*} )
         # echo "${func}" # test
