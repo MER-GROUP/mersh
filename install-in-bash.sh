@@ -75,7 +75,7 @@ install-in-bash(){ # NO args
         echo "" >> ${HOME}/.bashrc
         echo "# mersh scripts [сценарии mersh]" >> ${HOME}/.bashrc
         echo "current_dir=\`pwd\`" >> ${HOME}/.bashrc
-        echo "cd /home/red/.mer-group/mersh/" >> ${HOME}/.bashrc
+        echo "cd ${HOME}/.mer-group/mersh/" >> ${HOME}/.bashrc
         echo "source import.sh" >> ${HOME}/.bashrc
         echo 'cd "${current_dir}"' >> ${HOME}/.bashrc
         echo "" >> ${HOME}/.bashrc

@@ -11,11 +11,15 @@
 # global variables [глобальные переменные]
 
 # settings file [файл настроек]
-file_settings=./settings.sh
+# file_settings=./settings.sh
+file_settings="`pwd`/settings.sh"
+# echo "file_settings = ${file_settings}" # test
 
 # link file [файл ссылок]
 # file_links=./links.sh
-file_links=$( v=$( grep -e 'file_links' ${file_settings} ); echo ${v#*=} )
+# file_links=$( v=$( grep -e '^file_links' ${file_settings} ); echo ${v#*=} )
+file_links="`pwd`/$( v=$( grep -e '^file_links' ${file_settings} ); echo ${v#*=} )"
+# echo "file_links = ${file_links[@]}" # test
 
 # settings matrix [матрица настроек]
 declare -A settings_arr
@@ -49,6 +53,7 @@ settings_get(){ # args: file_path
     # the path of the settings file [путь файла с настройками]
     # local file_path=${1}
     eval local file_path="${1}"
+    # echo "file_path = ${file_path}" # test
     # get settings [получить настройки]
     for line in $( grep -v '^#' $file_path ); do
         # echo $line
@@ -351,7 +356,7 @@ delete_arhive_src_more_history(){ # args: path, hist
     for file in ${files_arr[@]}; do
         # echo ${file}
         # echo ${i}
-        local file_temp=$( echo ${file%_*}% )
+        local file_temp=$( echo ${file%_*} )
         files_base_arr[${i}]=$( echo ${file_temp%_*} )
         # echo ${files_base_arr[${i}]}
         let i++
@@ -566,6 +571,10 @@ src-get-from-github(){ # args: param_1 ... param_N
         # program help [справка программы]
         help_src_get_from_github
     fi
+    # --------------------------------------------------------------------
+    # return to the original directory
+    # [возврат в первоначальную директорию]
+    cd "${current_dir}"
     # --------------------------------------------------------------------
 }
 # ************************************************************************
