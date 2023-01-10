@@ -140,3 +140,12 @@ https://github.com/andrewcooke/simple-crypt.git
 # code.
 # git@ssh.gitlab.gnome.org:GNOME/vala.git
 https://gitlab.gnome.org/GNOME/vala.git
+
+# vscode_rainbow_csv
+# Rainbow CSV looks better and is much more usable in general with dark mode.
+# If your csv, semicolon-separated or tab-separated file 
+# doesn't have .csv or .tsv extension, you can manually enable highlighting 
+# by clicking on the current language label mark in the right bottom corner 
+# and then choosing "CSV", "TSV", "CSV (semicolon)" or "CSV (pipe)" 
+# depending on the file content
+https://github.com/mechatroner/vscode_rainbow_csv.git
