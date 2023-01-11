@@ -20,16 +20,16 @@ uninstall-mersh(){ # NO args
     # echo "arr = ${arr[@]}" # test
     # echo "len arr = ${#arr[@]}" # test
     # --------------------------------------------------------------------
+    # getting the current directory
+    # [получение текущей директории]
+    local current_dir=`pwd`
+    # --------------------------------------------------------------------
     # execute if there are arguments to the function
     # [выполнить если есть аргументы функции]
     if [[ 0 -ne ${#arr[@]} ]]; then
         # execute if the function argument is == start
         # [выполнить если аргумент функции == start]
-        if [[ 'start' == ${arr} ]] && [[ 1 -eq ${#arr[@]} ]]; then
-            # -------------------------------------------------------
-            # getting the current directory
-            # [получение текущей директории]
-            local current_dir=`pwd`
+        if [[ 'start' == ${arr} ]] && [[ 1 -eq ${#arr[@]} ]]; then           
             # -------------------------------------------------------
             # we determine the number of mersh scripts
             # [определяем количество скриптов mersh]
