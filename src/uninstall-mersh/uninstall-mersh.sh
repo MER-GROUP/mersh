@@ -199,67 +199,67 @@ uninstall-mersh(){ # NO args
             # [возврат в первоначальную директорию]
             # echo "${current_dir}" # test
             cd "${current_dir}"
-             # -------------------------------------------------------
-            #  deleting settings from the ~/.bashrc file
-            # [удаление настроек из файла ~/.bashrc]
-            # ----------------
-            # copy the ~/.bashrc file to the array
-            # we do not copy the mersh settings from the ~/.bashrc file
-            # [копируем файл ~/.bashrc в массив]
-            # [настройки mersh из файла ~/.bashrc не копируем]
-            local bashrc_arr 
-            local file_path="${HOME}/.bashrc"
-            local count_line_bash=5
-            local i=0
-            local n=`echo -e "\n"`
-            local bool='True'
-            while IFS= read -r line; do
-                # echo "${i}" # test
-                if [[ '# mersh scripts [сценарии mersh]' ==  "${line}" ]]; then
-                    let i++ # (( i++ ))
-                    continue
-                # elif [[ ${i} -ge 1 ]] && [[ ${i} -le 4 ]]; then # or
-                # elif [[ 0 -lt ${i} ]] && [[ 5 -gt ${i} ]]; then # or
-                elif [[ 0 -lt ${i} ]] && [[ ${count_line_bash} -gt ${i} ]]; then # or
-                    let i++ # (( i++ ))
-                    continue
-                # deleting empty lines after deleted mersh settings
-                # [удаляем пустые строки после удаленных настроек mersh]
-                # elif [[ 5 -le ${i} ]] && [[ ${n} == ${line} ]] && [[ 'True' == ${bool} ]]; then
-                elif [[ ${count_line_bash} -le ${i} ]] && [[ ${n} == ${line} ]] && [[ 'True' == ${bool} ]]; then
-                    let i++ # (( i++ ))
-                    continue
-                # elif [[ 5 -le ${i} ]] && [[ ${n} != ${line} ]]; then
-                elif [[ ${count_line_bash} -le ${i} ]] && [[ ${n} != ${line} ]]; then
-                    bool='False'
-                fi
+            # # -------------------------------------------------------
+            # #  deleting settings from the ~/.bashrc file
+            # # [удаление настроек из файла ~/.bashrc]
+            # # ----------------
+            # # copy the ~/.bashrc file to the array
+            # # we do not copy the mersh settings from the ~/.bashrc file
+            # # [копируем файл ~/.bashrc в массив]
+            # # [настройки mersh из файла ~/.bashrc не копируем]
+            # local bashrc_arr 
+            # local file_path="${HOME}/.bashrc"
+            # local count_line_bash=5
+            # local i=0
+            # local n=`echo -e "\n"`
+            # local bool='True'
+            # while IFS= read -r line; do
+            #     # echo "${i}" # test
+            #     if [[ '# mersh scripts [сценарии mersh]' ==  "${line}" ]]; then
+            #         let i++ # (( i++ ))
+            #         continue
+            #     # elif [[ ${i} -ge 1 ]] && [[ ${i} -le 4 ]]; then # or
+            #     # elif [[ 0 -lt ${i} ]] && [[ 5 -gt ${i} ]]; then # or
+            #     elif [[ 0 -lt ${i} ]] && [[ ${count_line_bash} -gt ${i} ]]; then # or
+            #         let i++ # (( i++ ))
+            #         continue
+            #     # deleting empty lines after deleted mersh settings
+            #     # [удаляем пустые строки после удаленных настроек mersh]
+            #     # elif [[ 5 -le ${i} ]] && [[ ${n} == ${line} ]] && [[ 'True' == ${bool} ]]; then
+            #     elif [[ ${count_line_bash} -le ${i} ]] && [[ ${n} == ${line} ]] && [[ 'True' == ${bool} ]]; then
+            #         let i++ # (( i++ ))
+            #         continue
+            #     # elif [[ 5 -le ${i} ]] && [[ ${n} != ${line} ]]; then
+            #     elif [[ ${count_line_bash} -le ${i} ]] && [[ ${n} != ${line} ]]; then
+            #         bool='False'
+            #     fi
 
-                bashrc_arr+=( "$line" )
-            done < "${file_path}"
-            # echo "${bashrc_arr[@]}"
-            # ----------------
-            # overwrite the ~/.bashrc file
-            # [перезаписать файл ~/.bashrc]
-            # --------
-            # bad version
-            # [плохая версия]
-            # echo "" > "${file_path}"
+            #     bashrc_arr+=( "$line" )
+            # done < "${file_path}"
+            # # echo "${bashrc_arr[@]}"
+            # # ----------------
+            # # overwrite the ~/.bashrc file
+            # # [перезаписать файл ~/.bashrc]
+            # # --------
+            # # bad version
+            # # [плохая версия]
+            # # echo "" > "${file_path}"
+            # # for line in "${bashrc_arr[@]}"; do
+            # #     echo "${line}" >> "${file_path}"
+            # # done
+            # # --------
+            # # good version
+            # # [хорошая версия]
+            # i=0
             # for line in "${bashrc_arr[@]}"; do
-            #     echo "${line}" >> "${file_path}"
+            #     if [[ 0 -eq ${i} ]]; then
+            #         echo "${line}" > "${file_path}"
+            #         let i++ # (( i++ ))
+            #     else
+            #         echo "${line}" >> "${file_path}"
+            #     fi
             # done
-            # --------
-            # good version
-            # [хорошая версия]
-            i=0
-            for line in "${bashrc_arr[@]}"; do
-                if [[ 0 -eq ${i} ]]; then
-                    echo "${line}" > "${file_path}"
-                    let i++ # (( i++ ))
-                else
-                    echo "${line}" >> "${file_path}"
-                fi
-            done
-            # -------------------------------------------------------
+            # # -------------------------------------------------------
         else
             echo "!!!!!!!!!! SPRAVKA !!!!!!!!!!"
         fi
