@@ -8,6 +8,30 @@
 # Script implementation - Max Romanenko (Red Alert) - 2023.
 # Реализация скрипта - Макс Романенко (Red Alert) - 2023г.
 # ************************************************************************
+# function help_uninstall_mersh
+
+# program help [справка программы]
+help_uninstall_mersh(){ # NO args
+    # --------------------------------------------------------------------
+    # program help [справка программы]
+    echo "|-ENG-HELP-------------------------------------------------------------|"
+    echo "|  help               : uninstall-mersh - deleting all mersh scripts   |"
+    echo "|  usage              : uninstall-mersh [ param ]                      |"
+    echo "|  example [start]    : uninstall-mersh start                          |"
+    echo "|  output             : ... deletes all mersh scripts ...              |"
+    echo "|  example [no param] : uninstall-mersh                                |"
+    echo "|  output             : ... output of this help ...                    |"
+    echo "|-RUS-HELP-------------------------------------------------------------|"
+    echo "|  помощь             : uninstall-mersh - удаление всех скриптов mersh |"
+    echo "|  использование      : uninstall-mersh [ параметр ]                   |"
+    echo "|  пример [start]     : uninstall-mersh start                          |"
+    echo "|  вывод              : ... удаляет все скрипты mersh ...              |"
+    echo "|  пример [no param]  : uninstall-mersh                                |"
+    echo "|  вывод              : ... вывод данной справки ...                   |"
+    echo "|-END------------------------------------------------------------------|"
+    # --------------------------------------------------------------------
+}
+# ************************************************************************
 # function uninstall-mersh
 
 # Deleting all mersh scripts
@@ -266,13 +290,14 @@ uninstall-mersh(){ # NO args
                 fi
             done
             # -------------------------------------------------------
+        # program help [справка программы]
         else
-            echo "!!!!!!!!!! SPRAVKA !!!!!!!!!!"
+            help_uninstall_mersh
         fi
     # --------------------------------------------------------------------
     # program help [справка программы]
     else
-        echo "!!!!!!!!!! SPRAVKA !!!!!!!!!!"
+        help_uninstall_mersh
     fi
     # --------------------------------------------------------------------
 }
