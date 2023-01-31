@@ -200,13 +200,6 @@ uninstall-mersh(){ # NO args
             # echo "${current_dir}" # test
             cd "${current_dir}"
             # -------------------------------------------------------
-
-
-
-
-
-
-
             #  deleting settings from the ~/.bashrc file
             # [удаление настроек из файла ~/.bashrc]
             # ----------------
@@ -214,6 +207,7 @@ uninstall-mersh(){ # NO args
             # we do not copy the mersh settings from the ~/.bashrc file
             # [копируем файл ~/.bashrc в массив]
             # [настройки mersh из файла ~/.bashrc не копируем]
+            unset bashrc_arr
             local bashrc_arr 
             local file_path="${HOME}/.bashrc"
             local count_line_bash=5
@@ -242,43 +236,36 @@ uninstall-mersh(){ # NO args
                 fi
 
                 bashrc_arr+=( "$line" )
-            done < "${file_path}"
-
-
-
-
-
-
-            
+            done < "${file_path}"           
             # ----------------
             # # echo "${bashrc_arr[@]}" ########## test
-            #################################### test
-            for line in "${bashrc_arr[@]}"; do # test
-                echo "${line}" ################# test
-            done ############################### test
-            # # ----------------
-            # # overwrite the ~/.bashrc file
-            # # [перезаписать файл ~/.bashrc]
-            # # --------
-            # # bad version
-            # # [плохая версия]
-            # # echo "" > "${file_path}"
-            # # for line in "${bashrc_arr[@]}"; do
-            # #     echo "${line}" >> "${file_path}"
-            # # done
-            # # --------
-            # # good version
-            # # [хорошая версия]
-            # i=0
+            # #################################### test
+            # for line in "${bashrc_arr[@]}"; do # test
+            #     echo "${line}" ################# test
+            # done ############################### test
+            # ----------------
+            # overwrite the ~/.bashrc file
+            # [перезаписать файл ~/.bashrc]
+            # --------
+            # bad version
+            # [плохая версия]
+            # echo "" > "${file_path}"
             # for line in "${bashrc_arr[@]}"; do
-            #     if [[ 0 -eq ${i} ]]; then
-            #         echo "${line}" > "${file_path}"
-            #         let i++ # (( i++ ))
-            #     else
-            #         echo "${line}" >> "${file_path}"
-            #     fi
+            #     echo "${line}" >> "${file_path}"
             # done
-            # # -------------------------------------------------------
+            # --------
+            # good version
+            # [хорошая версия]
+            i=0
+            for line in "${bashrc_arr[@]}"; do
+                if [[ 0 -eq ${i} ]]; then
+                    echo "${line}" > "${file_path}"
+                    let i++ # (( i++ ))
+                else
+                    echo "${line}" >> "${file_path}"
+                fi
+            done
+            # -------------------------------------------------------
         else
             echo "!!!!!!!!!! SPRAVKA !!!!!!!!!!"
         fi
