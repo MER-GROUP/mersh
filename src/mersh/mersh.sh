@@ -118,7 +118,7 @@ mersh(){ # args: script_1 ... script_N
         echo "|                     Removing mersh scripts                        |"
         echo "|                    [Удаление скриптов mersh]                      |"
         echo "|                   ---------------------------                     |"
-        echo "|           bash ~/.mer-group/mersh/uninstall-mersh.sh              |"
+        echo "|                      uninstall-mersh start                        |"
         echo "|-------------------------------------------------------------------|"
     fi
     # --------------------------------------------------------------------
