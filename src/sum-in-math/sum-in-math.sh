@@ -66,7 +66,7 @@ sum-in-math(){ # args: number_1 ... number_N
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
     if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
+        cd "${current_dir}"
         bool="False"
         # echo "BOOL"
     fi
