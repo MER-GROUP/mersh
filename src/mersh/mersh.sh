@@ -105,7 +105,7 @@ mersh(){ # args: script_1 ... script_N
         echo "|  output        : ... output of help for scripts ...               |"
         echo "|-RUS-HELP----------------------------------------------------------|"
         echo "|  помощь        : mersh - краткое руководство по всем скриптам     |"
-        echo "|  использование : mersh [ последовательность элеменов или ничего ] |"
+        echo "|  использование : mersh [ последовательность скриптов или ничего ] |"
         echo "|  пример        : mersh                                            |"
         echo "|  вывод         : ... вывод данной справки ...                     |"
         echo "|  пример        : mersh src-get-from-github sum-in-math            |"
