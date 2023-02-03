@@ -63,7 +63,7 @@ uninstall-mersh(){ # NO args
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
     if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
+        cd "${current_dir}"
         bool="False"
         # echo "BOOL"
     fi
@@ -78,7 +78,7 @@ uninstall-mersh(){ # NO args
     # checking the installation of the utility - bc
     # [проверка установки утилиты bc]
     # local utility=$( check-install-utils "redalert" ) # test
-    local utility=$( check-install-utils "ls" "greppp" )
+    local utility=$( check-install-utils "ls" "grep" )
     if [[ 'all utils are installed' != "${utility}" ]]; then
         echo "${utility}"
         next_prog=False
@@ -87,10 +87,6 @@ uninstall-mersh(){ # NO args
     # if the bc utility is installed, then continue executing the program
     # [если утилиты ls и grep установлены, то продолжить выполнение программы]
     if [[ 'True' == "${next_prog}" ]]; then
-
-
-
-
 
         # --------------------------------------------------------------------
         # getting function arguments
@@ -356,10 +352,6 @@ uninstall-mersh(){ # NO args
         fi
         # --------------------------------------------------------------------
 
-
-
-
-        
     fi
     # --------------------------------------------------------------------
 }
