@@ -98,7 +98,7 @@ sum-in-math(){ # args: number_1 ... number_N
         # ----------------------------------
         # a set of correct values to check the number
         # [набор правильных значений для проверки числа]
-        local sequence_str='-0123456789'
+        local sequence_str='-.0123456789'
         # ----------------------------------------------------------------
         # checking that all the entered elements are numbers (5, 1.5, -2, -3.67, etc.)
         # [проверка что все введенные элементы это числа (5, 1.5, -2, -3.67 и т.д.)]
@@ -250,8 +250,8 @@ declare -x -f sum-in-math
 # sum-in-math "1" "2" "3" "-1" "-5" "-5" # test
 # sum-in-math "-5" "-5" # test
 # sum-in-math "-5" "-5" "50" # test
-sum-in-math "-5" "1.5" # test
-# sum-in-math "-1.5" "-1.5" # test
+# sum-in-math "-5" "1.5" # test
+sum-in-math "-1.5" "-1.5" # test
 # sum-in-math "1" "-2.5" # test
 # sum-in-math "1" "5" # test
 # sum-in-math "1" "1.5" # test
