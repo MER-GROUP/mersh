@@ -171,6 +171,12 @@ sum-in-math(){ # args: number_1 ... number_N
                 # ------------------------------        
             done
             # ----------------------------------
+            # exit the program if there are two or more cons
+            # [выход из программы если в числе два и более минусов]
+            if [[ 1 -eq "${minus}" ]] && [[ "${digit:0:1}" != '-' ]]; then
+                next_prog=False
+            fi
+            # ----------------------------------
             # exit the program if the character is not a number
             # [выход из программы если символ не число]
             if [[ 'False' == "${next_prog}" ]]; then
@@ -261,7 +267,9 @@ declare -x -f sum-in-math
 # sum-in-math "1" "--5.67" # test for error
 # sum-in-math "1" "-5.67-" # test for error
 # sum-in-math "1" "-5.6-7" # test for error
-sum-in-math "1" "5.6-7" # test for error
+# sum-in-math "1" "5.6-7" # test for error
+# sum-in-math "1" "-5.6" # test for error
+sum-in-math "1" "5.6-" # test for error
 # sum-in-math "1" "-5.67." # test for error
 # sum-in-math "1" "-5.6.7" # test for error
 # sum-in-math "1" "-5..67" # test for error
