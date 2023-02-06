@@ -84,7 +84,7 @@ sum-in-math(){ # args: number_1 ... number_N
         next_prog=False
     fi
     # --------------------------------------------------------------------
-    echo "next_prog = ${next_prog}" # test
+    # echo "next_prog = ${next_prog}" # test
     # --------------------------------------------------------------------
     # if the bc utility is installed, then continue executing the program
     # [если утилита bc установлена, то продолжить выполнение программы]
@@ -185,7 +185,7 @@ sum-in-math(){ # args: number_1 ... number_N
             # ----------------------------------
         done
         # ----------------------------------------------------------------
-        echo "next_prog = ${next_prog}" # test
+        # echo "next_prog = ${next_prog}" # test
         # ----------------------------------------------------------------
         # if numbers are entered, then continue executing the program
         # [если введены числа, то продолжить выполнение программы]
@@ -269,7 +269,7 @@ declare -x -f sum-in-math
 # sum-in-math "1" "-5.6-7" # test for error
 # sum-in-math "1" "5.6-7" # test for error
 # sum-in-math "1" "-5.6" # test for error
-sum-in-math "1" "5.6-" # test for error
+# sum-in-math "1" "5.6-" # test for error
 # sum-in-math "1" "-5.67." # test for error
 # sum-in-math "1" "-5.6.7" # test for error
 # sum-in-math "1" "-5..67" # test for error
