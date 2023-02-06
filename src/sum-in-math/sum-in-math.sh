@@ -251,7 +251,7 @@ declare -x -f sum-in-math
 # sum-in-math "-5" "-5" # test
 # sum-in-math "-5" "-5" "50" # test
 # sum-in-math "-5" "1.5" # test
-sum-in-math "-1.5" "-1.5" # test
+# sum-in-math "-1.5" "-1.5" # test
 # sum-in-math "1" "-2.5" # test
 # sum-in-math "1" "5" # test
 # sum-in-math "1" "1.5" # test
@@ -260,6 +260,8 @@ sum-in-math "-1.5" "-1.5" # test
 # sum-in-math "1" "-5.67" # test
 # sum-in-math "1" "--5.67" # test for error
 # sum-in-math "1" "-5.67-" # test for error
+# sum-in-math "1" "-5.6-7" # test for error
+sum-in-math "1" "5.6-7" # test for error
 # sum-in-math "1" "-5.67." # test for error
 # sum-in-math "1" "-5.6.7" # test for error
 # sum-in-math "1" "-5..67" # test for error
