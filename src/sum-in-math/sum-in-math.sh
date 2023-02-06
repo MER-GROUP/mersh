@@ -84,6 +84,8 @@ sum-in-math(){ # args: number_1 ... number_N
         next_prog=False
     fi
     # --------------------------------------------------------------------
+    echo "next_prog = ${next_prog}" # test
+    # --------------------------------------------------------------------
     # if the bc utility is installed, then continue executing the program
     # [если утилита bc установлена, то продолжить выполнение программы]
     if [[ 'True' == "${next_prog}" ]]; then
@@ -156,7 +158,7 @@ sum-in-math(){ # args: number_1 ... number_N
                 # ------------------------------
                 # if the symbol is a number then we continue the program
                 # [если символ число то продолжаем программу]
-                if [[ "${char}" == *"${i}"* ]]; then
+                if [[ "${sequence_str}" == *"${char}"* ]]; then
                     let "start += 1"
                     # (( start += 1 ))
                     continue
@@ -176,6 +178,8 @@ sum-in-math(){ # args: number_1 ... number_N
             fi
             # ----------------------------------
         done
+        # ----------------------------------------------------------------
+        echo "next_prog = ${next_prog}" # test
         # ----------------------------------------------------------------
         # if numbers are entered, then continue executing the program
         # [если введены числа, то продолжить выполнение программы]
@@ -236,11 +240,17 @@ declare -x -f sum-in-math
 
 # sum-in-math # test
 # sum-in-math "1" "2" "3" # test
+# sum-in-math "10" "20" "30" # test
+# sum-in-math "100" "200" "300" # test
+# sum-in-math 100 200 300 # test
+# sum-in-math "hello" 100 200 300 "world" # test
+# sum-in-math "hello" "world" # test
 # sum-in-math "1" "2" "3" "-1" # test
 # sum-in-math "1" "2" "3" "-1" "-5" # test
 # sum-in-math "1" "2" "3" "-1" "-5" "-5" # test
 # sum-in-math "-5" "-5" # test
-# sum-in-math "-5" "1.5" # test
+# sum-in-math "-5" "-5" "50" # test
+sum-in-math "-5" "1.5" # test
 # sum-in-math "-1.5" "-1.5" # test
 # sum-in-math "1" "-2.5" # test
 # sum-in-math "1" "5" # test
