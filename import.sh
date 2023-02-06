@@ -26,7 +26,7 @@ for lib in ${files_arr[@]}; do
     #     continue
     else
         func=$( echo ${lib%.*} )
-        echo "${func}" # test
+        # echo "${func}" # test
         if [[ 0 -ne $( type ${func} &> /dev/null; echo ${?} ) ]]; then
             source ${lib}
         fi
