@@ -222,19 +222,12 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- ROADMAP ----------------------------------------------------------------------------------->
 ## **Roadmap [История изменений]**
 
-- [x] SDK version [*Версия SDK*]
-- [x] App package name [*Имя пакета App*]
-- [x] Installer name [*Имя установщика App*]
-- [x] Absolute app path [*Абсолютный путь App*]
-- [x] Full app path [*Полный путь App*]
-- [x] Files app [*Файлы App*]
-- [x] Path app files [*Путь к файлам App*]
-- [x] Hdd path [*Путь к Hdd*]
-- [x] OS language [*Язык ОС*]
-- [x] Device vibration [*Вибрация устройства*]
-- [ ] Multi-language Support [*Поддержка нескольких языков*]
-    - [ ] English
-    - [ ] Русский
+- [ ] check-install-utils  [*проверяет установку утилит*]
+- [ ] mersh [*краткое руководство по всем скриптам*]
+- [ ] set-in-math [*печатает математическое множество*]
+- [ ] src-get-from-github [*загружает и обновляет исходники с github/gitlab*]
+- [ ] sum-in-math [*создаёт математическую сумму*]
+- [ ] uninstall-mersh [*удаление скриптов mersh*]
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
