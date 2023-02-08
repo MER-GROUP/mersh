@@ -30,15 +30,18 @@
 
 <!-- PROJECT LOGO ------------------------------------------------------------------------------>
 <div align="center">
-  <a href="https://github.com/MER-GROUP/InfoOS">
+  <!--
+  <a href="https://github.com/MER-GROUP/mersh">
     <img src="ico/info.png" alt="Logo" width="280" height="280">
   </a>
+  -->
 
-  <h1 align="center"><b>Info OS</b></h1>
+  <h1 align="center"><b>mersh</b></h1>
 
   <p align="center">
-        <h2><b>InfoOS is a program that shows system information about the application and the Android OS</b><br />
-            <i>[InfoOS - это программа которая показывает системную информацию о приложении и ОС Android]</i></h2>
+        <h2><b>mersh is a set of scripts for configuring and administering linux</b><br />
+            <i>[mersh - это набор скриптов для настройки и администрирования linux]</i></h2>
+        <!--
         <h3><b>Screenshots of the program in Android</b><br />
             <i>[Cкриншоты программы в Android]</i></h3>
         <table border="0">
@@ -55,11 +58,12 @@
                 <td><img src="screenshot/android_rus/4 - инфо.png"></td>
             </tr>
         </table>
-        <a href="https://github.com/MER-GROUP/InfoOS">View [Просмотр]</a>
+        -->
+        <a href="https://github.com/MER-GROUP/mersh">View [Просмотр]</a>
         ·
-        <a href="https://github.com/MER-GROUP/InfoOS/issues">Report Bug [Сообщить об ошибке]</a>
+        <a href="https://github.com/MER-GROUP/mersh/issues">Report Bug [Сообщить об ошибке]</a>
         ·
-        <a href="https://github.com/MER-GROUP/InfoOS/issues">Request Feature [Внести изменение]</a>
+        <a href="https://github.com/MER-GROUP/mersh/issues">Request Feature [Внести изменение]</a>
   </p>
 </div>
 <!-- ------------------------------------------------------------------------------------------->
@@ -96,9 +100,9 @@
 <!-- 
 [![Product Name Screen Shot][product-screenshot]](https://example.com) 
 -->
-**InfoOS is a program that shows system information about the application and the Android OS.**
+**mersh is a program that shows system information about the application and the Android OS.**
 
-[*InfoOS - это программа которая показывает системную информацию о приложении и ОС Android.*]
+[*mersh - это программа которая показывает системную информацию о приложении и ОС Android.*]
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
@@ -145,11 +149,11 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 1. Clone the repo [*Скопируйте репозиторий*]:
   ```sh
-  git clone https://github.com/MER-GROUP/InfoOS.git
+  git clone https://github.com/MER-GROUP/mersh.git
   ```
 2. Go to the program folder [*Перейдите в папку с программой*]:
   ```sh
-  cd InfoOS
+  cd mersh
   ```
 3. Install the necessary components [*Установите необходимые компоненты*]:
   ```sh
@@ -213,7 +217,7 @@ Don't forget to give the project a star! Thanks again!**
 1. Fork the Project [*Сделайте форк проекта*]
 2. Create your Feature Branch [*Создайте свою ветку*]:
    ```sh
-   git checkout -b feature/InfoOS
+   git checkout -b feature/mersh
    ```
 3. Commit your Changes [*Внесите изменения*]:
    ```sh
@@ -243,7 +247,7 @@ Don't forget to give the project a star! Thanks again!**
 
 Max Ramanenka (Red Alert)  - i@mer-group.ru
 
-Project Link [*Ссылка на проект*]: [https://github.com/MER-GROUP/InfoOS](https://github.com/MER-GROUP/InfoOS)
+Project Link [*Ссылка на проект*]: [https://github.com/MER-GROUP/mersh](https://github.com/MER-GROUP/mersh)
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
@@ -269,24 +273,24 @@ Project Link [*Ссылка на проект*]: [https://github.com/MER-GROUP/I
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 <!-- contributors -->
-[contributors-shield]: https://img.shields.io/github/contributors/MER-GROUP/InfoOS.svg?style=for-the-badge
-[contributors-url]: https://github.com/MER-GROUP/InfoOS/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/MER-GROUP/mersh.svg?style=for-the-badge
+[contributors-url]: https://github.com/MER-GROUP/mersh/graphs/contributors
 
 <!-- forks -->
-[forks-shield]: https://img.shields.io/github/forks/MER-GROUP/InfoOS.svg?style=for-the-badge
-[forks-url]: https://github.com/MER-GROUP/InfoOS/network/members
+[forks-shield]: https://img.shields.io/github/forks/MER-GROUP/mersh.svg?style=for-the-badge
+[forks-url]: https://github.com/MER-GROUP/mersh/network/members
 
 <!-- stars -->
-[stars-shield]: https://img.shields.io/github/stars/MER-GROUP/InfoOS.svg?style=for-the-badge
-[stars-url]: https://github.com/MER-GROUP/InfoOS/stargazers
+[stars-shield]: https://img.shields.io/github/stars/MER-GROUP/mersh.svg?style=for-the-badge
+[stars-url]: https://github.com/MER-GROUP/mersh/stargazers
 
 <!-- issues -->
-[issues-shield]: https://img.shields.io/github/issues/MER-GROUP/InfoOS.svg?style=for-the-badge
-[issues-url]: https://github.com/MER-GROUP/InfoOS/issues
+[issues-shield]: https://img.shields.io/github/issues/MER-GROUP/mersh.svg?style=for-the-badge
+[issues-url]: https://github.com/MER-GROUP/mersh/issues
 
 <!-- license -->
-[license-shield]: https://img.shields.io/github/license/MER-GROUP/InfoOS.svg?style=for-the-badge
-[license-url]: https://github.com/MER-GROUP/InfoOS/blob/master/LICENSE
+[license-shield]: https://img.shields.io/github/license/MER-GROUP/mersh.svg?style=for-the-badge
+[license-url]: https://github.com/MER-GROUP/mersh/blob/master/LICENSE
 
 <!-- linkedin -->
 <!--
