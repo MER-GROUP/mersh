@@ -286,12 +286,20 @@ Project Link [*Ссылка на проект*]: [https://github.com/MER-GROUP/m
 <!-- ACKNOWLEDGMENTS --------------------------------------------------------------------------->
 ## **Acknowledgments [Используемын ресурсы]**
 
+<!--
 * [Python](https://www.python.org/)
 * [Kivy](https://kivy.org/#home)
 * [Plyer](https://github.com/kivy/plyer)
 * [Pyjnius](https://github.com/kivy/pyjnius)
 * [Buildozer](https://github.com/kivy/buildozer)
 * [Json](https://www.json.org/json-en.html)
+* [Debian](https://www.debian.org/)
+* [VSCode](https://code.visualstudio.com/)
+* [Git](https://git-scm.com/)
+* [Markdown](https://www.markdownguide.org/)
+-->
+
+* [Bash](https://gnu.org/software/bash)
 * [Debian](https://www.debian.org/)
 * [VSCode](https://code.visualstudio.com/)
 * [Git](https://git-scm.com/)
