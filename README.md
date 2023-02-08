@@ -180,9 +180,45 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- USAGE EXAMPLES ---------------------------------------------------------------------------->
 ## **Usage [Использование]**
 
-**The program is simple and intuitive to use and does not need instructions.**
+**All commands are typed in bash.**
 
-[*Программа проста и интуитивно понятна в использовании и не нуждается в инструкциях.*]
+[*Все команды набираются в bash.*]
+
+- Output of all available mersh scripts 
+[*Вывод всех доступных скриптов mersh*]:
+  ```sh
+  mersh
+  ```
+- Script help output - type the script name 
+[*Вывод справки по скрипту - набрать название скрипта*]:
+  ```sh
+  mersh
+  ```
+- check-install-utils - checks the installation of utils
+[*check-install-utils - проверяет установку утилит*]:
+  ```sh
+  check-install-utils git python
+  ```
+- set-in-math - print a mathematical set
+[*set-in-math - печатает математическое множество*]:
+  ```sh
+  set-in-math 1 2 3 2 3 4 3 4 5 
+  ```
+- src-get-from-github - downloads and updates sources from github/gitlab
+[*src-get-from-github - загружает и обновляет исходники с github/gitlab*]:
+  ```sh
+  src-get-from-github start
+  ```
+- sum-in-math - creates a mathematical sum
+[*sum-in-math - создаёт математическую сумму*]:
+  ```sh
+  sum-in-math 1 2 3 
+  ```
+- uninstall-mersh - removing mersh scripts
+[*uninstall-mersh - удаление скриптов mersh*]:
+  ```sh
+  uninstall-mersh start 
+  ```
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
