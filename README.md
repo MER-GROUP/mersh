@@ -100,9 +100,9 @@
 <!-- 
 [![Product Name Screen Shot][product-screenshot]](https://example.com) 
 -->
-**mersh is a program that shows system information about the application and the Android OS.**
+**mersh is a set of scripts for configuring and administering linux.**
 
-[*mersh - это программа которая показывает системную информацию о приложении и ОС Android.*]
+[*mersh - это набор скриптов для настройки и администрирования linux.*]
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
