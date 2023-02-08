@@ -169,10 +169,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
   ```sh
   bash install-in-bash.sh
   ```
-3. Removing all mersh scripts from bash [*Удаление всех скриптов mersh из bash*]:
-  ```sh
-  uninstall-mersh start
-  ```
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
