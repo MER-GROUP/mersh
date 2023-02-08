@@ -158,22 +158,21 @@ This section should list any major frameworks/libraries used to bootstrap your p
   ```sh
   git clone https://github.com/MER-GROUP/mersh.git
   ```
-2. Go to the program folder [*Перейдите в папку с программой*]:
-  ```sh
-  cd mersh
-  ```
-3. Install the necessary components [*Установите необходимые компоненты*]:
-  ```sh
-  pip install -Ur requirements.txt
-  ```
 
 ### **Installation [Установка]**
 
-1. Building a project on Android [*Создание проекта на Android*]:
-   ```sh
-   buildozer -v android debug
-   ```
-2. If the project has not been assembled, it means that the Bulldozer program libraries are not installed. Follow the link [https://github.com/kivy/buildozer](https://github.com/kivy/buildozer) and read what needs to be done [*Если проект не был собран, это означает, что библиотеки программ Bulldozer не установлены. Перейдите по ссылке [https://github.com/kivy/buildozer](https://github.com/kivy/buildozer) и прочитайте, что нужно сделать*].
+1. Go to the program folder [*Перейдите в папку с программой*]:
+  ```sh
+  cd mersh
+  ```
+2. Installing mersh scripts [*Установка скриптов mersh*]:
+  ```sh
+  bash install-in-bash.sh
+  ```
+3. Removing all mersh scripts from bash [*Удаление всех скриптов mersh из bash*]:
+  ```sh
+  uninstall-mersh start
+  ```
 
 <p align="right">(<a href="#top">back to top [вернуться к началу]</a>)</p>
 <!-- ------------------------------------------------------------------------------------------->
