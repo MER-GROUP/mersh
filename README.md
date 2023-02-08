@@ -126,11 +126,18 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [![JQuery][JQuery.com]][JQuery-url] 
 -->
 
+<!-- 
 * [![Python][Python.org]][Python-url]
 * [![Kivy][Kivy.org]][Kivy-url]
 * [![Plyer][Plyer.org]][Plyer-url]
 * [![Pyjnius][Pyjnius.org]][Pyjnius-url]
 * [![Buildozer][Buildozer.org]][Buildozer-url]
+* [![Debian][Debian.org]][Debian-url]
+* [![VSCode][VSCode.org]][VSCode-url]
+* [![Git][Git.org]][Git-url]
+-->
+
+* [![Bash][Gnu.org/software/bash]][Bash-url]
 * [![Debian][Debian.org]][Debian-url]
 * [![VSCode][VSCode.org]][VSCode-url]
 * [![Git][Git.org]][Git-url]
@@ -370,4 +377,8 @@ Project Link [*Ссылка на проект*]: [https://github.com/MER-GROUP/m
 <!-- Git -->
 [Git.org]: https://img.shields.io/badge/git-F92929?style=for-the-badge&logo=git&logoColor=white
 [Git-url]: https://git-scm.com/
+
+<!-- Bash -->
+[Gnu.org/software/bash]: https://img.shields.io/badge/bash-000000?style=for-the-badge&logo=bash&logoColor=white
+[Bash-url]: https://gnu.org/software/bash
 <!-- ------------------------------------------------------------------------------------------->
