@@ -24,6 +24,10 @@ for lib in ${files_arr[@]}; do
         continue
     # elif [[ 'uninstall-mersh.sh' == ${lib} ]]; then
     #     continue
+    elif [[ 'LICENSE' == ${lib} ]]; then
+        continue
+    elif [[ 'README.md' == ${lib} ]]; then
+        continue
     else
         func=$( echo ${lib%.*} )
         # echo "${func}" # test
