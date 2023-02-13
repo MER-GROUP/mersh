@@ -25,6 +25,10 @@ https://github.com/kivy/buildozer.git
 # A cross platform clipboard operation library of Python. Works for Windows, Mac and Linux.
 https://github.com/terryyin/clipboard.git
 
+# cpython
+# The Python programming language
+https://github.com/python/cpython.git
+
 # easygui
 # EasyGUI is a module for very simple, very easy GUI programming in Python. 
 # EasyGUI is different from other GUI libraries in that EasyGUI is NOT event-driven. 
