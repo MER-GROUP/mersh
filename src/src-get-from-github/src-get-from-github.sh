@@ -43,7 +43,7 @@ settings_get(){ # args: file_path
     # echo "${current_dir##*/}" # test
     local bool="False"
     if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
-        cd ./src/src-get-from-github/
+        cd "./src/src-get-from-github/"
         bool="True"
         # pwd # test
         # cd ../../ # test
@@ -73,7 +73,7 @@ settings_get(){ # args: file_path
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
     if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
+        cd "${current_dir}"
         bool="False"
         # echo "BOOL"
     fi
@@ -92,7 +92,7 @@ check_path(){ # args: path
     # echo "${current_dir##*/}" # test
     local bool="False"
     if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
-        cd ./src/src-get-from-github/
+        cd "./src/src-get-from-github/"
         bool="True"
         # pwd # test
         # cd ../../ # test
@@ -133,7 +133,7 @@ check_path(){ # args: path
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
     if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
+         cd "${current_dir}"
         bool="False"
         # echo "BOOL"
     fi
@@ -152,7 +152,7 @@ src_get(){ # args: path, links
     # echo "${current_dir##*/}" # test
     local bool="False"
     if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
-        cd ./src/src-get-from-github/
+        cd "./src/src-get-from-github/"
         bool="True"
         # pwd # test
         # cd ../../ # test
@@ -170,7 +170,7 @@ src_get(){ # args: path, links
     # echo path = ${path}
     # echo links = ${links[@]}
     # ----------------------------------
-    cd ${path}
+    cd "${path}"
     # pwd
     # ----------------------------------
     # Cloning sources
@@ -188,7 +188,7 @@ src_get(){ # args: path, links
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
     if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
+        cd "${current_dir}"
         bool="False"
         # echo "BOOL"
     fi
@@ -207,7 +207,7 @@ src_to_tar_gz(){ # args: path
     # echo "${current_dir##*/}" # test
     local bool="False"
     if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
-        cd ./src/src-get-from-github/
+        cd "./src/src-get-from-github/"
         bool="True"
         # pwd # test
         # cd ../../ # test
@@ -218,7 +218,7 @@ src_to_tar_gz(){ # args: path
 	# local path=${1}
 	eval local path="${1}"
     # ----------------------------------
-    cd ${path}
+    cd "${path}"
     # pwd
     # ----------------------------------
     # getting folders in a directory [получение папок в директории]
@@ -255,7 +255,7 @@ src_to_tar_gz(){ # args: path
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
     if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
+        cd "${current_dir}"
         bool="False"
         # echo "BOOL"
     fi
@@ -274,7 +274,7 @@ delete_src_folders(){ # args: path
     # echo "${current_dir##*/}" # test
     local bool="False"
     if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
-        cd ./src/src-get-from-github/
+        cd "./src/src-get-from-github/"
         bool="True"
         # pwd # test
         # cd ../../ # test
@@ -285,7 +285,7 @@ delete_src_folders(){ # args: path
 	# local path=${1}
 	eval local path="${1}"
     # ----------------------------------
-    cd ${path}
+    cd "${path}"
     # pwd
     # ----------------------------------
     # getting folders in a directory [получение папок в директории]
@@ -312,7 +312,7 @@ delete_src_folders(){ # args: path
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
     if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
+        cd "${current_dir}"
         bool="False"
         # echo "BOOL"
     fi
@@ -332,7 +332,7 @@ delete_arhive_src_more_history(){ # args: path, hist
     # echo "${current_dir##*/}" # test
     local bool="False"
     if [[ `pwd` =~ "mersh"$ ]] || [[ `pwd` =~ ".mersh"$ ]]; then
-        cd ./src/src-get-from-github/
+        cd "./src/src-get-from-github/"
         bool="True"
         # pwd # test
         # cd ../../ # test
@@ -343,7 +343,7 @@ delete_arhive_src_more_history(){ # args: path, hist
 	# local path=${1}
 	eval local path="${1}"
     # ----------------------------------
-    cd ${path}
+    cd "${path}"
     # pwd
     # ----------------------------------
     # getting folders in a directory [получение файлов в директории]
@@ -407,7 +407,7 @@ delete_arhive_src_more_history(){ # args: path, hist
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
     if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
+        cd "${current_dir}"
         bool="False"
         # echo "BOOL"
     fi
@@ -498,7 +498,7 @@ src-get-from-github(){ # args: param_1 ... param_N
     # return to the original directory if there was a transition to another directory
     # [возврат в первоначальную директорию, если был переход в другую директорию]
     if [[ 'True' == ${bool} ]]; then
-        cd ${current_dir}
+        cd "${current_dir}"
         bool="False"
         # echo "BOOL"
     fi
