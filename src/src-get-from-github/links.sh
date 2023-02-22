@@ -96,6 +96,11 @@ https://github.com/pyinstaller/pyinstaller.git
 # Warning: the pypi name is now pyjnius instead of jnius.
 https://github.com/kivy/pyjnius.git
 
+# pympler
+# Pympler is a development tool to measure, monitor and analyze the memory behavior 
+# of Python objects in a running Python application.
+https://github.com/pympler/pympler.git
+
 # pyperclip
 # Pyperclip is a cross-platform Python module for copy and paste clipboard functions. 
 # It works with Python 2 and 3.
