@@ -21,6 +21,11 @@ https://github.com/othneildrew/Best-README-Template.git
 # Buildozer is a tool for creating application packages easily.
 https://github.com/kivy/buildozer.git
 
+# cachetools
+# This module provides various memoizing collections and decorators, 
+# including variants of the Python Standard Library's @lru_cache function decorator.
+https://github.com/tkem/cachetools.git
+
 # clipboard
 # A cross platform clipboard operation library of Python. Works for Windows, Mac and Linux.
 https://github.com/terryyin/clipboard.git
