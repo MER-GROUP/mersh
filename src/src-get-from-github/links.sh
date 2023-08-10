@@ -59,6 +59,12 @@ https://github.com/kivy/kivy.git
 # a framework for cross-platform, touch-enabled graphical applications.
 https://github.com/kivymd/KivyMD.git
 
+# more-itertools
+# Python's itertools library is a gem - you can compose elegant solutions for 
+# a variety of problems with the functions it provides. In more-itertools we collect 
+# additional building blocks, recipes, and routines for working with Python iterables.
+https://github.com/more-itertools/more-itertools.git
+
 # mutagen
 # Mutagen is a Python module to handle audio metadata. It supports ASF, FLAC, MP4, 
 # Monkey's Audio, MP3, Musepack, Ogg Opus, Ogg FLAC, Ogg Speex, Ogg Theora, Ogg Vorbis, 
